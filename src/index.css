@@ -40,7 +40,7 @@ body {
   width: 100%;
   max-width: 414px;
   height: 100vh;
-  max-height: 896px;
+  height: 100dvh;
   background-color: var(--bg-dark);
   position: relative;
   overflow: hidden;
