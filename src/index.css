@@ -575,6 +575,18 @@ p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.5; }
   margin-top: 3rem;
 }
 
+.option-btn svg {
+  display: block;
+  margin: 0 auto 1.5rem auto;
+  width: 48px;
+  height: 48px;
+  transition: transform 0.3s;
+}
+
+.option-btn:hover svg {
+  transform: scale(1.1);
+}
+
 @media (max-width: 768px) {
   .selector-options {
     grid-template-columns: 1fr;
@@ -584,24 +596,28 @@ p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.5; }
   .selector-card {
     padding: 1.5rem 1rem;
     width: 95%;
+    margin: auto;
   }
   .option-btn {
-    padding: 1.25rem;
+    padding: 1.5rem;
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 1.5rem;
     text-align: left;
+    justify-content: flex-start;
   }
   .option-btn svg {
-    margin-bottom: 0;
-    width: 24px;
-    height: 24px;
+    margin: 0;
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
   }
   .option-btn h3 {
-    font-size: 1rem;
+    font-size: 1.1rem;
+    margin-bottom: 0;
   }
   .option-btn p {
-    display: none; /* Hide descriptions on mobile to save space */
+    display: none;
   }
 }
 
