@@ -1,0 +1,7 @@
+- generic [ref=e4]:
+  - heading "What's your primary goal?" [level=1]
+  - paragraph: We'll customize your meal plan and macro targets based on this.
+  - generic [ref=e9] [cursor=pointer]: Lose Weight
+  - generic [ref=e14] [cursor=pointer]: Maintain Fitness
+  - generic [ref=e19] [cursor=pointer]: Build Muscle
+  - button "Continue" [disabled] [ref=e20] [cursor=pointer]
