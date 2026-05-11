@@ -292,15 +292,18 @@ function App() {
               <motion.div key="d-home" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}>
                 <div className="flex-between" style={{ marginBottom: '2.5rem' }}>
                   <h1>Your Dashboard</h1>
-                  <div style={{ position: 'relative', width: '300px' }}>
-                    <Search size={18} style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
-                    <input 
-                      type="text" 
-                      placeholder="Search meals..." 
-                      value={searchQuery}
-                      onChange={(e) => setSearchQuery(e.target.value)}
-                      style={{ width: '100%', padding: '0.75rem 1rem 0.75rem 2.5rem', background: 'var(--bg-card)', border: '1px solid var(--border-color)', borderRadius: '12px', color: '#fff', outline: 'none' }} 
-                    />
+                  <div style={{ position: 'relative', width: '350px', display: 'flex', gap: '0.75rem' }}>
+                    <div style={{ position: 'relative', flex: 1 }}>
+                      <Search size={18} style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
+                      <input 
+                        type="text" 
+                        placeholder="Search meals..." 
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        style={{ width: '100%', padding: '0.75rem 1rem 0.75rem 2.5rem', background: 'var(--bg-card)', border: '1px solid var(--border-color)', borderRadius: '12px', color: '#fff', outline: 'none' }} 
+                      />
+                    </div>
+                    <button className="btn-primary" style={{ width: 'auto', padding: '0 1.25rem', borderRadius: '12px' }}>Search</button>
                   </div>
                 </div>
 
@@ -376,15 +379,18 @@ function App() {
               <motion.div key="d-menu" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 20 }}>
                 <div className="flex-between" style={{ marginBottom: '2.5rem' }}>
                   <h1>Explore Kitchen</h1>
-                  <div style={{ position: 'relative', width: '300px' }}>
-                    <Search size={18} style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
-                    <input 
-                      type="text" 
-                      placeholder="Search meals..." 
-                      value={searchQuery}
-                      onChange={(e) => setSearchQuery(e.target.value)}
-                      style={{ width: '100%', padding: '0.75rem 1rem 0.75rem 2.5rem', background: 'var(--bg-card)', border: '1px solid var(--border-color)', borderRadius: '12px', color: '#fff', outline: 'none' }} 
-                    />
+                  <div style={{ position: 'relative', width: '350px', display: 'flex', gap: '0.75rem' }}>
+                    <div style={{ position: 'relative', flex: 1 }}>
+                      <Search size={18} style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
+                      <input 
+                        type="text" 
+                        placeholder="Search meals..." 
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        style={{ width: '100%', padding: '0.75rem 1rem 0.75rem 2.5rem', background: 'var(--bg-card)', border: '1px solid var(--border-color)', borderRadius: '12px', color: '#fff', outline: 'none' }} 
+                      />
+                    </div>
+                    <button className="btn-primary" style={{ width: 'auto', padding: '0 1.25rem', borderRadius: '12px' }}>Search</button>
                   </div>
                 </div>
                 <div className="desktop-menu-grid" style={{ marginTop: '2rem' }}>
