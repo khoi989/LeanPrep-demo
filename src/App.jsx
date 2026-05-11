@@ -374,7 +374,19 @@ function App() {
 
             {tab === 'menu' && (
               <motion.div key="d-menu" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 20 }}>
-                <h1>Explore Kitchen</h1>
+                <div className="flex-between" style={{ marginBottom: '2.5rem' }}>
+                  <h1>Explore Kitchen</h1>
+                  <div style={{ position: 'relative', width: '300px' }}>
+                    <Search size={18} style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
+                    <input 
+                      type="text" 
+                      placeholder="Search meals..." 
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      style={{ width: '100%', padding: '0.75rem 1rem 0.75rem 2.5rem', background: 'var(--bg-card)', border: '1px solid var(--border-color)', borderRadius: '12px', color: '#fff', outline: 'none' }} 
+                    />
+                  </div>
+                </div>
                 <div className="desktop-menu-grid" style={{ marginTop: '2rem' }}>
                   {MENU_ITEMS.filter(item => item.name.toLowerCase().includes(searchQuery.toLowerCase())).map(item => (
                     <div key={item.id} className="meal-card" onClick={() => setSelectedMeal(item)}>
