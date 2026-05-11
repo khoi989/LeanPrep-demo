@@ -576,12 +576,29 @@ p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.5; }
   .selector-options {
     grid-template-columns: 1fr;
     gap: 1rem;
+    margin-top: 1.5rem;
   }
   .selector-card {
-    padding: 1.5rem;
+    padding: 1.5rem 1rem;
+    width: 95%;
   }
   .option-btn {
-    padding: 1.5rem;
+    padding: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    text-align: left;
+  }
+  .option-btn svg {
+    margin-bottom: 0;
+    width: 24px;
+    height: 24px;
+  }
+  .option-btn h3 {
+    font-size: 1rem;
+  }
+  .option-btn p {
+    display: none; /* Hide descriptions on mobile to save space */
   }
 }
 
