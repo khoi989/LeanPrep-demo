@@ -519,6 +519,30 @@ p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.5; }
   padding: 2rem;
 }
 
+@media (max-width: 1024px) {
+  .desktop-container {
+    flex-direction: column;
+    overflow-y: auto;
+  }
+  .desktop-sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid var(--border-color);
+    padding: 1rem;
+  }
+  .desktop-main {
+    padding: 1.5rem;
+  }
+  .desktop-stats-row {
+    grid-template-columns: 1fr;
+  }
+  .desktop-cart-panel {
+    width: 100%;
+    border-left: none;
+    border-top: 1px solid var(--border-color);
+  }
+}
+
 /* UI Selector Screen */
 .ui-selector-overlay {
   position: fixed;
@@ -546,6 +570,19 @@ p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.5; }
   grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
   margin-top: 3rem;
+}
+
+@media (max-width: 768px) {
+  .selector-options {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .selector-card {
+    padding: 1.5rem;
+  }
+  .option-btn {
+    padding: 1.5rem;
+  }
 }
 
 .option-btn {
@@ -639,6 +676,28 @@ p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.5; }
   font-size: 0.7rem;
   font-weight: 700;
   text-transform: uppercase;
+}
+
+@media (max-width: 1024px) {
+  .seller-view {
+    flex-direction: column;
+  }
+  .seller-sidebar {
+    width: 100%;
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid #27272a;
+    padding: 1rem;
+  }
+  .seller-main {
+    padding: 1.5rem;
+  }
+  .seller-kanban {
+    grid-template-columns: 1fr;
+  }
+  .seller-metric-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 
