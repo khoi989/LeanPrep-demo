@@ -923,17 +923,49 @@ function App() {
 
               <div className="glass-panel" style={{ padding: '2rem', borderRadius: '24px', border: '1px solid var(--border-color)' }}>
                 <h3 style={{ marginBottom: '2.5rem' }}>Daily Order Volume (Last 7 Days)</h3>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', height: '150px', padding: '0 2rem' }}>
-                  {[
-                    { day: 'Mon', val: 310 }, { day: 'Tue', val: 420 }, { day: 'Wed', val: 385 },
-                    { day: 'Thu', val: 490 }, { day: 'Fri', val: 580 }, { day: 'Sat', val: 240 }, { day: 'Sun', val: 290 }
-                  ].map(d => (
-                    <div key={d.day} style={{ textAlign: 'center', width: '40px' }}>
-                      <div style={{ fontSize: '0.75rem', fontWeight: 700, marginBottom: '0.5rem' }}>{d.val}</div>
-                      <div style={{ height: `${(d.val / 600) * 120}px`, background: d.val > 400 ? 'rgba(255,255,255,0.1)' : 'rgba(255,255,255,0.05)', borderRadius: '4px 4px 0 0' }}></div>
-                      <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.75rem' }}>{d.day}</div>
-                    </div>
-                  ))}
+                <div style={{ position: 'relative', height: '200px', padding: '0 2rem', marginTop: '1rem' }}>
+                  {/* SVG Line Overlay */}
+                  <svg style={{ position: 'absolute', top: 0, left: '2rem', right: '2rem', width: 'calc(100% - 4rem)', height: '150px', overflow: 'visible', zIndex: 1, pointerEvents: 'none' }}>
+                    <defs>
+                      <linearGradient id="lineGrad" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="var(--accent-primary)" stopOpacity="0.5" />
+                        <stop offset="100%" stopColor="transparent" />
+                      </linearGradient>
+                    </defs>
+                    <path 
+                      d="M 20,72 L 100,50 L 180,57 L 260,36 L 340,18 L 420,86 L 500,76" 
+                      fill="none" 
+                      stroke="var(--accent-primary)" 
+                      strokeWidth="3" 
+                      strokeLinecap="round" 
+                      strokeLinejoin="round"
+                      style={{ filter: 'drop-shadow(0 0 8px rgba(16, 185, 129, 0.4))' }}
+                    />
+                    <line x1="0" y1="56.5" x2="100%" y2="56.5" stroke="rgba(255,255,255,0.1)" strokeDasharray="4 4" />
+                  </svg>
+
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', height: '150px', position: 'relative', zIndex: 0 }}>
+                    {[
+                      { day: 'Mon', val: 310 }, { day: 'Tue', val: 420 }, { day: 'Wed', val: 385 },
+                      { day: 'Thu', val: 490 }, { day: 'Fri', val: 580 }, { day: 'Sat', val: 240 }, { day: 'Sun', val: 290 }
+                    ].map((d, idx) => {
+                      const avg = 387; // Pre-calculated avg
+                      const isBelow = d.val < avg;
+                      return (
+                        <div key={d.day} style={{ textAlign: 'center', width: '40px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                          <div style={{ fontSize: '0.75rem', fontWeight: 700, marginBottom: '0.5rem', color: isBelow ? 'var(--text-muted)' : 'var(--accent-primary)' }}>{d.val}</div>
+                          <div style={{ 
+                            width: '32px',
+                            height: `${(d.val / 600) * 120}px`, 
+                            background: isBelow ? 'rgba(16, 185, 129, 0.2)' : 'rgba(16, 185, 129, 0.8)', 
+                            borderRadius: '6px 6px 0 0',
+                            transition: 'all 0.3s ease'
+                          }}></div>
+                          <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.75rem', fontWeight: 600 }}>{d.day}</div>
+                        </div>
+                      );
+                    })}
+                  </div>
                 </div>
               </div>
             </div>
