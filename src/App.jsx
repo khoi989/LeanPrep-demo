@@ -645,6 +645,14 @@ function App() {
                             <MapPin size={20} /> View Live Tracking Map
                           </button>
                         )}
+                        {orderStage >= 4 && (
+                          <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} style={{ marginTop: '3rem', padding: '2rem', background: 'rgba(16, 185, 129, 0.05)', borderRadius: '24px', border: '1px solid rgba(16, 185, 129, 0.2)', textAlign: 'center' }}>
+                            <CheckCircle2 size={40} color="var(--accent-primary)" style={{ margin: '0 auto 1rem' }} />
+                            <h2 style={{ color: 'var(--accent-primary)', marginBottom: '0.5rem' }}>Delivered & Logged!</h2>
+                            <p style={{ color: 'var(--text-muted)', marginBottom: '2rem' }}>{activeOrder.totalCals} kcal and exact macros have been synced to your Dashboard.</p>
+                            <button onClick={() => { setActiveOrder(null); setTab('home'); }} className="btn-primary" style={{ maxWidth: '300px', margin: '0 auto' }}>View Dashboard</button>
+                          </motion.div>
+                        )}
                       </div>
                       <div className="glass-panel" style={{ borderRadius: '24px', padding: '2rem' }}>
                         <h3 style={{ marginBottom: '1.5rem' }}>Order Details</h3>
