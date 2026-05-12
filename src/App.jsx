@@ -934,7 +934,7 @@ function App() {
                       strokeDasharray="6 4" 
                       style={{ filter: 'drop-shadow(0 0 4px rgba(16, 185, 129, 0.4))' }}
                     />
-                    <text x="525" y="68" fill="var(--accent-primary)" style={{ fontSize: '0.65rem', fontWeight: 800, letterSpacing: '0.05em' }}>7D AVG</text>
+                    <text x="510" y="62" textAnchor="end" fill="var(--accent-primary)" style={{ fontSize: '0.5rem', fontWeight: 800, letterSpacing: '0.05em', opacity: 0.8 }}>7D AVG</text>
                   </svg>
 
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', height: '150px', position: 'relative', zIndex: 0 }}>
