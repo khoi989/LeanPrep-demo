@@ -934,8 +934,12 @@ function App() {
                       strokeDasharray="6 4" 
                       style={{ opacity: 0.5 }}
                     />
-                    <text x="515" y="38" textAnchor="end" fill="#ffffff" style={{ fontSize: '0.75rem', fontWeight: 500, fontFamily: 'Arial, sans-serif' }}>387</text>
                   </svg>
+
+                  {/* Fixed Proportion Label */}
+                  <div style={{ position: 'absolute', top: '35px', right: '2.5rem', color: '#fff', fontSize: '0.75rem', fontWeight: 500, fontFamily: 'Arial, sans-serif', zIndex: 2, pointerEvents: 'none' }}>
+                    Weekly Avg: 387
+                  </div>
 
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', height: '150px', position: 'relative', zIndex: 1 }}>
                     {[
