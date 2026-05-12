@@ -420,10 +420,9 @@ function App() {
                   <div className="dash-card" style={{ padding: '2rem' }}>
                     <h3 style={{ marginBottom: '1.5rem' }}>Weekly Consistency</h3>
                     <div className="weekly-chart" style={{ height: '120px' }}>
-                      {WEEK_DATA.map((d, i) => {
                         const isToday = i === 5;
                         const cals = isToday ? userProfile.eaten : d.val;
-                        const realH = (cals / userProfile.cals) * 100;
+                        const realH = (isToday && cals === 0) ? 85 : (cals / userProfile.cals) * 100;
                         return (
                           <div key={i} className="bar-col" style={{ width: '10%' }}>
                             <div className="bar-track" style={{ height: '80px' }}>
@@ -1143,7 +1142,7 @@ function App() {
                 <div className="glass-panel" style={{ padding: '2rem', borderRadius: '24px', border: '1px solid var(--border-color)' }}>
                   <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--text-muted)' }}>Avg. Prep & Cook Time</p>
                   <h2 style={{ margin: '0.5rem 0', fontSize: '2.5rem' }}>14.2 min</h2>
-                  <p style={{ margin: 0, fontSize: '0.9rem', color: 'var(--accent-primary)', fontWeight: 600 }}>-1.5 min from target</p>
+                  <p style={{ margin: 0, fontSize: '0.9rem', color: '#ef4444', fontWeight: 600 }}>-1.5 min from target</p>
                 </div>
                 <div className="glass-panel" style={{ padding: '2rem', borderRadius: '24px', border: '1px solid var(--border-color)' }}>
                   <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--text-muted)' }}>Macro Accuracy Rate</p>
@@ -1399,10 +1398,9 @@ function App() {
                 </div>
                 
                 <div className="weekly-chart">
-                  {WEEK_DATA.map((d, i) => {
                     const isToday = i === 5;
                     const cals = isToday ? userProfile.eaten : d.val;
-                    const realH = (cals / userProfile.cals) * 100;
+                    const realH = (isToday && cals === 0) ? 85 : (cals / userProfile.cals) * 100;
                     return (
                       <div key={i} className="bar-col">
                         <div className="bar-track">
