@@ -39,7 +39,12 @@ function App() {
       eaten: 1200,
       p: 105,
       c: 120,
-      f: 45
+      f: 45,
+      name: 'Khoi',
+      age: 25,
+      gender: 'Male',
+      weight: 75,
+      exercise: '3-5 days/week'
     };
     // Force reset eaten and macros on refresh for demo stability
     return { ...saved, eaten: 1200, p: 105, c: 120, f: 45 };
@@ -74,6 +79,31 @@ function App() {
   ]);
   const [showLiveMap, setShowLiveMap] = useState(false);
   const [streakDays, setStreakDays] = useState(7);
+
+  // Calculate Recommendations
+  useEffect(() => {
+    if (userProfile.weight && userProfile.age) {
+      // Basic Mifflin-St Jeor (simplified for demo)
+      let bmr = 10 * userProfile.weight + 6.25 * 175 - 5 * userProfile.age;
+      bmr = userProfile.gender === 'Male' ? bmr + 5 : bmr - 161;
+      
+      const activityMap = {
+        'Sedentary': 1.2,
+        '1-3 days/week': 1.375,
+        '3-5 days/week': 1.55,
+        '6-7 days/week': 1.725
+      };
+      
+      const tdee = bmr * (activityMap[userProfile.exercise] || 1.2);
+      
+      // Adjust based on goal
+      let target = tdee;
+      if (userProfile.goal === 'Lose Weight') target -= 500;
+      if (userProfile.goal === 'Build Muscle') target += 300;
+      
+      setUserProfile(prev => ({ ...prev, cals: Math.round(target) }));
+    }
+  }, [userProfile.weight, userProfile.age, userProfile.gender, userProfile.exercise, userProfile.goal]);
 
   // Persistence logic
   useEffect(() => {
@@ -305,6 +335,9 @@ function App() {
           <div className={`desktop-nav-item ${tab === 'advice' ? 'active' : ''}`} onClick={() => setTab('advice')}>
             <MessageSquare size={20} /> AI Advice
           </div>
+          <div className={`desktop-nav-item ${tab === 'profile' ? 'active' : ''}`} onClick={() => setTab('profile')}>
+            <Settings size={20} /> My Profile
+          </div>
           <div className={`desktop-nav-item ${tab === 'tracker' ? 'active' : ''}`} onClick={() => setTab('tracker')}>
             <Truck size={20} /> Tracker
           </div>
@@ -467,6 +500,90 @@ function App() {
                       </div>
                     </div>
                   ))}
+                </div>
+              </motion.div>
+            )}
+
+            {tab === 'profile' && (
+              <motion.div key="d-profile" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 20 }}>
+                <h1>My Profile & Goals</h1>
+                <div className="desktop-grid" style={{ gridTemplateColumns: '1fr 1fr', gap: '2rem', marginTop: '2rem' }}>
+                  <div className="glass-panel" style={{ padding: '2rem', borderRadius: '24px' }}>
+                    <h3 style={{ marginBottom: '1.5rem' }}>Personal Information</h3>
+                    <div style={{ display: 'grid', gap: '1.25rem' }}>
+                      <div className="input-group">
+                        <label style={{ display: 'block', fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '0.5rem' }}>Full Name</label>
+                        <input type="text" value={userProfile.name} onChange={e => setUserProfile({...userProfile, name: e.target.value})} style={{ width: '100%', padding: '0.75rem', background: 'var(--bg-dark)', border: '1px solid var(--border-color)', color: '#fff', borderRadius: '12px' }} />
+                      </div>
+                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+                        <div>
+                          <label style={{ display: 'block', fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '0.5rem' }}>Age</label>
+                          <input type="number" value={userProfile.age} onChange={e => setUserProfile({...userProfile, age: Number(e.target.value)})} style={{ width: '100%', padding: '0.75rem', background: 'var(--bg-dark)', border: '1px solid var(--border-color)', color: '#fff', borderRadius: '12px' }} />
+                        </div>
+                        <div>
+                          <label style={{ display: 'block', fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '0.5rem' }}>Gender</label>
+                          <select value={userProfile.gender} onChange={e => setUserProfile({...userProfile, gender: e.target.value})} style={{ width: '100%', padding: '0.75rem', background: 'var(--bg-dark)', border: '1px solid var(--border-color)', color: '#fff', borderRadius: '12px' }}>
+                            <option>Male</option>
+                            <option>Female</option>
+                            <option>Other</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+                        <div>
+                          <label style={{ display: 'block', fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '0.5rem' }}>Weight (kg)</label>
+                          <input type="number" value={userProfile.weight} onChange={e => setUserProfile({...userProfile, weight: Number(e.target.value)})} style={{ width: '100%', padding: '0.75rem', background: 'var(--bg-dark)', border: '1px solid var(--border-color)', color: '#fff', borderRadius: '12px' }} />
+                        </div>
+                        <div>
+                          <label style={{ display: 'block', fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '0.5rem' }}>Exercise Frequency</label>
+                          <select value={userProfile.exercise} onChange={e => setUserProfile({...userProfile, exercise: e.target.value})} style={{ width: '100%', padding: '0.75rem', background: 'var(--bg-dark)', border: '1px solid var(--border-color)', color: '#fff', borderRadius: '12px' }}>
+                            <option>Sedentary</option>
+                            <option>1-3 days/week</option>
+                            <option>3-5 days/week</option>
+                            <option>6-7 days/week</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="glass-panel" style={{ padding: '2rem', borderRadius: '24px', background: 'rgba(16, 185, 129, 0.05)', border: '1px solid rgba(16, 185, 129, 0.2)' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
+                      <Zap size={24} color="var(--accent-primary)" />
+                      <h3 style={{ margin: 0 }}>AI Recommendations</h3>
+                    </div>
+                    
+                    <p style={{ marginBottom: '2rem', fontSize: '0.95rem' }}>Based on your profile, LeanPrep AI recommends the following daily targets for your <strong>{userProfile.goal || 'selected goal'}</strong>:</p>
+                    
+                    <div style={{ display: 'grid', gap: '1.5rem' }}>
+                      <div className="flex-between">
+                        <div>
+                          <div style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--accent-primary)' }}>{userProfile.cals} kcal</div>
+                          <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Daily Calorie Target</div>
+                        </div>
+                        <TrendingUp size={24} color="var(--accent-primary)" />
+                      </div>
+
+                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1rem' }}>
+                        <div style={{ background: 'var(--bg-dark)', padding: '1rem', borderRadius: '12px', textAlign: 'center' }}>
+                          <div style={{ fontWeight: 700, color: 'var(--accent-secondary)' }}>{Math.round((userProfile.cals * 0.3) / 4)}g</div>
+                          <div style={{ fontSize: '0.65rem', color: 'var(--text-muted)' }}>PROTEIN</div>
+                        </div>
+                        <div style={{ background: 'var(--bg-dark)', padding: '1rem', borderRadius: '12px', textAlign: 'center' }}>
+                          <div style={{ fontWeight: 700, color: '#f59e0b' }}>{Math.round((userProfile.cals * 0.4) / 4)}g</div>
+                          <div style={{ fontSize: '0.65rem', color: 'var(--text-muted)' }}>CARBS</div>
+                        </div>
+                        <div style={{ background: 'var(--bg-dark)', padding: '1rem', borderRadius: '12px', textAlign: 'center' }}>
+                          <div style={{ fontWeight: 700, color: '#ef4444' }}>{Math.round((userProfile.cals * 0.3) / 9)}g</div>
+                          <div style={{ fontSize: '0.65rem', color: 'var(--text-muted)' }}>FATS</div>
+                        </div>
+                      </div>
+
+                      <p style={{ fontSize: '0.8rem', fontStyle: 'italic', color: 'var(--text-muted)', marginTop: '1rem' }}>
+                        *Calculated using Mifflin-St Jeor formula adjusted for activity factor and {userProfile.goal.toLowerCase()}.
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </motion.div>
             )}
@@ -1003,7 +1120,7 @@ function App() {
                 <div className="glass-panel" style={{ padding: '2rem', borderRadius: '24px', border: '1px solid var(--border-color)' }}>
                   <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--text-muted)' }}>Avg. Prep & Cook Time</p>
                   <h2 style={{ margin: '0.5rem 0', fontSize: '2.5rem' }}>14.2 min</h2>
-                  <p style={{ margin: 0, fontSize: '0.9rem', color: 'var(--accent-danger)', fontWeight: 600 }}>-1.5 min from target</p>
+                  <p style={{ margin: 0, fontSize: '0.9rem', color: 'var(--accent-primary)', fontWeight: 600 }}>-1.5 min from target</p>
                 </div>
                 <div className="glass-panel" style={{ padding: '2rem', borderRadius: '24px', border: '1px solid var(--border-color)' }}>
                   <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--text-muted)' }}>Macro Accuracy Rate</p>
@@ -1468,6 +1585,72 @@ function App() {
             </motion.div>
           )}
 
+          {tab === 'profile' && (
+            <motion.div key="profile" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}>
+              <h1>My Profile</h1>
+              <div className="glass-panel" style={{ padding: '1.5rem', borderRadius: '20px', marginTop: '1.5rem' }}>
+                <div style={{ display: 'grid', gap: '1.25rem' }}>
+                  <div className="input-group">
+                    <label style={{ display: 'block', fontSize: '0.8rem', color: 'var(--text-muted)', marginBottom: '0.4rem' }}>Name</label>
+                    <input type="text" value={userProfile.name} onChange={e => setUserProfile({...userProfile, name: e.target.value})} style={{ width: '100%', padding: '0.75rem', background: 'rgba(255,255,255,0.05)', border: '1px solid var(--border-color)', color: '#fff', borderRadius: '12px' }} />
+                  </div>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+                    <div>
+                      <label style={{ display: 'block', fontSize: '0.8rem', color: 'var(--text-muted)', marginBottom: '0.4rem' }}>Age</label>
+                      <input type="number" value={userProfile.age} onChange={e => setUserProfile({...userProfile, age: Number(e.target.value)})} style={{ width: '100%', padding: '0.75rem', background: 'rgba(255,255,255,0.05)', border: '1px solid var(--border-color)', color: '#fff', borderRadius: '12px' }} />
+                    </div>
+                    <div>
+                      <label style={{ display: 'block', fontSize: '0.8rem', color: 'var(--text-muted)', marginBottom: '0.4rem' }}>Gender</label>
+                      <select value={userProfile.gender} onChange={e => setUserProfile({...userProfile, gender: e.target.value})} style={{ width: '100%', padding: '0.75rem', background: 'rgba(255,255,255,0.05)', border: '1px solid var(--border-color)', color: '#fff', borderRadius: '12px' }}>
+                        <option>Male</option>
+                        <option>Female</option>
+                        <option>Other</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+                    <div>
+                      <label style={{ display: 'block', fontSize: '0.8rem', color: 'var(--text-muted)', marginBottom: '0.4rem' }}>Weight (kg)</label>
+                      <input type="number" value={userProfile.weight} onChange={e => setUserProfile({...userProfile, weight: Number(e.target.value)})} style={{ width: '100%', padding: '0.75rem', background: 'rgba(255,255,255,0.05)', border: '1px solid var(--border-color)', color: '#fff', borderRadius: '12px' }} />
+                    </div>
+                    <div>
+                      <label style={{ display: 'block', fontSize: '0.8rem', color: 'var(--text-muted)', marginBottom: '0.4rem' }}>Exercise</label>
+                      <select value={userProfile.exercise} onChange={e => setUserProfile({...userProfile, exercise: e.target.value})} style={{ width: '100%', padding: '0.75rem', background: 'rgba(255,255,255,0.05)', border: '1px solid var(--border-color)', color: '#fff', borderRadius: '12px' }}>
+                        <option>Sedentary</option>
+                        <option>1-3 days/week</option>
+                        <option>3-5 days/week</option>
+                        <option>6-7 days/week</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="glass-panel" style={{ padding: '1.5rem', borderRadius: '20px', marginTop: '1.5rem', background: 'rgba(16, 185, 129, 0.05)', border: '1px solid rgba(16, 185, 129, 0.2)' }}>
+                <h3 style={{ marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                  <Zap size={18} color="var(--accent-primary)" /> AI Targets
+                </h3>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
+                  <div style={{ fontSize: '1.5rem', fontWeight: 800 }}>{userProfile.cals} <span style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>kcal/day</span></div>
+                </div>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.75rem' }}>
+                  <div style={{ textAlign: 'center' }}>
+                    <div style={{ fontWeight: 700, color: 'var(--accent-secondary)' }}>{Math.round((userProfile.cals * 0.3) / 4)}g</div>
+                    <div style={{ fontSize: '0.6rem', color: 'var(--text-muted)' }}>PROTEIN</div>
+                  </div>
+                  <div style={{ textAlign: 'center' }}>
+                    <div style={{ fontWeight: 700, color: '#f59e0b' }}>{Math.round((userProfile.cals * 0.4) / 4)}g</div>
+                    <div style={{ fontSize: '0.6rem', color: 'var(--text-muted)' }}>CARBS</div>
+                  </div>
+                  <div style={{ textAlign: 'center' }}>
+                    <div style={{ fontWeight: 700, color: '#ef4444' }}>{Math.round((userProfile.cals * 0.3) / 9)}g</div>
+                    <div style={{ fontSize: '0.6rem', color: 'var(--text-muted)' }}>FATS</div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          )}
+
           {tab === 'advice' && (
             <motion.div key="advice" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} style={{ height: 'calc(100vh - 180px)', display: 'flex', flexDirection: 'column' }}>
               <h1 style={{ marginBottom: '1.5rem' }}>AI Advice</h1>
@@ -1667,6 +1850,10 @@ function App() {
         <div className={`nav-item ${tab === 'menu' ? 'active' : ''}`} onClick={() => setTab('menu')}>
           <Utensils size={24} />
           <span>Menu</span>
+        </div>
+        <div className={`nav-item ${tab === 'profile' ? 'active' : ''}`} onClick={() => setTab('profile')}>
+          <Settings size={24} />
+          <span>Profile</span>
         </div>
         <div className={`nav-item ${tab === 'cart' ? 'active' : ''}`} style={{ position: 'relative' }} onClick={() => setTab('cart')}>
           <ShoppingBag size={24} />
