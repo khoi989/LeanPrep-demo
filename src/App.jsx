@@ -32,8 +32,17 @@ const MOCK_SELLER_ORDERS = [
 function App() {
   const [onboardStep, setOnboardStep] = useState(() => JSON.parse(localStorage.getItem('leanprep_onboardStep')) || 0);
   const [userProfile, setUserProfile] = useState(() => {
-    const saved = JSON.parse(localStorage.getItem('leanprep_userProfile')) || { goal: '', diet: '', cals: 2200, eaten: 1200 };
-    return { ...saved, eaten: 1200 };
+    const saved = JSON.parse(localStorage.getItem('leanprep_userProfile')) || { 
+      goal: '', 
+      diet: '', 
+      cals: 2200, 
+      eaten: 1200,
+      p: 105,
+      c: 120,
+      f: 45
+    };
+    // Force reset eaten and macros on refresh for demo stability
+    return { ...saved, eaten: 1200, p: 105, c: 120, f: 45 };
   });
 
   const [tab, setTab] = useState('home');
@@ -104,7 +113,12 @@ function App() {
       setTimeout(() => {
         setPaymentSuccess(false);
         setIsCheckingOut(false);
-        setActiveOrder({ items: cart, totalCals: cartCals });
+        const totalMacros = cart.reduce((acc, item) => ({
+          p: acc.p + (item.macros.p * item.qty),
+          c: acc.c + (item.macros.c * item.qty),
+          f: acc.f + (item.macros.f * item.qty)
+        }), { p: 0, c: 0, f: 0 });
+        setActiveOrder({ items: cart, totalCals: cartCals, totalMacros });
         setCart([]);
         setOrderStage(0);
         setTab('tracker');
@@ -118,8 +132,14 @@ function App() {
       timer = setTimeout(() => {
         setOrderStage(prev => prev + 1);
         if (orderStage === 3) {
-          // Add calories to eaten
-          setUserProfile(p => ({ ...p, eaten: p.eaten + activeOrder.totalCals }));
+          // Add calories and macros to eaten totals
+          setUserProfile(prev => ({ 
+            ...prev, 
+            eaten: prev.eaten + activeOrder.totalCals,
+            p: prev.p + activeOrder.totalMacros.p,
+            c: prev.c + activeOrder.totalMacros.c,
+            f: prev.f + activeOrder.totalMacros.f
+          }));
         }
       }, 3500); 
     }
@@ -322,19 +342,19 @@ function App() {
                     <div className="macros-summary" style={{ margin: 0 }}>
                       <h3 style={{ marginBottom: '1rem' }}>Macro Breakdown</h3>
                       <div className="macro-line">
-                        <span>Protein ({((userProfile.eaten * 0.3) / 4).toFixed(0)}g)</span>
-                        <div className="macro-bar-bg" style={{ flex: 1, margin: '0 1rem' }}><div className="macro-bar-fg" style={{ width: '70%', background: 'var(--accent-secondary)' }}></div></div>
-                        <span>70%</span>
+                        <span>Protein ({userProfile.p} / {Math.round((userProfile.cals * 0.3) / 4)}g)</span>
+                        <div className="macro-bar-bg" style={{ flex: 1, margin: '0 1rem' }}><div className="macro-bar-fg" style={{ width: `${Math.min(100, (userProfile.p / ((userProfile.cals * 0.3) / 4)) * 100)}%`, background: 'var(--accent-secondary)' }}></div></div>
+                        <span>{Math.round((userProfile.p / ((userProfile.cals * 0.3) / 4)) * 100)}%</span>
                       </div>
                       <div className="macro-line" style={{ marginTop: '0.5rem' }}>
-                        <span>Carbs ({((userProfile.eaten * 0.5) / 4).toFixed(0)}g)</span>
-                        <div className="macro-bar-bg" style={{ flex: 1, margin: '0 1rem' }}><div className="macro-bar-fg" style={{ width: '45%', background: '#f59e0b' }}></div></div>
-                        <span>45%</span>
+                        <span>Carbs ({userProfile.c} / {Math.round((userProfile.cals * 0.4) / 4)}g)</span>
+                        <div className="macro-bar-bg" style={{ flex: 1, margin: '0 1rem' }}><div className="macro-bar-fg" style={{ width: `${Math.min(100, (userProfile.c / ((userProfile.cals * 0.4) / 4)) * 100)}%`, background: '#f59e0b' }}></div></div>
+                        <span>{Math.round((userProfile.c / ((userProfile.cals * 0.4) / 4)) * 100)}%</span>
                       </div>
                       <div className="macro-line" style={{ marginTop: '0.5rem' }}>
-                        <span>Fats ({((userProfile.eaten * 0.2) / 9).toFixed(0)}g)</span>
-                        <div className="macro-bar-bg" style={{ flex: 1, margin: '0 1rem' }}><div className="macro-bar-fg" style={{ width: '30%', background: '#ef4444' }}></div></div>
-                        <span>30%</span>
+                        <span>Fats ({userProfile.f} / {Math.round((userProfile.cals * 0.3) / 9)}g)</span>
+                        <div className="macro-bar-bg" style={{ flex: 1, margin: '0 1rem' }}><div className="macro-bar-fg" style={{ width: `${Math.min(100, (userProfile.f / ((userProfile.cals * 0.3) / 9)) * 100)}%`, background: '#ef4444' }}></div></div>
+                        <span>{Math.round((userProfile.f / ((userProfile.cals * 0.3) / 9)) * 100)}%</span>
                       </div>
                     </div>
                   </div>
@@ -1040,16 +1060,16 @@ function App() {
                   
                   <div className="macros-summary">
                     <div>
-                      <div className="macro-line"><span>Protein</span> <span>105 / 150g</span></div>
-                      <div className="macro-bar-bg"><div className="macro-bar-fg" style={{ width: '70%', background: '#3b82f6' }}></div></div>
+                      <div className="macro-line"><span>Protein</span> <span>{userProfile.p} / {Math.round((userProfile.cals * 0.3) / 4)}g</span></div>
+                      <div className="macro-bar-bg"><div className="macro-bar-fg" style={{ width: `${Math.min(100, (userProfile.p / ((userProfile.cals * 0.3) / 4)) * 100)}%`, background: '#3b82f6' }}></div></div>
                     </div>
                     <div>
-                      <div className="macro-line"><span>Carbs</span> <span>120 / 200g</span></div>
-                      <div className="macro-bar-bg"><div className="macro-bar-fg" style={{ width: '60%', background: '#f59e0b' }}></div></div>
+                      <div className="macro-line"><span>Carbs</span> <span>{userProfile.c} / {Math.round((userProfile.cals * 0.4) / 4)}g</span></div>
+                      <div className="macro-bar-bg"><div className="macro-bar-fg" style={{ width: `${Math.min(100, (userProfile.c / ((userProfile.cals * 0.4) / 4)) * 100)}%`, background: '#f59e0b' }}></div></div>
                     </div>
                     <div>
-                      <div className="macro-line"><span>Fats</span> <span>45 / 70g</span></div>
-                      <div className="macro-bar-bg"><div className="macro-bar-fg" style={{ width: '64%', background: '#ef4444' }}></div></div>
+                      <div className="macro-line"><span>Fats</span> <span>{userProfile.f} / {Math.round((userProfile.cals * 0.3) / 9)}g</span></div>
+                      <div className="macro-bar-bg"><div className="macro-bar-fg" style={{ width: `${Math.min(100, (userProfile.f / ((userProfile.cals * 0.3) / 9)) * 100)}%`, background: '#ef4444' }}></div></div>
                     </div>
                   </div>
                 </div>
