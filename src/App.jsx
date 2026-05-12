@@ -339,22 +339,37 @@ function App() {
                         <span className="label">Remaining</span>
                       </div>
                     </div>
-                    <div className="macros-summary" style={{ margin: 0 }}>
-                      <h3 style={{ marginBottom: '1rem' }}>Macro Breakdown</h3>
-                      <div className="macro-line">
-                        <span>Protein ({userProfile.p} / {Math.round((userProfile.cals * 0.3) / 4)}g)</span>
-                        <div className="macro-bar-bg" style={{ flex: 1, margin: '0 1rem' }}><div className="macro-bar-fg" style={{ width: `${Math.min(100, (userProfile.p / ((userProfile.cals * 0.3) / 4)) * 100)}%`, background: 'var(--accent-secondary)' }}></div></div>
-                        <span>{Math.round((userProfile.p / ((userProfile.cals * 0.3) / 4)) * 100)}%</span>
+                    <div className="macros-summary" style={{ margin: 0, flex: 1 }}>
+                      <h3 style={{ marginBottom: '1.5rem' }}>Macro Breakdown</h3>
+                      
+                      <div style={{ marginBottom: '1.25rem' }}>
+                        <div className="flex-between" style={{ marginBottom: '0.5rem', fontSize: '0.9rem' }}>
+                          <span>Protein ({userProfile.p} / {Math.round((userProfile.cals * 0.3) / 4)}g)</span>
+                          <span style={{ fontWeight: 600, color: 'var(--accent-secondary)' }}>{Math.round((userProfile.p / ((userProfile.cals * 0.3) / 4)) * 100)}%</span>
+                        </div>
+                        <div className="macro-bar-bg" style={{ height: '8px' }}>
+                          <div className="macro-bar-fg" style={{ width: `${Math.min(100, (userProfile.p / ((userProfile.cals * 0.3) / 4)) * 100)}%`, background: 'var(--accent-secondary)' }}></div>
+                        </div>
                       </div>
-                      <div className="macro-line" style={{ marginTop: '0.5rem' }}>
-                        <span>Carbs ({userProfile.c} / {Math.round((userProfile.cals * 0.4) / 4)}g)</span>
-                        <div className="macro-bar-bg" style={{ flex: 1, margin: '0 1rem' }}><div className="macro-bar-fg" style={{ width: `${Math.min(100, (userProfile.c / ((userProfile.cals * 0.4) / 4)) * 100)}%`, background: '#f59e0b' }}></div></div>
-                        <span>{Math.round((userProfile.c / ((userProfile.cals * 0.4) / 4)) * 100)}%</span>
+
+                      <div style={{ marginBottom: '1.25rem' }}>
+                        <div className="flex-between" style={{ marginBottom: '0.5rem', fontSize: '0.9rem' }}>
+                          <span>Carbs ({userProfile.c} / {Math.round((userProfile.cals * 0.4) / 4)}g)</span>
+                          <span style={{ fontWeight: 600, color: '#f59e0b' }}>{Math.round((userProfile.c / ((userProfile.cals * 0.4) / 4)) * 100)}%</span>
+                        </div>
+                        <div className="macro-bar-bg" style={{ height: '8px' }}>
+                          <div className="macro-bar-fg" style={{ width: `${Math.min(100, (userProfile.c / ((userProfile.cals * 0.4) / 4)) * 100)}%`, background: '#f59e0b' }}></div>
+                        </div>
                       </div>
-                      <div className="macro-line" style={{ marginTop: '0.5rem' }}>
-                        <span>Fats ({userProfile.f} / {Math.round((userProfile.cals * 0.3) / 9)}g)</span>
-                        <div className="macro-bar-bg" style={{ flex: 1, margin: '0 1rem' }}><div className="macro-bar-fg" style={{ width: `${Math.min(100, (userProfile.f / ((userProfile.cals * 0.3) / 9)) * 100)}%`, background: '#ef4444' }}></div></div>
-                        <span>{Math.round((userProfile.f / ((userProfile.cals * 0.3) / 9)) * 100)}%</span>
+
+                      <div>
+                        <div className="flex-between" style={{ marginBottom: '0.5rem', fontSize: '0.9rem' }}>
+                          <span>Fats ({userProfile.f} / {Math.round((userProfile.cals * 0.3) / 9)}g)</span>
+                          <span style={{ fontWeight: 600, color: '#ef4444' }}>{Math.round((userProfile.f / ((userProfile.cals * 0.3) / 9)) * 100)}%</span>
+                        </div>
+                        <div className="macro-bar-bg" style={{ height: '8px' }}>
+                          <div className="macro-bar-fg" style={{ width: `${Math.min(100, (userProfile.f / ((userProfile.cals * 0.3) / 9)) * 100)}%`, background: '#ef4444' }}></div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -1058,18 +1073,27 @@ function App() {
                     </div>
                   </div>
                   
-                  <div className="macros-summary">
-                    <div>
-                      <div className="macro-line"><span>Protein</span> <span>{userProfile.p} / {Math.round((userProfile.cals * 0.3) / 4)}g</span></div>
-                      <div className="macro-bar-bg"><div className="macro-bar-fg" style={{ width: `${Math.min(100, (userProfile.p / ((userProfile.cals * 0.3) / 4)) * 100)}%`, background: '#3b82f6' }}></div></div>
+                  <div className="macros-summary" style={{ flex: 1 }}>
+                    <div style={{ marginBottom: '1rem' }}>
+                      <div className="flex-between" style={{ marginBottom: '0.35rem', fontSize: '0.8rem' }}>
+                        <span style={{ color: 'var(--text-muted)' }}>Protein</span>
+                        <span style={{ fontWeight: 700 }}>{userProfile.p} / {Math.round((userProfile.cals * 0.3) / 4)}g</span>
+                      </div>
+                      <div className="macro-bar-bg" style={{ height: '6px' }}><div className="macro-bar-fg" style={{ width: `${Math.min(100, (userProfile.p / ((userProfile.cals * 0.3) / 4)) * 100)}%`, background: '#3b82f6' }}></div></div>
+                    </div>
+                    <div style={{ marginBottom: '1rem' }}>
+                      <div className="flex-between" style={{ marginBottom: '0.35rem', fontSize: '0.8rem' }}>
+                        <span style={{ color: 'var(--text-muted)' }}>Carbs</span>
+                        <span style={{ fontWeight: 700 }}>{userProfile.c} / {Math.round((userProfile.cals * 0.4) / 4)}g</span>
+                      </div>
+                      <div className="macro-bar-bg" style={{ height: '6px' }}><div className="macro-bar-fg" style={{ width: `${Math.min(100, (userProfile.c / ((userProfile.cals * 0.4) / 4)) * 100)}%`, background: '#f59e0b' }}></div></div>
                     </div>
                     <div>
-                      <div className="macro-line"><span>Carbs</span> <span>{userProfile.c} / {Math.round((userProfile.cals * 0.4) / 4)}g</span></div>
-                      <div className="macro-bar-bg"><div className="macro-bar-fg" style={{ width: `${Math.min(100, (userProfile.c / ((userProfile.cals * 0.4) / 4)) * 100)}%`, background: '#f59e0b' }}></div></div>
-                    </div>
-                    <div>
-                      <div className="macro-line"><span>Fats</span> <span>{userProfile.f} / {Math.round((userProfile.cals * 0.3) / 9)}g</span></div>
-                      <div className="macro-bar-bg"><div className="macro-bar-fg" style={{ width: `${Math.min(100, (userProfile.f / ((userProfile.cals * 0.3) / 9)) * 100)}%`, background: '#ef4444' }}></div></div>
+                      <div className="flex-between" style={{ marginBottom: '0.35rem', fontSize: '0.8rem' }}>
+                        <span style={{ color: 'var(--text-muted)' }}>Fats</span>
+                        <span style={{ fontWeight: 700 }}>{userProfile.f} / {Math.round((userProfile.cals * 0.3) / 9)}g</span>
+                      </div>
+                      <div className="macro-bar-bg" style={{ height: '6px' }}><div className="macro-bar-fg" style={{ width: `${Math.min(100, (userProfile.f / ((userProfile.cals * 0.3) / 9)) * 100)}%`, background: '#ef4444' }}></div></div>
                     </div>
                   </div>
                 </div>
