@@ -47,7 +47,7 @@ function App() {
       exercise: '3-5 days/week'
     };
     // Force reset eaten and macros on refresh for demo stability
-    return { ...saved, eaten: 1200, p: 105, c: 120, f: 45 };
+    return { ...saved, eaten: 0, p: 0, c: 0, f: 0 };
   });
 
   const [tab, setTab] = useState('home');
@@ -420,14 +420,19 @@ function App() {
                   <div className="dash-card" style={{ padding: '2rem' }}>
                     <h3 style={{ marginBottom: '1.5rem' }}>Weekly Consistency</h3>
                     <div className="weekly-chart" style={{ height: '120px' }}>
-                      {WEEK_DATA.map((d, i) => (
-                        <div key={i} className="bar-col" style={{ width: '10%' }}>
-                          <div className="bar-track" style={{ height: '80px' }}>
-                            <div className="bar-fill" style={{ height: `${(d.val / 2500) * 100}%`, background: d.val > 2000 ? 'var(--accent-primary)' : 'var(--accent-secondary)' }}></div>
+                      {WEEK_DATA.map((d, i) => {
+                        const isToday = i === 5;
+                        const cals = isToday ? userProfile.eaten : d.val;
+                        const realH = (cals / userProfile.cals) * 100;
+                        return (
+                          <div key={i} className="bar-col" style={{ width: '10%' }}>
+                            <div className="bar-track" style={{ height: '80px' }}>
+                              <div className="bar-fill" style={{ height: `${Math.min(100, realH)}%`, background: isToday ? 'var(--accent-primary)' : 'var(--border-color)' }}></div>
+                            </div>
+                            <span style={{ fontSize: '0.75rem', color: isToday ? '#fff' : 'var(--text-muted)' }}>{d.day}</span>
                           </div>
-                          <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>{d.day}</span>
-                        </div>
-                      ))}
+                        );
+                      })}
                     </div>
                     <div className="flex-between" style={{ marginTop: '1.5rem', padding: '1rem', background: 'rgba(245, 158, 11, 0.1)', borderRadius: '12px', border: '1px solid rgba(245, 158, 11, 0.2)' }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
