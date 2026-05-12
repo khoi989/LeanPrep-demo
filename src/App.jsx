@@ -861,6 +861,15 @@ function App() {
               <button onClick={() => setShowLiveMap(false)} style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', zIndex: 10, background: 'rgba(0,0,0,0.5)', border: 'none', color: '#fff', width: '40px', height: '40px', borderRadius: '50%', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><X size={24}/></button>
               
               <div style={{ height: '100%', position: 'relative', background: '#1a1a1a' }}>
+                {/* Arrived Notification */}
+                <motion.div 
+                  initial={{ opacity: 0, y: -20, x: '-50%' }}
+                  animate={{ opacity: 1, y: 0, x: '-50%' }}
+                  transition={{ delay: 20 }}
+                  style={{ position: 'absolute', top: '2rem', left: '50%', background: 'var(--accent-primary)', color: '#000', padding: '1rem 2rem', borderRadius: '40px', fontWeight: 800, fontSize: '1.25rem', boxShadow: '0 10px 30px rgba(16, 185, 129, 0.4)', zIndex: 100, whiteSpace: 'nowrap' }}
+                >
+                  Your Order has Arrived! 🍱
+                </motion.div>
                 {/* Simulated Map SVG */}
                 <svg width="100%" height="100%" viewBox="0 0 1000 800" style={{ opacity: 0.6 }}>
                   <pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse">
@@ -1892,6 +1901,15 @@ function App() {
               <button onClick={() => setShowLiveMap(false)} style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', zIndex: 10, background: 'rgba(0,0,0,0.5)', border: 'none', color: '#fff', width: '40px', height: '40px', borderRadius: '50%', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><X size={24}/></button>
               
               <div style={{ height: '100%', position: 'relative', background: '#1a1a1a' }}>
+                {/* Arrived Notification */}
+                <motion.div 
+                  initial={{ opacity: 0, y: -20, x: '-50%' }}
+                  animate={{ opacity: 1, y: 0, x: '-50%' }}
+                  transition={{ delay: 20 }}
+                  style={{ position: 'absolute', top: '2rem', left: '50%', background: 'var(--accent-primary)', color: '#000', padding: '1rem 2rem', borderRadius: '40px', fontWeight: 800, fontSize: '1.25rem', boxShadow: '0 10px 30px rgba(16, 185, 129, 0.4)', zIndex: 100, whiteSpace: 'nowrap' }}
+                >
+                  Your Order has Arrived! 🍱
+                </motion.div>
                 {/* Simulated Map SVG */}
                 <svg width="100%" height="100%" viewBox="0 0 1000 800" style={{ opacity: 0.6 }}>
                   <pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse">
