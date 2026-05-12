@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ShieldCheck, Utensils, Activity, Search, Clock, CheckCircle2, Truck, ChefHat, ArrowLeft, Flame, Scale, LayoutList, Target, ShoppingBag, Plus, Minus, Edit2, X, CreditCard, Wallet, Lock, LayoutDashboard, Package, TrendingUp, Bell, FileText, Zap, ArrowRight, Settings } from 'lucide-react';
+import { ShieldCheck, Utensils, Activity, Search, Clock, CheckCircle2, Truck, ChefHat, ArrowLeft, Flame, Scale, LayoutList, Target, ShoppingBag, Plus, Minus, Edit2, X, CreditCard, Wallet, Lock, LayoutDashboard, Package, TrendingUp, Bell, FileText, Zap, ArrowRight, Settings, MessageSquare, Send, MapPin } from 'lucide-react';
 import './index.css';
 
 const MENU_ITEMS = [
@@ -67,6 +67,13 @@ function App() {
     partners: 'Uber Direct & DoorDash Drive'
   });
   const [isSavingSettings, setIsSavingSettings] = useState(false);
+  const [aiMessages, setAiMessages] = useState([
+    { role: 'ai', text: "Hello Khoi! I've analyzed your progress. Your current daily target is 2200 kcal. Based on your 'Build Muscle' goal, would you like to adjust this for a cleaner bulk?" },
+    { role: 'user', text: "Yes, I feel like 2200 might be a bit low. What do you recommend?" },
+    { role: 'ai', text: "Given your activity level, I suggest increasing to 2500 kcal, focusing on an extra 30g of protein. This will optimize muscle protein synthesis without excessive fat gain. Shall I update your dashboard?" }
+  ]);
+  const [showLiveMap, setShowLiveMap] = useState(false);
+  const [streakDays, setStreakDays] = useState(7);
 
   // Persistence logic
   useEffect(() => {
@@ -295,6 +302,9 @@ function App() {
           <div className={`desktop-nav-item ${tab === 'menu' ? 'active' : ''}`} onClick={() => setTab('menu')}>
             <Utensils size={20} /> Kitchen Menu
           </div>
+          <div className={`desktop-nav-item ${tab === 'advice' ? 'active' : ''}`} onClick={() => setTab('advice')}>
+            <MessageSquare size={20} /> AI Advice
+          </div>
           <div className={`desktop-nav-item ${tab === 'tracker' ? 'active' : ''}`} onClick={() => setTab('tracker')}>
             <Truck size={20} /> Tracker
           </div>
@@ -386,6 +396,18 @@ function App() {
                         </div>
                       ))}
                     </div>
+                    <div className="flex-between" style={{ marginTop: '1.5rem', padding: '1rem', background: 'rgba(245, 158, 11, 0.1)', borderRadius: '12px', border: '1px solid rgba(245, 158, 11, 0.2)' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                        <div style={{ width: '32px', height: '32px', background: 'var(--accent-warning)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                          <Flame size={18} color="#000" />
+                        </div>
+                        <div>
+                          <div style={{ fontWeight: 700, fontSize: '0.9rem' }}>{streakDays} Day Streak!</div>
+                          <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>You've hit your target 7 days in a row</div>
+                        </div>
+                      </div>
+                      <TrendingUp size={20} color="var(--accent-primary)" />
+                    </div>
                   </div>
                 </div>
 
@@ -449,6 +471,38 @@ function App() {
               </motion.div>
             )}
 
+            {tab === 'advice' && (
+              <motion.div key="d-advice" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 20 }} style={{ height: 'calc(100vh - 100px)', display: 'flex', flexDirection: 'column' }}>
+                <div className="flex-between" style={{ marginBottom: '2.5rem' }}>
+                  <h1>AI Nutritional Advice</h1>
+                  <div className="macro-pill" style={{ padding: '0.5rem 1rem' }}><Zap size={16} color="var(--accent-primary)" /> Powered by LeanPrep AI</div>
+                </div>
+                <div className="glass-panel" style={{ flex: 1, borderRadius: '24px', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
+                  <div style={{ flex: 1, padding: '2rem', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                    {aiMessages.map((msg, i) => (
+                      <div key={i} style={{ 
+                        alignSelf: msg.role === 'user' ? 'flex-end' : 'flex-start',
+                        maxWidth: '70%',
+                        background: msg.role === 'user' ? 'var(--accent-primary)' : 'rgba(255,255,255,0.05)',
+                        color: msg.role === 'user' ? '#000' : '#fff',
+                        padding: '1.25rem',
+                        borderRadius: msg.role === 'user' ? '20px 20px 4px 20px' : '20px 20px 20px 4px',
+                        fontSize: '1rem',
+                        lineHeight: 1.5,
+                        boxShadow: '0 4px 15px rgba(0,0,0,0.1)'
+                      }}>
+                        {msg.text}
+                      </div>
+                    ))}
+                  </div>
+                  <div style={{ padding: '1.5rem', background: 'rgba(255,255,255,0.02)', borderTop: '1px solid var(--border-color)', display: 'flex', gap: '1rem' }}>
+                    <input type="text" placeholder="Ask about your diet, macros, or meal timing..." style={{ flex: 1, background: 'var(--bg-dark)', border: '1px solid var(--border-color)', borderRadius: '12px', padding: '1rem', color: '#fff', outline: 'none' }} />
+                    <button className="btn-primary" style={{ width: '60px', height: '60px', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '12px' }}><Send size={24}/></button>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+
             {tab === 'tracker' && (
               <motion.div key="d-tracker" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 20 }}>
                 <h1>Live Tracking</h1>
@@ -469,6 +523,11 @@ function App() {
                           <TrackStep active={orderStage >= 3} icon={<Truck size={18}/>} title="Out for Delivery" desc="A driver is heading to your location." />
                           <TrackStep active={orderStage >= 4} icon={<ShoppingBag size={18}/>} title="Delivered" desc="Enjoy your macro-certified meal!" />
                         </div>
+                        {orderStage === 3 && (
+                          <button className="btn-primary" style={{ marginTop: '2rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.75rem' }} onClick={() => setShowLiveMap(true)}>
+                            <MapPin size={20} /> View Live Tracking Map
+                          </button>
+                        )}
                       </div>
                       <div className="glass-panel" style={{ borderRadius: '24px', padding: '2rem' }}>
                         <h3 style={{ marginBottom: '1.5rem' }}>Order Details</h3>
@@ -504,9 +563,9 @@ function App() {
                     <p style={{ fontSize: '0.8rem', color: 'var(--accent-primary)' }}>${item.price}</p>
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                    <button className="nav-item" style={{ padding: '4px' }} onClick={() => updateCartQty(item.id, -1)}><Minus size={14}/></button>
+                    <button className="nav-item" style={{ padding: '4px' }} onClick={() => updateQty(item.id, -1)}><Minus size={14}/></button>
                     <span style={{ fontSize: '0.9rem', fontWeight: 600 }}>{item.qty}</span>
-                    <button className="nav-item" style={{ padding: '4px' }} onClick={() => updateCartQty(item.id, 1)}><Plus size={14}/></button>
+                    <button className="nav-item" style={{ padding: '4px' }} onClick={() => updateQty(item.id, 1)}><Plus size={14}/></button>
                   </div>
                 </div>
               ))
@@ -662,7 +721,79 @@ function App() {
             </motion.div>
           )}
         </AnimatePresence>
-      </div>
+
+      {/* Live Map Modal */}
+      <AnimatePresence>
+        {showLiveMap && (
+          <motion.div 
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+            style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.9)', zIndex: 9000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: uiMode === 'mobile' ? '1rem' : '4rem' }}
+          >
+            <motion.div 
+              initial={{ scale: 0.9, y: 20 }} animate={{ scale: 1, y: 0 }}
+              style={{ background: 'var(--bg-card)', width: '100%', maxWidth: '1000px', height: '100%', maxHeight: '800px', borderRadius: '32px', border: '1px solid var(--border-color)', position: 'relative', overflow: 'hidden' }}
+            >
+              <button onClick={() => setShowLiveMap(false)} style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', zIndex: 10, background: 'rgba(0,0,0,0.5)', border: 'none', color: '#fff', width: '40px', height: '40px', borderRadius: '50%', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><X size={24}/></button>
+              
+              <div style={{ height: '100%', position: 'relative', background: '#1a1a1a' }}>
+                {/* Simulated Map SVG */}
+                <svg width="100%" height="100%" viewBox="0 0 1000 800" style={{ opacity: 0.6 }}>
+                  <pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse">
+                    <path d="M 100 0 L 0 0 0 100" fill="none" stroke="rgba(255,255,255,0.05)" strokeWidth="1"/>
+                  </pattern>
+                  <rect width="1000" height="800" fill="url(#grid)" />
+                  {/* Streets */}
+                  <path d="M 0 400 L 1000 400 M 500 0 L 500 800 M 200 0 L 200 800 M 800 0 L 800 800 M 0 200 L 1000 200 M 0 600 L 1000 600" stroke="rgba(255,255,255,0.1)" strokeWidth="20" fill="none" />
+                  
+                  {/* Delivery Route */}
+                  <motion.path 
+                    d="M 200 600 L 500 600 L 500 400 L 800 400" 
+                    stroke="var(--accent-primary)" 
+                    strokeWidth="4" 
+                    fill="none" 
+                    strokeDasharray="10,10"
+                    initial={{ pathLength: 0 }}
+                    animate={{ pathLength: 1 }}
+                    transition={{ duration: 5, repeat: Infinity }}
+                  />
+
+                  {/* Destination */}
+                  <g transform="translate(800, 400)">
+                    <circle r="12" fill="var(--accent-secondary)" style={{ opacity: 0.3 }}>
+                      <animate attributeName="r" values="12;20;12" dur="2s" repeatCount="indefinite" />
+                    </circle>
+                    <circle r="6" fill="var(--accent-secondary)" />
+                    <text y="-25" textAnchor="middle" fill="#fff" fontSize="14" fontWeight="700">HOME</text>
+                  </g>
+
+                  {/* Delivery Man */}
+                  <motion.g 
+                    initial={{ x: 200, y: 600 }}
+                    animate={{ x: [200, 500, 500, 800], y: [600, 600, 400, 400] }}
+                    transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                  >
+                    <circle r="15" fill="var(--accent-primary)" style={{ filter: 'drop-shadow(0 0 10px var(--accent-primary))' }} />
+                    <Truck size={18} x="-9" y="-9" color="#000" />
+                    <text y="-25" textAnchor="middle" fill="var(--accent-primary)" fontSize="14" fontWeight="800">COURIER</text>
+                  </motion.g>
+                </svg>
+
+                <div style={{ position: 'absolute', bottom: '2rem', left: '2rem', right: '2rem', display: 'flex', gap: '1rem' }}>
+                  <div className="glass-panel" style={{ flex: 1, padding: '1.5rem', borderRadius: '20px', background: 'rgba(0,0,0,0.8)' }}>
+                    <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '0.5rem' }}>Estimated Arrival</div>
+                    <div style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--accent-primary)' }}>8 - 12 Minutes</div>
+                  </div>
+                  <div className="glass-panel" style={{ flex: 1, padding: '1.5rem', borderRadius: '20px', background: 'rgba(0,0,0,0.8)', display: uiMode === 'mobile' ? 'none' : 'block' }}>
+                    <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '0.5rem' }}>Driver</div>
+                    <div style={{ fontSize: '1.25rem', fontWeight: 700 }}>Marco "The Macro" Polo</div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
     );
   }
 
@@ -1142,6 +1273,13 @@ function App() {
                     );
                   })}
                 </div>
+                <div className="flex-between" style={{ marginTop: '1rem', padding: '0.85rem', background: 'rgba(245, 158, 11, 0.1)', borderRadius: '12px', border: '1px solid rgba(245, 158, 11, 0.2)' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+                    <Flame size={18} color="var(--accent-warning)" />
+                    <span style={{ fontWeight: 700, fontSize: '0.85rem' }}>{streakDays} Day Streak!</span>
+                  </div>
+                  <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Meeting targets daily</span>
+                </div>
               </div>
 
               <div className="flex-between" style={{ marginTop: '2rem', marginBottom: '1rem' }}>
@@ -1311,6 +1449,12 @@ function App() {
                     />
                   </div>
                   
+                  {orderStage === 3 && (
+                    <button className="btn-primary" style={{ marginTop: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }} onClick={() => setShowLiveMap(true)}>
+                      <MapPin size={18} /> View Live Map
+                    </button>
+                  )}
+
                   {orderStage >= 4 && (
                     <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} style={{ marginTop: '2rem', padding: '1rem', background: 'rgba(16, 185, 129, 0.1)', borderRadius: '12px', border: '1px solid rgba(16, 185, 129, 0.3)', textAlign: 'center' }}>
                       <CheckCircle2 size={24} color="var(--accent-primary)" style={{ margin: '0 auto 0.5rem' }} />
@@ -1321,6 +1465,34 @@ function App() {
                   )}
                 </div>
               )}
+            </motion.div>
+          )}
+
+          {tab === 'advice' && (
+            <motion.div key="advice" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} style={{ height: 'calc(100vh - 180px)', display: 'flex', flexDirection: 'column' }}>
+              <h1 style={{ marginBottom: '1.5rem' }}>AI Advice</h1>
+              <div className="glass-panel" style={{ flex: 1, borderRadius: '24px', display: 'flex', flexDirection: 'column', overflow: 'hidden', background: 'rgba(255,255,255,0.02)' }}>
+                <div style={{ flex: 1, padding: '1.5rem', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+                  {aiMessages.map((msg, i) => (
+                    <div key={i} style={{ 
+                      alignSelf: msg.role === 'user' ? 'flex-end' : 'flex-start',
+                      maxWidth: '85%',
+                      background: msg.role === 'user' ? 'var(--accent-primary)' : 'rgba(255,255,255,0.08)',
+                      color: msg.role === 'user' ? '#000' : '#fff',
+                      padding: '1rem',
+                      borderRadius: msg.role === 'user' ? '16px 16px 4px 16px' : '16px 16px 16px 4px',
+                      fontSize: '0.9rem',
+                      lineHeight: 1.4
+                    }}>
+                      {msg.text}
+                    </div>
+                  ))}
+                </div>
+                <div style={{ padding: '1rem', background: 'rgba(0,0,0,0.2)', display: 'flex', gap: '0.75rem' }}>
+                  <input type="text" placeholder="Message AI..." style={{ flex: 1, background: 'rgba(255,255,255,0.05)', border: '1px solid var(--border-color)', borderRadius: '12px', padding: '0.75rem 1rem', color: '#fff', fontSize: '0.9rem', outline: 'none' }} />
+                  <button className="btn-primary" style={{ width: '45px', height: '45px', padding: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}><Send size={20}/></button>
+                </div>
+              </div>
             </motion.div>
           )}
 
@@ -1501,11 +1673,87 @@ function App() {
           <span>Cart</span>
           {cart.length > 0 && <div className="badge">{cart.reduce((s,i) => s + i.qty, 0)}</div>}
         </div>
+        <div className={`nav-item ${tab === 'advice' ? 'active' : ''}`} onClick={() => setTab('advice')}>
+          <MessageSquare size={24} />
+          <span>AI Advice</span>
+        </div>
         <div className={`nav-item ${tab === 'tracker' ? 'active' : ''}`} onClick={() => setTab('tracker')}>
           <Truck size={24} />
           <span>Tracker</span>
         </div>
       </div>
+
+      {/* Live Map Modal */}
+      <AnimatePresence>
+        {showLiveMap && (
+          <motion.div 
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+            style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.9)', zIndex: 9000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: uiMode === 'mobile' ? '1rem' : '4rem' }}
+          >
+            <motion.div 
+              initial={{ scale: 0.9, y: 20 }} animate={{ scale: 1, y: 0 }}
+              style={{ background: 'var(--bg-card)', width: '100%', maxWidth: '1000px', height: '100%', maxHeight: '800px', borderRadius: '32px', border: '1px solid var(--border-color)', position: 'relative', overflow: 'hidden' }}
+            >
+              <button onClick={() => setShowLiveMap(false)} style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', zIndex: 10, background: 'rgba(0,0,0,0.5)', border: 'none', color: '#fff', width: '40px', height: '40px', borderRadius: '50%', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><X size={24}/></button>
+              
+              <div style={{ height: '100%', position: 'relative', background: '#1a1a1a' }}>
+                {/* Simulated Map SVG */}
+                <svg width="100%" height="100%" viewBox="0 0 1000 800" style={{ opacity: 0.6 }}>
+                  <pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse">
+                    <path d="M 100 0 L 0 0 0 100" fill="none" stroke="rgba(255,255,255,0.05)" strokeWidth="1"/>
+                  </pattern>
+                  <rect width="1000" height="800" fill="url(#grid)" />
+                  {/* Streets */}
+                  <path d="M 0 400 L 1000 400 M 500 0 L 500 800 M 200 0 L 200 800 M 800 0 L 800 800 M 0 200 L 1000 200 M 0 600 L 1000 600" stroke="rgba(255,255,255,0.1)" strokeWidth="20" fill="none" />
+                  
+                  {/* Delivery Route */}
+                  <motion.path 
+                    d="M 200 600 L 500 600 L 500 400 L 800 400" 
+                    stroke="var(--accent-primary)" 
+                    strokeWidth="4" 
+                    fill="none" 
+                    strokeDasharray="10,10"
+                    initial={{ pathLength: 0 }}
+                    animate={{ pathLength: 1 }}
+                    transition={{ duration: 5, repeat: Infinity }}
+                  />
+
+                  {/* Destination */}
+                  <g transform="translate(800, 400)">
+                    <circle r="12" fill="var(--accent-secondary)" style={{ opacity: 0.3 }}>
+                      <animate attributeName="r" values="12;20;12" dur="2s" repeatCount="indefinite" />
+                    </circle>
+                    <circle r="6" fill="var(--accent-secondary)" />
+                    <text y="-25" textAnchor="middle" fill="#fff" fontSize="14" fontWeight="700">HOME</text>
+                  </g>
+
+                  {/* Delivery Man */}
+                  <motion.g 
+                    initial={{ x: 200, y: 600 }}
+                    animate={{ x: [200, 500, 500, 800], y: [600, 600, 400, 400] }}
+                    transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                  >
+                    <circle r="15" fill="var(--accent-primary)" style={{ filter: 'drop-shadow(0 0 10px var(--accent-primary))' }} />
+                    <Truck size={18} x="-9" y="-9" color="#000" />
+                    <text y="-25" textAnchor="middle" fill="var(--accent-primary)" fontSize="14" fontWeight="800">COURIER</text>
+                  </motion.g>
+                </svg>
+
+                <div style={{ position: 'absolute', bottom: '2rem', left: '2rem', right: '2rem', display: 'flex', gap: '1rem' }}>
+                  <div className="glass-panel" style={{ flex: 1, padding: '1.5rem', borderRadius: '20px', background: 'rgba(0,0,0,0.8)' }}>
+                    <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '0.5rem' }}>Estimated Arrival</div>
+                    <div style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--accent-primary)' }}>8 - 12 Minutes</div>
+                  </div>
+                  <div className="glass-panel" style={{ flex: 1, padding: '1.5rem', borderRadius: '20px', background: 'rgba(0,0,0,0.8)', display: uiMode === 'mobile' ? 'none' : 'block' }}>
+                    <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '0.5rem' }}>Driver</div>
+                    <div style={{ fontSize: '1.25rem', fontWeight: 700 }}>Marco "The Macro" Polo</div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
