@@ -866,9 +866,10 @@ function App() {
                   initial={{ opacity: 0, y: -20, x: '-50%' }}
                   animate={{ opacity: 1, y: 0, x: '-50%' }}
                   transition={{ delay: 20 }}
-                  style={{ position: 'absolute', top: '2rem', left: '50%', background: 'var(--accent-primary)', color: '#000', padding: '1rem 2rem', borderRadius: '40px', fontWeight: 800, fontSize: '1.25rem', boxShadow: '0 10px 30px rgba(16, 185, 129, 0.4)', zIndex: 100, whiteSpace: 'nowrap' }}
+                  style={{ position: 'absolute', top: '2rem', left: '50%', background: 'var(--accent-primary)', color: '#000', padding: '1rem 2rem', borderRadius: '40px', fontWeight: 800, fontSize: '1.25rem', boxShadow: '0 10px 30px rgba(16, 185, 129, 0.4)', zIndex: 100, whiteSpace: 'nowrap', display: 'flex', alignItems: 'center', gap: '1.5rem' }}
                 >
-                  Your Order has Arrived! 🍱
+                  <span>Your Order has Arrived! 🍱</span>
+                  <button onClick={() => setShowLiveMap(false)} style={{ background: '#000', color: '#fff', border: 'none', padding: '0.5rem 1.25rem', borderRadius: '20px', fontSize: '0.9rem', fontWeight: 700, cursor: 'pointer' }}>Close Tracker</button>
                 </motion.div>
                 {/* Simulated Map SVG */}
                 <svg width="100%" height="100%" viewBox="0 0 1000 800" style={{ opacity: 0.6 }}>
@@ -1906,9 +1907,10 @@ function App() {
                   initial={{ opacity: 0, y: -20, x: '-50%' }}
                   animate={{ opacity: 1, y: 0, x: '-50%' }}
                   transition={{ delay: 20 }}
-                  style={{ position: 'absolute', top: '2rem', left: '50%', background: 'var(--accent-primary)', color: '#000', padding: '1rem 2rem', borderRadius: '40px', fontWeight: 800, fontSize: '1.25rem', boxShadow: '0 10px 30px rgba(16, 185, 129, 0.4)', zIndex: 100, whiteSpace: 'nowrap' }}
+                  style={{ position: 'absolute', top: '2rem', left: '50%', background: 'var(--accent-primary)', color: '#000', padding: '1rem 2rem', borderRadius: '40px', fontWeight: 800, fontSize: '1.25rem', boxShadow: '0 10px 30px rgba(16, 185, 129, 0.4)', zIndex: 100, whiteSpace: 'nowrap', display: 'flex', alignItems: 'center', gap: '1.5rem' }}
                 >
-                  Your Order has Arrived! 🍱
+                  <span>Your Order has Arrived! 🍱</span>
+                  <button onClick={() => setShowLiveMap(false)} style={{ background: '#000', color: '#fff', border: 'none', padding: '0.5rem 1.25rem', borderRadius: '20px', fontSize: '0.9rem', fontWeight: 700, cursor: 'pointer' }}>Close Tracker</button>
                 </motion.div>
                 {/* Simulated Map SVG */}
                 <svg width="100%" height="100%" viewBox="0 0 1000 800" style={{ opacity: 0.6 }}>
