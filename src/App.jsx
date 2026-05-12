@@ -926,15 +926,15 @@ function App() {
                 <div style={{ position: 'relative', height: '200px', padding: '0 2rem', marginTop: '1rem' }}>
                   {/* SVG Line Overlay */}
                   <svg viewBox="0 0 520 120" preserveAspectRatio="none" style={{ position: 'absolute', top: 0, left: '2rem', right: '2rem', width: 'calc(100% - 4rem)', height: '150px', overflow: 'visible', zIndex: 1, pointerEvents: 'none' }}>
-                    {/* Constant Average Line */}
+                    {/* Constant Average Line at 387 */}
                     <line 
-                      x1="0" y1="65" x2="520" y2="65" 
+                      x1="0" y1="43" x2="520" y2="43" 
                       stroke="var(--accent-primary)" 
                       strokeWidth="2" 
                       strokeDasharray="6 4" 
                       style={{ filter: 'drop-shadow(0 0 4px rgba(16, 185, 129, 0.4))' }}
                     />
-                    <text x="5" y="58" textAnchor="start" fill="#ffffff" style={{ fontSize: '0.45rem', fontWeight: 700, fontFamily: 'Arial, sans-serif', letterSpacing: '0.05em' }}>7D AVG</text>
+                    <text x="515" y="38" textAnchor="end" fill="#ffffff" style={{ fontSize: '0.6rem', fontWeight: 800, fontFamily: 'Arial, sans-serif' }}>387</text>
                   </svg>
 
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', height: '150px', position: 'relative', zIndex: 0 }}>
