@@ -889,7 +889,7 @@ function App() {
                     strokeDasharray="10,10"
                     initial={{ pathLength: 0 }}
                     animate={{ pathLength: 1 }}
-                    transition={{ duration: 5, repeat: Infinity }}
+                    transition={{ duration: 5, ease: "easeInOut" }}
                   />
 
                   {/* Destination */}
@@ -905,7 +905,7 @@ function App() {
                   <motion.g 
                     initial={{ x: 200, y: 600 }}
                     animate={{ x: [200, 500, 500, 800], y: [600, 600, 400, 400] }}
-                    transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                    transition={{ duration: 20, ease: "linear" }}
                   >
                     <circle r="15" fill="var(--accent-primary)" style={{ filter: 'drop-shadow(0 0 10px var(--accent-primary))' }} />
                     <Truck size={18} x="-9" y="-9" color="#000" />
@@ -1930,7 +1930,7 @@ function App() {
                     strokeDasharray="10,10"
                     initial={{ pathLength: 0 }}
                     animate={{ pathLength: 1 }}
-                    transition={{ duration: 5, repeat: Infinity }}
+                    transition={{ duration: 5, ease: "easeInOut" }}
                   />
 
                   {/* Destination */}
@@ -1946,7 +1946,7 @@ function App() {
                   <motion.g 
                     initial={{ x: 200, y: 600 }}
                     animate={{ x: [200, 500, 500, 800], y: [600, 600, 400, 400] }}
-                    transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                    transition={{ duration: 20, ease: "linear" }}
                   >
                     <circle r="15" fill="var(--accent-primary)" style={{ filter: 'drop-shadow(0 0 10px var(--accent-primary))' }} />
                     <Truck size={18} x="-9" y="-9" color="#000" />
