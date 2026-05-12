@@ -925,23 +925,29 @@ function App() {
                 <h3 style={{ marginBottom: '2.5rem' }}>Daily Order Volume (Last 7 Days)</h3>
                 <div style={{ position: 'relative', height: '200px', padding: '0 2rem', marginTop: '1rem' }}>
                   {/* SVG Line Overlay */}
-                  <svg style={{ position: 'absolute', top: 0, left: '2rem', right: '2rem', width: 'calc(100% - 4rem)', height: '150px', overflow: 'visible', zIndex: 1, pointerEvents: 'none' }}>
+                  <svg viewBox="0 0 520 120" preserveAspectRatio="none" style={{ position: 'absolute', top: 0, left: '2rem', right: '2rem', width: 'calc(100% - 4rem)', height: '150px', overflow: 'visible', zIndex: 1, pointerEvents: 'none' }}>
                     <defs>
-                      <linearGradient id="lineGrad" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0%" stopColor="var(--accent-primary)" stopOpacity="0.5" />
-                        <stop offset="100%" stopColor="transparent" />
-                      </linearGradient>
+                      <filter id="glow">
+                        <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+                        <feMerge>
+                          <feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/>
+                        </feMerge>
+                      </filter>
                     </defs>
                     <path 
-                      d="M 20,72 L 100,50 L 180,57 L 260,36 L 340,18 L 420,86 L 500,76" 
+                      d="M 20,85 C 60,65 80,60 100,60 C 140,60 160,65 180,67 C 220,72 240,45 260,45 C 300,45 320,25 340,25 C 380,25 400,105 420,105 C 460,105 480,95 500,95" 
                       fill="none" 
                       stroke="var(--accent-primary)" 
                       strokeWidth="3" 
                       strokeLinecap="round" 
-                      strokeLinejoin="round"
-                      style={{ filter: 'drop-shadow(0 0 8px rgba(16, 185, 129, 0.4))' }}
+                      style={{ filter: 'url(#glow)' }}
                     />
-                    <line x1="0" y1="56.5" x2="100%" y2="56.5" stroke="rgba(255,255,255,0.1)" strokeDasharray="4 4" />
+                    {/* Dot Markers */}
+                    {[20, 100, 180, 260, 340, 420, 500].map((x, i) => {
+                      const y = [85, 60, 67, 45, 25, 105, 95][i];
+                      return <circle key={i} cx={x} cy={y} r="5" fill="var(--bg-card)" stroke="var(--accent-primary)" strokeWidth="2" />;
+                    })}
+                    <line x1="0" y1="65" x2="520" y2="65" stroke="rgba(255,255,255,0.1)" strokeDasharray="4 4" />
                   </svg>
 
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', height: '150px', position: 'relative', zIndex: 0 }}>
@@ -949,10 +955,10 @@ function App() {
                       { day: 'Mon', val: 310 }, { day: 'Tue', val: 420 }, { day: 'Wed', val: 385 },
                       { day: 'Thu', val: 490 }, { day: 'Fri', val: 580 }, { day: 'Sat', val: 240 }, { day: 'Sun', val: 290 }
                     ].map((d, idx) => {
-                      const avg = 387; // Pre-calculated avg
+                      const avg = 387; 
                       const isBelow = d.val < avg;
                       return (
-                        <div key={d.day} style={{ textAlign: 'center', width: '40px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                        <div key={idx} style={{ textAlign: 'center', width: '40px', display: 'flex', flexDirection: 'column', alignItems: 'center', flex: 1 }}>
                           <div style={{ fontSize: '0.75rem', fontWeight: 700, marginBottom: '0.5rem', color: isBelow ? 'var(--text-muted)' : 'var(--accent-primary)' }}>{d.val}</div>
                           <div style={{ 
                             width: '32px',
