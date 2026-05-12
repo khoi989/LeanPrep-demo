@@ -921,8 +921,13 @@ function App() {
                 </div>
               </div>
 
-              <div className="glass-panel" style={{ padding: '2rem', borderRadius: '24px', border: '1px solid var(--border-color)' }}>
-                <h3 style={{ marginBottom: '2.5rem' }}>Daily Order Volume (Last 7 Days)</h3>
+              <div className="glass-panel" style={{ padding: '2rem', borderRadius: '24px', border: '1px solid var(--border-color)', position: 'relative' }}>
+                <div className="flex-between" style={{ alignItems: 'flex-start', marginBottom: '2.5rem' }}>
+                  <h3 style={{ margin: 0 }}>Daily Order Volume (Last 7 Days)</h3>
+                  <span style={{ color: '#fff', fontSize: '0.75rem', fontWeight: 500, fontFamily: 'Arial, sans-serif', opacity: 0.8 }}>
+                    Weekly Avg: 387
+                  </span>
+                </div>
                 <div style={{ position: 'relative', height: '200px', padding: '0 2rem', marginTop: '1rem' }}>
                   {/* SVG Line Overlay */}
                   <svg viewBox="0 0 520 120" preserveAspectRatio="none" style={{ position: 'absolute', top: 0, left: '2rem', right: '2rem', width: 'calc(100% - 4rem)', height: '150px', overflow: 'visible', zIndex: 0, pointerEvents: 'none' }}>
@@ -935,11 +940,6 @@ function App() {
                       style={{ opacity: 0.5 }}
                     />
                   </svg>
-
-                  {/* Fixed Proportion Label */}
-                  <div style={{ position: 'absolute', top: '35px', right: '2.5rem', color: '#fff', fontSize: '0.75rem', fontWeight: 500, fontFamily: 'Arial, sans-serif', zIndex: 2, pointerEvents: 'none' }}>
-                    Weekly Avg: 387
-                  </div>
 
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', height: '150px', position: 'relative', zIndex: 1 }}>
                     {[
