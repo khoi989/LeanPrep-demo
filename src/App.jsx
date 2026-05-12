@@ -1143,7 +1143,7 @@ function App() {
                 <div className="glass-panel" style={{ padding: '2rem', borderRadius: '24px', border: '1px solid var(--border-color)' }}>
                   <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--text-muted)' }}>Avg. Prep & Cook Time</p>
                   <h2 style={{ margin: '0.5rem 0', fontSize: '2.5rem' }}>14.2 min</h2>
-                  <p style={{ margin: 0, fontSize: '0.9rem', color: 'var(--accent-primary)', fontWeight: 600 }}>-1.5 min from target</p>
+                  <p style={{ margin: 0, fontSize: '0.9rem', color: '#10b981', fontWeight: 600 }}>-1.5 min from target</p>
                 </div>
                 <div className="glass-panel" style={{ padding: '2rem', borderRadius: '24px', border: '1px solid var(--border-color)' }}>
                   <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--text-muted)' }}>Macro Accuracy Rate</p>
