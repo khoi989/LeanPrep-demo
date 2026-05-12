@@ -429,7 +429,7 @@ function App() {
                             <div className="bar-track" style={{ height: '80px' }}>
                               <div className="bar-fill" style={{ height: `${Math.min(100, realH)}%`, background: isToday ? 'var(--accent-primary)' : 'var(--border-color)' }}></div>
                             </div>
-                            <span style={{ fontSize: '0.75rem', color: isToday ? '#fff' : 'var(--text-muted)' }}>{d.day}</span>
+                            <span style={{ fontSize: '0.75rem', color: isToday ? '#fff' : 'var(--text-muted)', fontWeight: isToday ? 800 : 400 }}>{d.day}</span>
                           </div>
                         );
                       })}
@@ -1408,7 +1408,7 @@ function App() {
                         <div className="bar-track">
                           <div className="bar-fill" style={{ height: `${Math.min(100, realH)}%`, background: isToday ? 'var(--accent-primary)' : 'var(--border-color)' }}></div>
                         </div>
-                        <span style={{ fontSize: '0.7rem', color: isToday ? '#fff' : 'var(--text-muted)' }}>{d.day}</span>
+                        <span style={{ fontSize: '0.7rem', color: isToday ? '#fff' : 'var(--text-muted)', fontWeight: isToday ? 800 : 400 }}>{d.day}</span>
                       </div>
                     );
                   })}
