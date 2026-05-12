@@ -420,6 +420,7 @@ function App() {
                   <div className="dash-card" style={{ padding: '2rem' }}>
                     <h3 style={{ marginBottom: '1.5rem' }}>Weekly Consistency</h3>
                     <div className="weekly-chart" style={{ height: '120px' }}>
+                      {WEEK_DATA.map((d, i) => {
                         const isToday = i === 5;
                         const cals = isToday ? userProfile.eaten : d.val;
                         const realH = (isToday && cals === 0) ? 85 : (cals / userProfile.cals) * 100;
@@ -1398,6 +1399,7 @@ function App() {
                 </div>
                 
                 <div className="weekly-chart">
+                  {WEEK_DATA.map((d, i) => {
                     const isToday = i === 5;
                     const cals = isToday ? userProfile.eaten : d.val;
                     const realH = (isToday && cals === 0) ? 85 : (cals / userProfile.cals) * 100;
