@@ -926,28 +926,15 @@ function App() {
                 <div style={{ position: 'relative', height: '200px', padding: '0 2rem', marginTop: '1rem' }}>
                   {/* SVG Line Overlay */}
                   <svg viewBox="0 0 520 120" preserveAspectRatio="none" style={{ position: 'absolute', top: 0, left: '2rem', right: '2rem', width: 'calc(100% - 4rem)', height: '150px', overflow: 'visible', zIndex: 1, pointerEvents: 'none' }}>
-                    <defs>
-                      <filter id="glow">
-                        <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
-                        <feMerge>
-                          <feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/>
-                        </feMerge>
-                      </filter>
-                    </defs>
-                    <path 
-                      d="M 20,85 C 60,65 80,60 100,60 C 140,60 160,65 180,67 C 220,72 240,45 260,45 C 300,45 320,25 340,25 C 380,25 400,105 420,105 C 460,105 480,95 500,95" 
-                      fill="none" 
+                    {/* Constant Average Line */}
+                    <line 
+                      x1="0" y1="65" x2="520" y2="65" 
                       stroke="var(--accent-primary)" 
-                      strokeWidth="3" 
-                      strokeLinecap="round" 
-                      style={{ filter: 'url(#glow)' }}
+                      strokeWidth="2" 
+                      strokeDasharray="6 4" 
+                      style={{ filter: 'drop-shadow(0 0 4px rgba(16, 185, 129, 0.4))' }}
                     />
-                    {/* Dot Markers */}
-                    {[20, 100, 180, 260, 340, 420, 500].map((x, i) => {
-                      const y = [85, 60, 67, 45, 25, 105, 95][i];
-                      return <circle key={i} cx={x} cy={y} r="5" fill="var(--bg-card)" stroke="var(--accent-primary)" strokeWidth="2" />;
-                    })}
-                    <line x1="0" y1="65" x2="520" y2="65" stroke="rgba(255,255,255,0.1)" strokeDasharray="4 4" />
+                    <text x="525" y="68" fill="var(--accent-primary)" style={{ fontSize: '0.65rem', fontWeight: 800, letterSpacing: '0.05em' }}>7D AVG</text>
                   </svg>
 
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', height: '150px', position: 'relative', zIndex: 0 }}>
