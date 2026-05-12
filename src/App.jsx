@@ -925,19 +925,19 @@ function App() {
                 <h3 style={{ marginBottom: '2.5rem' }}>Daily Order Volume (Last 7 Days)</h3>
                 <div style={{ position: 'relative', height: '200px', padding: '0 2rem', marginTop: '1rem' }}>
                   {/* SVG Line Overlay */}
-                  <svg viewBox="0 0 520 120" preserveAspectRatio="none" style={{ position: 'absolute', top: 0, left: '2rem', right: '2rem', width: 'calc(100% - 4rem)', height: '150px', overflow: 'visible', zIndex: 1, pointerEvents: 'none' }}>
+                  <svg viewBox="0 0 520 120" preserveAspectRatio="none" style={{ position: 'absolute', top: 0, left: '2rem', right: '2rem', width: 'calc(100% - 4rem)', height: '150px', overflow: 'visible', zIndex: 0, pointerEvents: 'none' }}>
                     {/* Constant Average Line at 387 */}
                     <line 
                       x1="0" y1="43" x2="520" y2="43" 
                       stroke="var(--accent-primary)" 
                       strokeWidth="2" 
                       strokeDasharray="6 4" 
-                      style={{ filter: 'drop-shadow(0 0 4px rgba(16, 185, 129, 0.4))' }}
+                      style={{ opacity: 0.5 }}
                     />
-                    <text x="515" y="38" textAnchor="end" fill="#ffffff" style={{ fontSize: '0.6rem', fontWeight: 800, fontFamily: 'Arial, sans-serif' }}>387</text>
+                    <text x="515" y="38" textAnchor="end" fill="#ffffff" style={{ fontSize: '0.75rem', fontWeight: 500, fontFamily: 'Arial, sans-serif' }}>387</text>
                   </svg>
 
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', height: '150px', position: 'relative', zIndex: 0 }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', height: '150px', position: 'relative', zIndex: 1 }}>
                     {[
                       { day: 'Mon', val: 310 }, { day: 'Tue', val: 420 }, { day: 'Wed', val: 385 },
                       { day: 'Thu', val: 490 }, { day: 'Fri', val: 580 }, { day: 'Sat', val: 240 }, { day: 'Sun', val: 290 }
