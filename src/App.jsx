@@ -30,9 +30,9 @@ const MOCK_SELLER_ORDERS = [
 ];
 
 function App() {
-  const [onboardStep, setOnboardStep] = useState(() => JSON.parse(localStorage.getItem('leanprep_onboardStep')) || 0);
+  const [onboardStep, setOnboardStep] = useState(() => JSON.parse(localStorage.getItem('măm-mate_onboardStep')) || 0);
   const [userProfile, setUserProfile] = useState(() => {
-    const saved = JSON.parse(localStorage.getItem('leanprep_userProfile')) || { 
+    const saved = JSON.parse(localStorage.getItem('măm-mate_userProfile')) || { 
       goal: '', 
       diet: '', 
       cals: 2200, 
@@ -52,13 +52,13 @@ function App() {
 
   const [tab, setTab] = useState('home');
   const [selectedMeal, setSelectedMeal] = useState(null);
-  const [cart, setCart] = useState(() => JSON.parse(localStorage.getItem('leanprep_cart')) || []);
-  const [activeOrder, setActiveOrder] = useState(() => JSON.parse(localStorage.getItem('leanprep_activeOrder')) || null);
-  const [orderStage, setOrderStage] = useState(() => Number(localStorage.getItem('leanprep_orderStage')) || 0);
+  const [cart, setCart] = useState(() => JSON.parse(localStorage.getItem('măm-mate_cart')) || []);
+  const [activeOrder, setActiveOrder] = useState(() => JSON.parse(localStorage.getItem('măm-mate_activeOrder')) || null);
+  const [orderStage, setOrderStage] = useState(() => Number(localStorage.getItem('măm-mate_orderStage')) || 0);
   const [isEditingCals, setIsEditingCals] = useState(false);
   const [newCals, setNewCals] = useState(2200);
   const [searchQuery, setSearchQuery] = useState('');
-  const [uiMode, setUiMode] = useState(() => localStorage.getItem('leanprep_uiMode') || 'selector'); 
+  const [uiMode, setUiMode] = useState(() => localStorage.getItem('măm-mate_uiMode') || 'selector'); 
   const [sellerTab, setSellerTab] = useState('kanban');
   const [sellerOrders, setSellerOrders] = useState(MOCK_SELLER_ORDERS);
   const [showPOModal, setShowPOModal] = useState(false);  const [isCheckingOut, setIsCheckingOut] = useState(false);
@@ -66,7 +66,7 @@ function App() {
   const [paymentSuccess, setPaymentSuccess] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState('card');
   const [sellerSettings, setSellerSettings] = useState({
-    location: 'LeanPrep Central Kitchen - NY',
+    location: 'Măm-mate Central Kitchen - NY',
     capacity: '1500',
     hours: '04:00 AM - 10:00 PM',
     partners: 'Uber Direct & DoorDash Drive'
@@ -107,12 +107,12 @@ function App() {
 
   // Persistence logic
   useEffect(() => {
-    localStorage.setItem('leanprep_onboardStep', JSON.stringify(onboardStep));
-    localStorage.setItem('leanprep_userProfile', JSON.stringify(userProfile));
-    localStorage.setItem('leanprep_cart', JSON.stringify(cart));
-    localStorage.setItem('leanprep_activeOrder', JSON.stringify(activeOrder));
-    localStorage.setItem('leanprep_orderStage', orderStage.toString());
-    localStorage.setItem('leanprep_uiMode', uiMode);
+    localStorage.setItem('măm-mate_onboardStep', JSON.stringify(onboardStep));
+    localStorage.setItem('măm-mate_userProfile', JSON.stringify(userProfile));
+    localStorage.setItem('măm-mate_cart', JSON.stringify(cart));
+    localStorage.setItem('măm-mate_activeOrder', JSON.stringify(activeOrder));
+    localStorage.setItem('măm-mate_orderStage', orderStage.toString());
+    localStorage.setItem('măm-mate_uiMode', uiMode);
   }, [onboardStep, userProfile, cart, activeOrder, orderStage, uiMode]);
 
   // Cart operations
@@ -222,7 +222,7 @@ function App() {
           className="selector-card"
         >
           <ChefHat size={64} color="var(--accent-primary)" style={{ margin: '0 auto 1.5rem' }} />
-          <h1 style={{ fontSize: '2.5rem', marginBottom: '0.5rem' }}>LeanPrep</h1>
+          <h1 style={{ fontSize: '2.5rem', marginBottom: '0.5rem' }}>Măm-mate</h1>
           <p style={{ color: 'var(--text-muted)', fontSize: '1.1rem' }}>Select your interface to begin the demo</p>
           
           <div className="selector-options">
@@ -308,7 +308,7 @@ function App() {
                 <Activity size={48} color="var(--accent-primary)" />
               </motion.div>
               <h2>Calculating your macros...</h2>
-              <p style={{ textAlign: 'center', marginTop: '0.5rem' }}>Using LeanPrep AI to build your perfect profile.</p>
+              <p style={{ textAlign: 'center', marginTop: '0.5rem' }}>Using Măm-mate AI to build your perfect profile.</p>
             </motion.div>
           )}
         </AnimatePresence>
@@ -323,7 +323,7 @@ function App() {
         <div className="desktop-sidebar">
           <div className="sidebar-logo" style={{ marginBottom: '2.5rem' }}>
             <ChefHat size={32} color="var(--accent-primary)" />
-            <span style={{ fontSize: '1.5rem', fontWeight: 700 }}>LeanPrep</span>
+            <span style={{ fontSize: '1.5rem', fontWeight: 700 }}>Măm-mate</span>
           </div>
           
           <div className={`desktop-nav-item ${tab === 'home' ? 'active' : ''}`} onClick={() => setTab('home')}>
@@ -558,7 +558,7 @@ function App() {
                       <h3 style={{ margin: 0 }}>AI Recommendations</h3>
                     </div>
                     
-                    <p style={{ marginBottom: '2rem', fontSize: '0.95rem' }}>Based on your profile, LeanPrep AI recommends the following daily targets for your <strong>{userProfile.goal || 'selected goal'}</strong>:</p>
+                    <p style={{ marginBottom: '2rem', fontSize: '0.95rem' }}>Based on your profile, Măm-mate AI recommends the following daily targets for your <strong>{userProfile.goal || 'selected goal'}</strong>:</p>
                     
                     <div style={{ display: 'grid', gap: '1.5rem' }}>
                       <div className="flex-between">
@@ -597,7 +597,7 @@ function App() {
               <motion.div key="d-advice" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 20 }} style={{ height: 'calc(100vh - 100px)', display: 'flex', flexDirection: 'column' }}>
                 <div className="flex-between" style={{ marginBottom: '2.5rem' }}>
                   <h1>AI Nutritional Advice</h1>
-                  <div className="macro-pill" style={{ padding: '0.5rem 1rem' }}><Zap size={16} color="var(--accent-primary)" /> Powered by LeanPrep AI</div>
+                  <div className="macro-pill" style={{ padding: '0.5rem 1rem' }}><Zap size={16} color="var(--accent-primary)" /> Powered by Măm-mate AI</div>
                 </div>
                 <div className="glass-panel" style={{ flex: 1, borderRadius: '24px', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
                   <div style={{ flex: 1, padding: '2rem', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
@@ -944,7 +944,7 @@ function App() {
         <div className="seller-sidebar">
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '3rem', padding: '0 0.5rem' }}>
             <ChefHat size={32} color="var(--accent-primary)" />
-            <span style={{ fontWeight: 700, fontSize: '1.25rem' }}>LeanPrep Dash</span>
+            <span style={{ fontWeight: 700, fontSize: '1.25rem' }}>Măm-mate Dash</span>
           </div>
           <div className={`desktop-nav-item ${sellerTab === 'kanban' ? 'active' : ''}`} onClick={() => setSellerTab('kanban')}>
             <LayoutDashboard size={20} /> Kitchen Board
@@ -970,7 +970,7 @@ function App() {
               <h1 style={{ fontSize: '2rem', margin: 0 }}>
                 {sellerTab === 'kanban' ? 'Live Kitchen Board' : sellerTab === 'inventory' ? 'Inventory Forecast' : 'Performance Analytics'}
               </h1>
-              <p style={{ marginTop: '0.5rem', color: 'var(--text-muted)' }}>Real-time sync with LeanPrep Cloud</p>
+              <p style={{ marginTop: '0.5rem', color: 'var(--text-muted)' }}>Real-time sync with Măm-mate Cloud</p>
             </div>
             <div style={{ display: 'flex', gap: '1rem' }}>
               <div className="glass-panel" style={{ padding: '0.75rem 1.25rem', display: 'flex', alignItems: 'center', gap: '0.75rem', borderRadius: '12px', border: '1px solid var(--border-color)' }}>
@@ -1263,7 +1263,7 @@ function App() {
                 <button className="btn-primary" style={{ flex: 1 }} onClick={() => { setIsSavingSettings(true); setTimeout(() => setIsSavingSettings(false), 1500); }}>
                   {isSavingSettings ? 'Saving...' : 'Save Changes'}
                 </button>
-                <button className="onboard-option" style={{ margin: 0, width: 'auto', padding: '0 1.5rem', background: 'rgba(255,255,255,0.05)', border: '1px solid var(--border-color)', fontWeight: 700 }} onClick={() => setSellerSettings({ location: 'LeanPrep Central Kitchen - NY', capacity: '1500', hours: '04:00 AM - 10:00 PM', partners: 'Uber Direct & DoorDash Drive' })}>
+                <button className="onboard-option" style={{ margin: 0, width: 'auto', padding: '0 1.5rem', background: 'rgba(255,255,255,0.05)', border: '1px solid var(--border-color)', fontWeight: 700 }} onClick={() => setSellerSettings({ location: 'Măm-mate Central Kitchen - NY', capacity: '1500', hours: '04:00 AM - 10:00 PM', partners: 'Uber Direct & DoorDash Drive' })}>
                   Reset
                 </button>
               </div>
@@ -1545,7 +1545,7 @@ function App() {
           {tab === 'tracker' && (
             <motion.div key="tracker" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0 }}>
               <h1>Live Tracking</h1>
-              <p>Directly synced with LeanPrep Cloud Kitchen</p>
+              <p>Directly synced with Măm-mate Cloud Kitchen</p>
 
               {!activeOrder ? (
                 <div style={{ textAlign: 'center', padding: '4rem 1rem', color: 'var(--text-muted)' }}>
@@ -1567,7 +1567,7 @@ function App() {
                       active={orderStage >= 0} 
                       icon={<LayoutList size={16} />} 
                       title="Order Received" 
-                      desc="Sent to LeanPrep OS Kitchen Board." 
+                      desc="Sent to Măm-mate OS Kitchen Board." 
                     />
                     <TrackStep 
                       active={orderStage >= 1} 

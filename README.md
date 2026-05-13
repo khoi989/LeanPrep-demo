@@ -1,4 +1,4 @@
-# LeanPrep Unified Suite
+# Măm-mate Unified Suite
 
 A unified multi-platform application for nutrition management, featuring:
 - **Mobile Consumer App**: Personalized meal tracking and ordering.
@@ -14,7 +14,7 @@ This project is configured for automated deployment via **GitHub Pages**.
    ```bash
    git init
    git add .
-   git commit -m "Initial commit of LeanPrep Unified Suite"
+   git commit -m "Initial commit of Măm-mate Unified Suite"
    git branch -M main
    git remote add origin https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git
    git push -u origin main
