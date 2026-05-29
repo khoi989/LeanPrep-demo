@@ -3,20 +3,29 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ShieldCheck, Utensils, Activity, Search, Clock, CheckCircle2, Truck, ChefHat, ArrowLeft, Flame, Scale, LayoutList, Target, ShoppingBag, Plus, Minus, Edit2, X, CreditCard, Wallet, Lock, LayoutDashboard, Package, TrendingUp, Bell, FileText, Zap, ArrowRight, Settings, MessageSquare, Send, MapPin, Sun, Moon } from 'lucide-react';
 import './index.css';
 
+const formatVND = (value) => {
+  return new Intl.NumberFormat('vi-VN', {
+    style: 'currency',
+    currency: 'VND',
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0
+  }).format(value);
+};
+
 const MENU_ITEMS = [
-  { id: 'M1', name: 'Lemon Herb Chicken', desc: 'Juicy, oven-roasted chicken breast marinated in fresh lemon and herbs, served over a bed of fluffy quinoa and steamed broccoli.', cals: 450, macros: { p: 45, c: 35, f: 12 }, price: 12.99, img: '🍗', ingredients: [{ name: 'Premium Chicken Breast', amt: '170g' }, { name: 'Organic Quinoa', amt: '90g' }, { name: 'Fresh Broccoli', amt: '150g' }, { name: 'Olive Oil & Herbs', amt: '15ml' }] },
-  { id: 'M2', name: 'Spicy Salmon Bowl', desc: 'Wild-caught salmon glazed in a spicy-sweet soy reduction, paired with jasmine rice and roasted edamame.', cals: 520, macros: { p: 40, c: 45, f: 18 }, price: 14.99, img: '🍱', ingredients: [{ name: 'Wild-Caught Salmon', amt: '140g' }, { name: 'Jasmine Rice', amt: '120g' }, { name: 'Edamame', amt: '75g' }, { name: 'Spicy Soy Glaze', amt: '30ml' }] },
-  { id: 'M3', name: 'Keto Steak & Eggs', desc: 'Grass-fed flank steak seared to perfection alongside two pasture-raised eggs and avocado.', cals: 600, macros: { p: 55, c: 5, f: 38 }, price: 15.99, img: '🥩', ingredients: [{ name: 'Grass-fed Flank Steak', amt: '170g' }, { name: 'Pasture-Raised Eggs', amt: '2 large' }, { name: 'Hass Avocado', amt: '100g' }, { name: 'Grass-fed Butter', amt: '15g' }] },
-  { id: 'M4', name: 'Vegan Buddha Bowl', desc: 'A vibrant mix of roasted chickpeas, sweet potatoes, and kale drizzled with a creamy tahini dressing.', cals: 400, macros: { p: 15, c: 55, f: 14 }, price: 11.99, img: '🥗', ingredients: [{ name: 'Roasted Chickpeas', amt: '80g' }, { name: 'Sweet Potatoes', amt: '130g' }, { name: 'Fresh Kale', amt: '100g' }, { name: 'Tahini Dressing', amt: '30g' }] },
-  { id: 'M5', name: 'Turkey Meatballs & Zoodles', desc: 'Lean ground turkey meatballs simmered in a rich marinara sauce, served over fresh zucchini noodles.', cals: 380, macros: { p: 42, c: 15, f: 16 }, price: 13.99, img: '🍝', ingredients: [{ name: 'Lean Turkey Meatballs', amt: '140g' }, { name: 'Zucchini Noodles', amt: '150g' }, { name: 'Marinara Sauce', amt: '120ml' }, { name: 'Parmesan Cheese', amt: '10g' }] },
-  { id: 'M6', name: 'Mediterranean Shrimp Salad', desc: 'Grilled shrimp over mixed greens with feta, Kalamata olives, cucumbers, and a light vinaigrette.', cals: 350, macros: { p: 38, c: 12, f: 18 }, price: 15.49, img: '🍤', ingredients: [{ name: 'Grilled Shrimp', amt: '170g' }, { name: 'Mixed Greens', amt: '60g' }, { name: 'Kalamata Olives', amt: '30g' }, { name: 'Feta Cheese', amt: '30g' }] },
-  { id: 'M7', name: 'Protein Power Pancakes', desc: 'Fluffy whey protein pancakes topped with fresh berries, sliced banana, and sugar-free syrup.', cals: 500, macros: { p: 45, c: 50, f: 10 }, price: 10.99, img: '🥞', ingredients: [{ name: 'Protein Pancake Mix', amt: '60g' }, { name: 'Fresh Berries', amt: '75g' }, { name: 'Sliced Banana', amt: '60g' }, { name: 'Sugar-Free Syrup', amt: '30ml' }] },
-  { id: 'M8', name: 'BBQ Jackfruit Wrap', desc: 'Smoky BBQ pulled jackfruit wrapped in a spinach tortilla with crunchy cabbage slaw.', cals: 420, macros: { p: 8, c: 65, f: 12 }, price: 11.49, img: '🌯', ingredients: [{ name: 'Pulled Jackfruit', amt: '150g' }, { name: 'Spinach Tortilla', amt: '1 wrap' }, { name: 'Cabbage Slaw', amt: '50g' }, { name: 'BBQ Sauce', amt: '30g' }] },
-  { id: 'M9', name: 'Teriyaki Tofu Stir-Fry', desc: 'Crispy tofu cubes tossed with broccoli, bell peppers, and snap peas in a savory teriyaki glaze.', cals: 450, macros: { p: 25, c: 45, f: 20 }, price: 12.49, img: '🥘', ingredients: [{ name: 'Extra Firm Tofu', amt: '170g' }, { name: 'Mixed Veggies', amt: '200g' }, { name: 'Teriyaki Sauce', amt: '30ml' }, { name: 'Sesame Seeds', amt: '5g' }] },
-  { id: 'M10', name: 'Grilled Mahi Mahi', desc: 'Wild-caught Mahi Mahi grilled with lemon and dill, served alongside roasted asparagus spears.', cals: 320, macros: { p: 48, c: 8, f: 10 }, price: 16.99, img: '🐟', ingredients: [{ name: 'Mahi Mahi Filet', amt: '170g' }, { name: 'Asparagus', amt: '130g' }, { name: 'Lemon Wedge', amt: '1 slice' }, { name: 'Olive Oil', amt: '8ml' }] },
-  { id: 'M11', name: 'Black Bean Chili', desc: 'Hearty and spicy black bean and sweet potato chili, topped with a dollop of Greek yogurt.', cals: 380, macros: { p: 18, c: 60, f: 8 }, price: 10.49, img: '🍲', ingredients: [{ name: 'Black Beans', amt: '170g' }, { name: 'Diced Sweet Potato', amt: '65g' }, { name: 'Chili Tomato Base', amt: '240ml' }, { name: 'Plain Greek Yogurt', amt: '30g' }] },
-  { id: 'M12', name: 'Chicken Pesto Penne', desc: 'Whole wheat penne pasta tossed in a creamy basil pesto sauce with grilled chicken breast strips.', cals: 550, macros: { p: 45, c: 55, f: 18 }, price: 13.49, img: '🍝', ingredients: [{ name: 'Grilled Chicken', amt: '140g' }, { name: 'Whole Wheat Penne', amt: '100g' }, { name: 'Basil Pesto', amt: '30g' }, { name: 'Cherry Tomatoes', amt: '40g' }] },
-  { id: 'M13', name: 'Berry Protein Parfait', desc: 'Layers of non-fat Greek yogurt, mixed berries, and a crunchy almond granola.', cals: 250, macros: { p: 22, c: 30, f: 5 }, price: 6.99, img: '🍧', ingredients: [{ name: 'Non-fat Greek Yogurt', amt: '240g' }, { name: 'Mixed Berries', amt: '75g' }, { name: 'Almond Granola', amt: '30g' }, { name: 'Honey', amt: '7g' }] },
+  { id: 'M1', name: 'Lemon Herb Chicken', desc: 'Juicy, oven-roasted chicken breast marinated in fresh lemon and herbs, served over a bed of fluffy quinoa and steamed broccoli.', cals: 450, macros: { p: 45, c: 35, f: 12 }, price: 325000, img: '🍗', ingredients: [{ name: 'Premium Chicken Breast', amt: '170g' }, { name: 'Organic Quinoa', amt: '90g' }, { name: 'Fresh Broccoli', amt: '150g' }, { name: 'Olive Oil & Herbs', amt: '15ml' }] },
+  { id: 'M2', name: 'Spicy Salmon Bowl', desc: 'Wild-caught salmon glazed in a spicy-sweet soy reduction, paired with jasmine rice and roasted edamame.', cals: 520, macros: { p: 40, c: 45, f: 18 }, price: 375000, img: '🍱', ingredients: [{ name: 'Wild-Caught Salmon', amt: '140g' }, { name: 'Jasmine Rice', amt: '120g' }, { name: 'Edamame', amt: '75g' }, { name: 'Spicy Soy Glaze', amt: '30ml' }] },
+  { id: 'M3', name: 'Keto Steak & Eggs', desc: 'Grass-fed flank steak seared to perfection alongside two pasture-raised eggs and avocado.', cals: 600, macros: { p: 55, c: 5, f: 38 }, price: 400000, img: '🥩', ingredients: [{ name: 'Grass-fed Flank Steak', amt: '170g' }, { name: 'Pasture-Raised Eggs', amt: '2 large' }, { name: 'Hass Avocado', amt: '100g' }, { name: 'Grass-fed Butter', amt: '15g' }] },
+  { id: 'M4', name: 'Vegan Buddha Bowl', desc: 'A vibrant mix of roasted chickpeas, sweet potatoes, and kale drizzled with a creamy tahini dressing.', cals: 400, macros: { p: 15, c: 55, f: 14 }, price: 300000, img: '🥗', ingredients: [{ name: 'Roasted Chickpeas', amt: '80g' }, { name: 'Sweet Potatoes', amt: '130g' }, { name: 'Fresh Kale', amt: '100g' }, { name: 'Tahini Dressing', amt: '30g' }] },
+  { id: 'M5', name: 'Turkey Meatballs & Zoodles', desc: 'Lean ground turkey meatballs simmered in a rich marinara sauce, served over fresh zucchini noodles.', cals: 380, macros: { p: 42, c: 15, f: 16 }, price: 350000, img: '🍝', ingredients: [{ name: 'Lean Turkey Meatballs', amt: '140g' }, { name: 'Zucchini Noodles', amt: '150g' }, { name: 'Marinara Sauce', amt: '120ml' }, { name: 'Parmesan Cheese', amt: '10g' }] },
+  { id: 'M6', name: 'Mediterranean Shrimp Salad', desc: 'Grilled shrimp over mixed greens with feta, Kalamata olives, cucumbers, and a light vinaigrette.', cals: 350, macros: { p: 38, c: 12, f: 18 }, price: 387000, img: '🍤', ingredients: [{ name: 'Grilled Shrimp', amt: '170g' }, { name: 'Mixed Greens', amt: '60g' }, { name: 'Kalamata Olives', amt: '30g' }, { name: 'Feta Cheese', amt: '30g' }] },
+  { id: 'M7', name: 'Protein Power Pancakes', desc: 'Fluffy whey protein pancakes topped with fresh berries, sliced banana, and sugar-free syrup.', cals: 500, macros: { p: 45, c: 50, f: 10 }, price: 275000, img: '🥞', ingredients: [{ name: 'Protein Pancake Mix', amt: '60g' }, { name: 'Fresh Berries', amt: '75g' }, { name: 'Sliced Banana', amt: '60g' }, { name: 'Sugar-Free Syrup', amt: '30ml' }] },
+  { id: 'M8', name: 'BBQ Jackfruit Wrap', desc: 'Smoky BBQ pulled jackfruit wrapped in a spinach tortilla with crunchy cabbage slaw.', cals: 420, macros: { p: 8, c: 65, f: 12 }, price: 287000, img: '🌯', ingredients: [{ name: 'Pulled Jackfruit', amt: '150g' }, { name: 'Spinach Tortilla', amt: '1 wrap' }, { name: 'Cabbage Slaw', amt: '50g' }, { name: 'BBQ Sauce', amt: '30g' }] },
+  { id: 'M9', name: 'Teriyaki Tofu Stir-Fry', desc: 'Crispy tofu cubes tossed with broccoli, bell peppers, and snap peas in a savory teriyaki glaze.', cals: 450, macros: { p: 25, c: 45, f: 20 }, price: 312000, img: '🥘', ingredients: [{ name: 'Extra Firm Tofu', amt: '170g' }, { name: 'Mixed Veggies', amt: '200g' }, { name: 'Teriyaki Sauce', amt: '30ml' }, { name: 'Sesame Seeds', amt: '5g' }] },
+  { id: 'M10', name: 'Grilled Mahi Mahi', desc: 'Wild-caught Mahi Mahi grilled with lemon and dill, served alongside roasted asparagus spears.', cals: 320, macros: { p: 48, c: 8, f: 10 }, price: 425000, img: '🐟', ingredients: [{ name: 'Mahi Mahi Filet', amt: '170g' }, { name: 'Asparagus', amt: '130g' }, { name: 'Lemon Wedge', amt: '1 slice' }, { name: 'Olive Oil', amt: '8ml' }] },
+  { id: 'M11', name: 'Black Bean Chili', desc: 'Hearty and spicy black bean and sweet potato chili, topped with a dollop of Greek yogurt.', cals: 380, macros: { p: 18, c: 60, f: 8 }, price: 262000, img: '🍲', ingredients: [{ name: 'Black Beans', amt: '170g' }, { name: 'Diced Sweet Potato', amt: '65g' }, { name: 'Chili Tomato Base', amt: '240ml' }, { name: 'Plain Greek Yogurt', amt: '30g' }] },
+  { id: 'M12', name: 'Chicken Pesto Penne', desc: 'Whole wheat penne pasta tossed in a creamy basil pesto sauce with grilled chicken breast strips.', cals: 550, macros: { p: 45, c: 55, f: 18 }, price: 337000, img: '🍝', ingredients: [{ name: 'Grilled Chicken', amt: '140g' }, { name: 'Whole Wheat Penne', amt: '100g' }, { name: 'Basil Pesto', amt: '30g' }, { name: 'Cherry Tomatoes', amt: '40g' }] },
+  { id: 'M13', name: 'Berry Protein Parfait', desc: 'Layers of non-fat Greek yogurt, mixed berries, and a crunchy almond granola.', cals: 250, macros: { p: 22, c: 30, f: 5 }, price: 175000, img: '🍧', ingredients: [{ name: 'Non-fat Greek Yogurt', amt: '240g' }, { name: 'Mixed Berries', amt: '75g' }, { name: 'Almond Granola', amt: '30g' }, { name: 'Honey', amt: '7g' }] },
 ];
 
 const WEEK_DATA = [ { day: 'M', val: 1850 }, { day: 'T', val: 2100 }, { day: 'W', val: 1900 }, { day: 'T', val: 2050 }, { day: 'F', val: 2400 }, { day: 'S', val: 1200 }, { day: 'S', val: 0 } ];
@@ -483,7 +492,7 @@ function App() {
                       <div className="meal-content">
                         <div className="flex-between" style={{ marginBottom: '0.5rem' }}>
                           <h3 style={{ margin: 0 }}>{item.name}</h3>
-                          <span style={{ fontWeight: 700, color: 'var(--accent-primary)' }}>${item.price}</span>
+                          <span style={{ fontWeight: 700, color: 'var(--accent-primary)' }}>{formatVND(item.price)}</span>
                         </div>
                         <div style={{ display: 'flex', gap: '0.5rem' }}>
                           <span className="macro-pill"><Flame size={12} color="var(--accent-warning)" /> {item.cals}</span>
@@ -521,7 +530,7 @@ function App() {
                       <div className="meal-content">
                         <div className="flex-between" style={{ marginBottom: '0.5rem' }}>
                           <h3>{item.name}</h3>
-                          <span style={{ fontWeight: 700, color: 'var(--accent-primary)' }}>${item.price}</span>
+                          <span style={{ fontWeight: 700, color: 'var(--accent-primary)' }}>{formatVND(item.price)}</span>
                         </div>
                         <p style={{ marginBottom: '1rem' }}>{item.desc}</p>
                         <div style={{ display: 'flex', gap: '0.5rem' }}>
@@ -690,7 +699,7 @@ function App() {
                         {activeOrder.items.map(item => (
                           <div key={item.id} className="flex-between" style={{ marginBottom: '1rem', paddingBottom: '1rem', borderBottom: '1px solid var(--border-color)' }}>
                             <span>{item.qty}x {item.name}</span>
-                            <span>${(item.price * item.qty).toFixed(2)}</span>
+                            <span>{formatVND(item.price * item.qty)}</span>
                           </div>
                         ))}
                       </div>
@@ -716,7 +725,7 @@ function App() {
                   <div className="cart-img">{item.img}</div>
                   <div style={{ flex: 1 }}>
                     <h4 style={{ fontSize: '0.9rem' }}>{item.name}</h4>
-                    <p style={{ fontSize: '0.8rem', color: 'var(--accent-primary)' }}>${item.price}</p>
+                    <p style={{ fontSize: '0.8rem', color: 'var(--accent-primary)' }}>{formatVND(item.price)}</p>
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                     <button className="nav-item" style={{ padding: '4px' }} onClick={() => updateQty(item.id, -1)}><Minus size={14}/></button>
@@ -732,7 +741,7 @@ function App() {
             <div style={{ marginTop: '2rem', paddingTop: '2rem', borderTop: '1px solid var(--border-color)' }}>
               <div className="flex-between" style={{ marginBottom: '1.5rem', fontSize: '1.25rem', fontWeight: 700 }}>
                 <span>Total</span>
-                <span>${cartTotal.toFixed(2)}</span>
+                <span>{formatVND(cartTotal)}</span>
               </div>
               <button className="btn-primary" onClick={handleCheckout}>Confirm Order</button>
             </div>
@@ -789,7 +798,7 @@ function App() {
                     ))}
                   </div>
 
-                  <button className="btn-primary" style={{ marginTop: '3rem' }} onClick={() => addToCart(selectedMeal)}>Add to Cart - ${selectedMeal.price}</button>
+                  <button className="btn-primary" style={{ marginTop: '3rem' }} onClick={() => addToCart(selectedMeal)}>Add to Cart - {formatVND(selectedMeal.price)}</button>
                 </div>
               </motion.div>
             </motion.div>
@@ -839,7 +848,7 @@ function App() {
                       <div className="glass-panel" style={{ padding: '1.5rem', borderRadius: '16px', marginBottom: '2rem' }}>
                         <div className="flex-between" style={{ marginBottom: '0.5rem' }}>
                           <span style={{ color: 'var(--text-muted)' }}>Order Total</span>
-                          <span style={{ fontWeight: 700, fontSize: '1.25rem' }}>${cartTotal.toFixed(2)}</span>
+                          <span style={{ fontWeight: 700, fontSize: '1.25rem' }}>{formatVND(cartTotal)}</span>
                         </div>
                         <div style={{ fontSize: '0.85rem', color: 'var(--accent-primary)' }}>
                           Includes {cart.reduce((s,i) => s+i.qty, 0)} macro-balanced meals
@@ -1147,7 +1156,7 @@ function App() {
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                 <div className="glass-panel" style={{ padding: '1.5rem', borderRadius: '24px', border: '1px solid var(--border-color)' }}>
                   <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--text-muted)' }}>Total Value on Hand</p>
-                  <h2 style={{ margin: '0.5rem 0', fontSize: '1.75rem' }}>$3,240.50</h2>
+                  <h2 style={{ margin: '0.5rem 0', fontSize: '1.75rem' }}>{formatVND(81012500)}</h2>
                   <p style={{ margin: 0, fontSize: '0.8rem', color: 'var(--accent-primary)', fontWeight: 600 }}>Optimal Range</p>
                 </div>
                 <div className="glass-panel" style={{ padding: '1.5rem', borderRadius: '24px', border: '1px solid var(--border-color)' }}>
@@ -1164,7 +1173,7 @@ function App() {
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem' }}>
                 <div className="glass-panel" style={{ padding: '2rem', borderRadius: '24px', border: '1px solid var(--border-color)' }}>
                   <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--text-muted)' }}>Gross Revenue (MTD)</p>
-                  <h2 style={{ margin: '0.5rem 0', fontSize: '2.5rem' }}>$42,850</h2>
+                  <h2 style={{ margin: '0.5rem 0', fontSize: '2.5rem' }}>{formatVND(1071250000)}</h2>
                   <p style={{ margin: 0, fontSize: '0.9rem', color: 'var(--accent-primary)', fontWeight: 600 }}>+15.2% vs last month</p>
                 </div>
                 <div className="glass-panel" style={{ padding: '2rem', borderRadius: '24px', border: '1px solid var(--border-color)' }}>
@@ -1184,10 +1193,10 @@ function App() {
                   <h3 style={{ marginBottom: '2rem' }}>Top Selling Meals (This Week)</h3>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                     {[
-                      { rank: 1, name: 'Lemon Herb Chicken', orders: 342, rev: '$4,442' },
-                      { rank: 2, name: 'Spicy Salmon Bowl', orders: 289, rev: '$4,332' },
-                      { rank: 3, name: 'Keto Steak & Eggs', orders: 215, rev: '$3,437' },
-                      { rank: 4, name: 'Vegan Buddha Bowl', orders: 198, rev: '$2,374' }
+                      { rank: 1, name: 'Lemon Herb Chicken', orders: 342, rev: '111.050.000 ₫' },
+                      { rank: 2, name: 'Spicy Salmon Bowl', orders: 289, rev: '108.300.000 ₫' },
+                      { rank: 3, name: 'Keto Steak & Eggs', orders: 215, rev: '85.925.000 ₫' },
+                      { rank: 4, name: 'Vegan Buddha Bowl', orders: 198, rev: '59.350.000 ₫' }
                     ].map(m => (
                       <div key={m.rank} className="flex-between" style={{ paddingBottom: '1rem', borderBottom: '1px solid var(--border-color)' }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
@@ -1325,14 +1334,14 @@ function App() {
                     </thead>
                     <tbody>
                       {[
-                        { name: 'Premium Chicken Breast', qty: '56 kg', supplier: 'Farm Fresh Meats Inc.', cost: '$369.52' },
-                        { name: 'Wild-Caught Salmon', qty: '20 kg', supplier: 'Oceanic Seafoods', cost: '$427.05' },
-                        { name: 'Grass-fed Flank Steak', qty: '27 kg', supplier: 'Ranch Direct', cost: '$580.40' },
-                        { name: 'Organic Quinoa', qty: '14 kg', supplier: 'Valley Grains', cost: '$85.50' },
-                        { name: 'Fresh Broccoli', qty: '18 kg', supplier: 'Local Green Farms', cost: '$62.00' },
-                        { name: 'Extra Firm Tofu', qty: '12 kg', supplier: 'Soy Masters', cost: '$35.20' },
-                        { name: 'Sweet Potatoes', qty: '18 kg', supplier: 'Root Farms', cost: '$24.50' },
-                        { name: 'Zucchini Noodles', qty: '15 kg', supplier: 'Fresh Veggies Co.', cost: '$45.00' }
+                        { name: 'Premium Chicken Breast', qty: '56 kg', supplier: 'Farm Fresh Meats Inc.', cost: '9.238.000 ₫' },
+                        { name: 'Wild-Caught Salmon', qty: '20 kg', supplier: 'Oceanic Seafoods', cost: '10.676.000 ₫' },
+                        { name: 'Grass-fed Flank Steak', qty: '27 kg', supplier: 'Ranch Direct', cost: '14.510.000 ₫' },
+                        { name: 'Organic Quinoa', qty: '14 kg', supplier: 'Valley Grains', cost: '2.137.500 ₫' },
+                        { name: 'Fresh Broccoli', qty: '18 kg', supplier: 'Local Green Farms', cost: '1.550.000 ₫' },
+                        { name: 'Extra Firm Tofu', qty: '12 kg', supplier: 'Soy Masters', cost: '880.000 ₫' },
+                        { name: 'Sweet Potatoes', qty: '18 kg', supplier: 'Root Farms', cost: '612.500 ₫' },
+                        { name: 'Zucchini Noodles', qty: '15 kg', supplier: 'Fresh Veggies Co.', cost: '1.125.000 ₫' }
                       ].map((item, i) => (
                         <tr key={i} style={{ borderBottom: '1px solid rgba(255,255,255,0.03)', fontSize: '0.95rem' }}>
                           <td style={{ padding: '1.25rem 0', fontWeight: 500 }}>{item.name}</td>
@@ -1347,7 +1356,7 @@ function App() {
 
                 <div className="flex-between" style={{ padding: '1.5rem 0', borderTop: '2px solid var(--border-color)', marginBottom: '3rem' }}>
                   <span style={{ fontSize: '1.1rem', fontWeight: 700 }}>Total Estimated Cost:</span>
-                  <span style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--accent-primary)' }}>$1,629.17</span>
+                  <span style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--accent-primary)' }}>{formatVND(40729250)}</span>
                 </div>
 
                 <div style={{ display: 'flex', gap: '1.5rem' }}>
@@ -1508,7 +1517,7 @@ function App() {
                   <div className="meal-content">
                     <div className="flex-between" style={{ alignItems: 'flex-start' }}>
                       <h3 style={{ fontSize: '1.1rem', marginBottom: '0.5rem' }}>{item.name}</h3>
-                      <span style={{ fontWeight: 600 }}>${item.price}</span>
+                      <span style={{ fontWeight: 600 }}>{formatVND(item.price)}</span>
                     </div>
                     <p style={{ marginBottom: '1rem', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>{item.desc}</p>
                     <div style={{ display: 'flex', gap: '0.5rem' }}>
@@ -1538,7 +1547,7 @@ function App() {
                         <div className="cart-img">{item.img}</div>
                         <div style={{ flex: 1 }}>
                           <h4 style={{ fontSize: '0.95rem', marginBottom: '0.25rem' }}>{item.name}</h4>
-                          <p style={{ fontSize: '0.85rem', color: 'var(--accent-primary)' }}>${item.price}</p>
+                          <p style={{ fontSize: '0.85rem', color: 'var(--accent-primary)' }}>{formatVND(item.price)}</p>
                         </div>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', background: '#222', borderRadius: '8px', padding: '0.25rem' }}>
                           <button style={{ background: 'none', border: 'none', color: '#fff', padding: '0.25rem', cursor: 'pointer' }} onClick={() => updateQty(item.id, -1)}><Minus size={16}/></button>
@@ -1552,7 +1561,7 @@ function App() {
                   <div className="dash-card">
                     <div className="flex-between" style={{ marginBottom: '0.75rem' }}>
                       <span style={{ color: 'var(--text-muted)' }}>Subtotal</span>
-                      <span>${cartTotal.toFixed(2)}</span>
+                      <span>{formatVND(cartTotal)}</span>
                     </div>
                     <div className="flex-between" style={{ marginBottom: '0.75rem' }}>
                       <span style={{ color: 'var(--text-muted)' }}>Delivery</span>
@@ -1560,7 +1569,7 @@ function App() {
                     </div>
                     <div className="flex-between" style={{ borderTop: '1px solid var(--border-color)', paddingTop: '1rem', marginTop: '0.5rem', fontWeight: 600, fontSize: '1.1rem' }}>
                       <span>Total</span>
-                      <span>${cartTotal.toFixed(2)}</span>
+                      <span>{formatVND(cartTotal)}</span>
                     </div>
                   </div>
                   
@@ -1769,7 +1778,7 @@ function App() {
             <div style={{ padding: '1.5rem' }}>
               <div className="flex-between">
                 <h1>{selectedMeal.name}</h1>
-                <h2 style={{ color: 'var(--accent-primary)', margin: 0 }}>${selectedMeal.price}</h2>
+                <h2 style={{ color: 'var(--accent-primary)', margin: 0 }}>{formatVND(selectedMeal.price)}</h2>
               </div>
               <p style={{ fontSize: '1rem', marginTop: '1rem', color: '#ccc' }}>{selectedMeal.desc}</p>
               
@@ -1807,7 +1816,7 @@ function App() {
             
             <div className="btn-sticky">
               <button className="btn-primary" onClick={() => addToCart(selectedMeal)}>
-                Add to Cart
+                Add to Cart - {formatVND(selectedMeal.price)}
               </button>
             </div>
           </motion.div>
@@ -1856,7 +1865,7 @@ function App() {
                     <div className="glass-panel" style={{ padding: '1.5rem', borderRadius: '16px', marginBottom: '2rem' }}>
                       <div className="flex-between" style={{ marginBottom: '0.5rem' }}>
                         <span style={{ color: 'var(--text-muted)' }}>Order Total</span>
-                        <span style={{ fontWeight: 700, fontSize: '1.25rem' }}>${cartTotal.toFixed(2)}</span>
+                        <span style={{ fontWeight: 700, fontSize: '1.25rem' }}>{formatVND(cartTotal)}</span>
                       </div>
                       <div style={{ fontSize: '0.85rem', color: 'var(--accent-primary)' }}>
                         Includes {cart.reduce((s,i) => s+i.qty, 0)} macro-balanced meals
