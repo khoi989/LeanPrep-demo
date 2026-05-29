@@ -10,6 +10,15 @@
   --text-muted: #a1a1aa;
 }
 
+:root.light-mode {
+  --bg-dark: #f4f4f5;
+  --bg-card: #ffffff;
+  --border-color: #e4e4e7;
+  --text-main: #09090b;
+  --text-muted: #71717a;
+}
+
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -746,5 +755,85 @@ p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.5; }
     grid-template-columns: 1fr;
   }
 }
+
+/* Theme Toggle Button */
+.theme-toggle-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-color);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--text-main);
+  transition: all 0.2s ease;
+}
+.theme-toggle-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+:root.light-mode .theme-toggle-btn {
+  background: rgba(0, 0, 0, 0.05);
+}
+:root.light-mode .theme-toggle-btn:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+/* Specific light mode styling overrides */
+:root.light-mode body {
+  background-color: #f4f4f5;
+}
+:root.light-mode .mobile-wrapper {
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.05);
+}
+@media (min-width: 450px) {
+  :root.light-mode .mobile-wrapper {
+    border: 8px solid #d4d4d8;
+  }
+}
+:root.light-mode .bottom-nav {
+  background: rgba(255, 255, 255, 0.85);
+}
+:root.light-mode .ui-selector-overlay {
+  background: radial-gradient(circle at center, #ffffff, #e4e4e7);
+}
+:root.light-mode .selector-card {
+  background: rgba(0, 0, 0, 0.02);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+:root.light-mode .option-btn {
+  background: rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+:root.light-mode .option-btn:hover {
+  background: rgba(16, 185, 129, 0.08);
+}
+:root.light-mode .seller-view {
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+}
+:root.light-mode .seller-sidebar {
+  background: var(--bg-card);
+  border-right: 1px solid var(--border-color);
+}
+:root.light-mode .seller-col {
+  background: rgba(0, 0, 0, 0.02);
+}
+:root.light-mode .seller-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+}
+:root.light-mode .seller-metric {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+}
+
+/* Global input and select text color overrides for light mode compatibility */
+input, select, textarea {
+  color: var(--text-main) !important;
+}
+
+
 
 

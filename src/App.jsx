@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ShieldCheck, Utensils, Activity, Search, Clock, CheckCircle2, Truck, ChefHat, ArrowLeft, Flame, Scale, LayoutList, Target, ShoppingBag, Plus, Minus, Edit2, X, CreditCard, Wallet, Lock, LayoutDashboard, Package, TrendingUp, Bell, FileText, Zap, ArrowRight, Settings, MessageSquare, Send, MapPin } from 'lucide-react';
+import { ShieldCheck, Utensils, Activity, Search, Clock, CheckCircle2, Truck, ChefHat, ArrowLeft, Flame, Scale, LayoutList, Target, ShoppingBag, Plus, Minus, Edit2, X, CreditCard, Wallet, Lock, LayoutDashboard, Package, TrendingUp, Bell, FileText, Zap, ArrowRight, Settings, MessageSquare, Send, MapPin, Sun, Moon } from 'lucide-react';
 import './index.css';
 
 const MENU_ITEMS = [
@@ -29,7 +29,32 @@ const MOCK_SELLER_ORDERS = [
   { id: 'ORD-1046', item: 'Lemon Herb Chicken', macros: '450 kcal', status: 'delivered', time: '09:50 AM', qty: 5, progress: 100 },
 ];
 
+const ThemeToggle = ({ theme, setTheme }) => {
+  return (
+    <motion.button
+      whileHover={{ scale: 1.1 }}
+      whileTap={{ scale: 0.9 }}
+      onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+      className="theme-toggle-btn"
+      title={`Switch to ${theme === 'dark' ? 'Light' : 'Dark'} Mode`}
+    >
+      {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
+    </motion.button>
+  );
+};
+
 function App() {
+  const [theme, setTheme] = useState(() => localStorage.getItem('măm-mate_theme') || 'dark');
+
+  useEffect(() => {
+    localStorage.setItem('măm-mate_theme', theme);
+    if (theme === 'light') {
+      document.documentElement.classList.add('light-mode');
+    } else {
+      document.documentElement.classList.remove('light-mode');
+    }
+  }, [theme]);
+
   const [onboardStep, setOnboardStep] = useState(() => JSON.parse(localStorage.getItem('măm-mate_onboardStep')) || 0);
   const [userProfile, setUserProfile] = useState(() => {
     const saved = JSON.parse(localStorage.getItem('măm-mate_userProfile')) || { 
@@ -261,7 +286,7 @@ function App() {
   // Shared Onboarding
   if (onboardStep < 3) {
     return (
-      <div className={uiMode === 'mobile' ? "mobile-wrapper" : "desktop-container"} style={{ justifyContent: 'center', backgroundColor: '#09090b', alignItems: 'center' }}>
+      <div className={uiMode === 'mobile' ? "mobile-wrapper" : "desktop-container"} style={{ justifyContent: 'center', backgroundColor: 'var(--bg-dark)', alignItems: 'center' }}>
         <AnimatePresence mode="wait">
           {onboardStep === 0 && (
             <motion.div key="s0" className="onboard-screen" style={uiMode === 'desktop' ? { width: '450px', position: 'relative', borderRadius: '32px', height: 'auto', padding: '3rem' } : {}} initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}>
@@ -355,7 +380,8 @@ function App() {
               <motion.div key="d-home" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}>
                 <div className="flex-between" style={{ marginBottom: '2.5rem' }}>
                   <h1>Your Dashboard</h1>
-                  <div style={{ position: 'relative', width: '350px', display: 'flex', gap: '0.75rem' }}>
+                  <div style={{ position: 'relative', width: '350px', display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
+                    <ThemeToggle theme={theme} setTheme={setTheme} />
                     <div style={{ position: 'relative', flex: 1 }}>
                       <Search size={18} style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
                       <input 
@@ -605,8 +631,8 @@ function App() {
                       <div key={i} style={{ 
                         alignSelf: msg.role === 'user' ? 'flex-end' : 'flex-start',
                         maxWidth: '70%',
-                        background: msg.role === 'user' ? 'var(--accent-primary)' : 'rgba(255,255,255,0.05)',
-                        color: msg.role === 'user' ? '#000' : '#fff',
+                        background: msg.role === 'user' ? 'var(--accent-primary)' : (theme === 'light' ? 'rgba(0,0,0,0.05)' : 'rgba(255,255,255,0.05)'),
+                        color: msg.role === 'user' ? '#000' : 'var(--text-main)',
                         padding: '1.25rem',
                         borderRadius: msg.role === 'user' ? '20px 20px 4px 20px' : '20px 20px 20px 4px',
                         fontSize: '1rem',
@@ -972,10 +998,11 @@ function App() {
               </h1>
               <p style={{ marginTop: '0.5rem', color: 'var(--text-muted)' }}>Real-time sync with Măm-mate Cloud</p>
             </div>
-            <div style={{ display: 'flex', gap: '1rem' }}>
+            <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+              <ThemeToggle theme={theme} setTheme={setTheme} />
               <div className="glass-panel" style={{ padding: '0.75rem 1.25rem', display: 'flex', alignItems: 'center', gap: '0.75rem', borderRadius: '12px', border: '1px solid var(--border-color)' }}>
                 <Search size={18} color="var(--text-muted)" />
-                <input type="text" placeholder="Search orders..." style={{ background: 'none', border: 'none', color: '#fff', outline: 'none' }} />
+                <input type="text" placeholder="Search orders..." style={{ background: 'none', border: 'none', color: 'var(--text-main)', outline: 'none' }} />
               </div>
               <div className="glass-panel" style={{ padding: '0.75rem', borderRadius: '12px', border: '1px solid var(--border-color)', display: 'flex' }}><Bell size={20}/></div>
             </div>
@@ -1007,10 +1034,10 @@ function App() {
                             <Clock size={12} /> {order.time}
                           </span>
                         </div>
-                        <div style={{ fontWeight: 700, fontSize: '1.25rem', marginBottom: '1rem', color: '#fff' }}>{order.qty}x {order.item}</div>
+                        <div style={{ fontWeight: 700, fontSize: '1.25rem', marginBottom: '1rem', color: 'var(--text-main)' }}>{order.qty}x {order.item}</div>
                         
                         <div style={{ display: 'flex', gap: '0.6rem', marginBottom: '1.25rem' }}>
-                          <span style={{ background: 'rgba(255,255,255,0.05)', padding: '4px 12px', borderRadius: '8px', fontSize: '0.7rem', fontWeight: 600, color: 'var(--text-muted)', textTransform: 'uppercase' }}>{order.macros}</span>
+                          <span style={{ background: theme === 'light' ? 'rgba(0,0,0,0.05)' : 'rgba(255,255,255,0.05)', padding: '4px 12px', borderRadius: '8px', fontSize: '0.7rem', fontWeight: 600, color: 'var(--text-muted)', textTransform: 'uppercase' }}>{order.macros}</span>
                         </div>
 
                         {(status === 'cooking' || status === 'ready') && (
@@ -1195,7 +1222,7 @@ function App() {
               <div className="glass-panel" style={{ padding: '2rem', borderRadius: '24px', border: '1px solid var(--border-color)', position: 'relative' }}>
                 <div className="flex-between" style={{ alignItems: 'flex-start', marginBottom: '2.5rem' }}>
                   <h3 style={{ margin: 0 }}>Daily Order Volume (Last 7 Days)</h3>
-                  <span style={{ color: '#fff', fontSize: '0.75rem', fontWeight: 500, fontFamily: 'Arial, sans-serif', opacity: 0.8 }}>
+                  <span style={{ color: 'var(--text-main)', fontSize: '0.75rem', fontWeight: 500, fontFamily: 'Arial, sans-serif', opacity: 0.8 }}>
                     Weekly Avg: 387
                   </span>
                 </div>
@@ -1242,21 +1269,21 @@ function App() {
             <div className="glass-panel" style={{ padding: '3rem', borderRadius: '32px', border: '1px solid var(--border-color)', maxWidth: '900px' }}>
               <h2 style={{ marginBottom: '2rem', fontSize: '1.5rem' }}>Kitchen Profile</h2>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem', marginBottom: '3rem' }}>
-                <div className="onboard-option" style={{ margin: 0, padding: '1rem 1.5rem', display: 'block', height: 'auto', border: 'none', background: 'rgba(255,255,255,0.03)' }}>
+                <div className="onboard-option" style={{ margin: 0, padding: '1rem 1.5rem', display: 'block', height: 'auto', border: 'none', background: theme === 'light' ? 'rgba(0,0,0,0.03)' : 'rgba(255,255,255,0.03)' }}>
                   <p style={{ margin: '0 0 0.75rem', fontSize: '0.85rem', color: 'var(--text-muted)', fontWeight: 600 }}>Location Name</p>
-                  <input type="text" value={sellerSettings.location} onChange={e => setSellerSettings({...sellerSettings, location: e.target.value})} style={{ background: 'none', border: 'none', color: '#fff', fontSize: '1rem', width: '100%', outline: 'none' }} />
+                  <input type="text" value={sellerSettings.location} onChange={e => setSellerSettings({...sellerSettings, location: e.target.value})} style={{ background: 'none', border: 'none', color: 'var(--text-main)', fontSize: '1rem', width: '100%', outline: 'none' }} />
                 </div>
-                <div className="onboard-option" style={{ margin: 0, padding: '1rem 1.5rem', display: 'block', height: 'auto', border: 'none', background: 'rgba(255,255,255,0.03)' }}>
+                <div className="onboard-option" style={{ margin: 0, padding: '1rem 1.5rem', display: 'block', height: 'auto', border: 'none', background: theme === 'light' ? 'rgba(0,0,0,0.03)' : 'rgba(255,255,255,0.03)' }}>
                   <p style={{ margin: '0 0 0.75rem', fontSize: '0.85rem', color: 'var(--text-muted)', fontWeight: 600 }}>Max Capacity (Meals/Day)</p>
-                  <input type="number" value={sellerSettings.capacity} onChange={e => setSellerSettings({...sellerSettings, capacity: e.target.value})} style={{ background: 'none', border: 'none', color: '#fff', fontSize: '1rem', width: '100%', outline: 'none' }} />
+                  <input type="number" value={sellerSettings.capacity} onChange={e => setSellerSettings({...sellerSettings, capacity: e.target.value})} style={{ background: 'none', border: 'none', color: 'var(--text-main)', fontSize: '1rem', width: '100%', outline: 'none' }} />
                 </div>
-                <div className="onboard-option" style={{ margin: 0, padding: '1rem 1.5rem', display: 'block', height: 'auto', border: 'none', background: 'rgba(255,255,255,0.03)' }}>
+                <div className="onboard-option" style={{ margin: 0, padding: '1rem 1.5rem', display: 'block', height: 'auto', border: 'none', background: theme === 'light' ? 'rgba(0,0,0,0.03)' : 'rgba(255,255,255,0.03)' }}>
                   <p style={{ margin: '0 0 0.75rem', fontSize: '0.85rem', color: 'var(--text-muted)', fontWeight: 600 }}>Operating Hours</p>
-                  <input type="text" value={sellerSettings.hours} onChange={e => setSellerSettings({...sellerSettings, hours: e.target.value})} style={{ background: 'none', border: 'none', color: '#fff', fontSize: '1rem', width: '100%', outline: 'none' }} />
+                  <input type="text" value={sellerSettings.hours} onChange={e => setSellerSettings({...sellerSettings, hours: e.target.value})} style={{ background: 'none', border: 'none', color: 'var(--text-main)', fontSize: '1rem', width: '100%', outline: 'none' }} />
                 </div>
-                <div className="onboard-option" style={{ margin: 0, padding: '1rem 1.5rem', display: 'block', height: 'auto', border: 'none', background: 'rgba(255,255,255,0.03)' }}>
+                <div className="onboard-option" style={{ margin: 0, padding: '1rem 1.5rem', display: 'block', height: 'auto', border: 'none', background: theme === 'light' ? 'rgba(0,0,0,0.03)' : 'rgba(255,255,255,0.03)' }}>
                   <p style={{ margin: '0 0 0.75rem', fontSize: '0.85rem', color: 'var(--text-muted)', fontWeight: 600 }}>Auto-Dispatch Delivery Partners</p>
-                  <input type="text" value={sellerSettings.partners} onChange={e => setSellerSettings({...sellerSettings, partners: e.target.value})} style={{ background: 'none', border: 'none', color: '#fff', fontSize: '1rem', width: '100%', outline: 'none' }} />
+                  <input type="text" value={sellerSettings.partners} onChange={e => setSellerSettings({...sellerSettings, partners: e.target.value})} style={{ background: 'none', border: 'none', color: 'var(--text-main)', fontSize: '1rem', width: '100%', outline: 'none' }} />
                 </div>
               </div>
               <div style={{ display: 'flex', gap: '1rem' }}>
@@ -1347,9 +1374,12 @@ function App() {
                   <p style={{ color: 'var(--accent-primary)', fontWeight: 600, fontSize: '0.85rem' }}>Good Morning, Khoi</p>
                   <h1>Your Dashboard</h1>
                 </div>
-                <button onClick={() => setUiMode('selector')} style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid var(--border-color)', color: 'var(--text-muted)', padding: '0.5rem 0.75rem', borderRadius: '10px', fontSize: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                  <ArrowLeft size={14} /> Exit Hub
-                </button>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                  <ThemeToggle theme={theme} setTheme={setTheme} />
+                  <button onClick={() => setUiMode('selector')} style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid var(--border-color)', color: 'var(--text-muted)', padding: '0.5rem 0.75rem', borderRadius: '10px', fontSize: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                    <ArrowLeft size={14} /> Exit Hub
+                  </button>
+                </div>
               </div>
 
               <div className="dash-card">
@@ -1683,8 +1713,8 @@ function App() {
                     <div key={i} style={{ 
                       alignSelf: msg.role === 'user' ? 'flex-end' : 'flex-start',
                       maxWidth: '85%',
-                      background: msg.role === 'user' ? 'var(--accent-primary)' : 'rgba(255,255,255,0.08)',
-                      color: msg.role === 'user' ? '#000' : '#fff',
+                      background: msg.role === 'user' ? 'var(--accent-primary)' : (theme === 'light' ? 'rgba(0,0,0,0.05)' : 'rgba(255,255,255,0.08)'),
+                      color: msg.role === 'user' ? '#000' : 'var(--text-main)',
                       padding: '1rem',
                       borderRadius: msg.role === 'user' ? '16px 16px 4px 16px' : '16px 16px 16px 4px',
                       fontSize: '0.9rem',
