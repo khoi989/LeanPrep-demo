@@ -571,9 +571,27 @@ function App() {
   });
   const [isSavingSettings, setIsSavingSettings] = useState(false);
   const [aiMessages, setAiMessages] = useState([
-    { role: 'ai', text: "Hello Khoi! I've analyzed your progress. Your current daily target is 2200 kcal. Based on your 'Build Muscle' goal, would you like to adjust this for a cleaner bulk?" },
-    { role: 'user', text: "Yes, I feel like 2200 might be a bit low. What do you recommend?" },
-    { role: 'ai', text: "Given your activity level, I suggest increasing to 2500 kcal, focusing on an extra 30g of protein. This will optimize muscle protein synthesis without excessive fat gain. Shall I update your dashboard?" }
+    { 
+      role: 'ai', 
+      text: { 
+        en: "Hello Khoi! I've analyzed your progress. Your current daily target is 2200 kcal. Based on your 'Build Muscle' goal, would you like to adjust this for a cleaner bulk?", 
+        vi: "Xin chào Khôi! Tôi đã phân tích tiến trình của bạn. Mục tiêu calo hàng ngày hiện tại của bạn là 2200 kcal. Dựa trên mục tiêu 'Tăng Cơ' của bạn, bạn có muốn điều chỉnh con số này để tăng cơ sạch (clean bulk) không?" 
+      }
+    },
+    { 
+      role: 'user', 
+      text: { 
+        en: "Yes, I feel like 2200 might be a bit low. What do you recommend?", 
+        vi: "Có chứ, tôi cảm thấy 2200 kcal có vẻ hơi thấp. Bạn có đề xuất gì không?" 
+      }
+    },
+    { 
+      role: 'ai', 
+      text: { 
+        en: "Given your activity level, I suggest increasing to 2500 kcal, focusing on an extra 30g of protein. This will optimize muscle protein synthesis without excessive fat gain. Shall I update your dashboard?", 
+        vi: "Với mức độ hoạt động của bạn, tôi khuyên bạn nên tăng lên 2500 kcal, tập trung vào việc bổ sung thêm 30g protein. Điều này sẽ tối ưu hóa quá trình tổng hợp protein cơ bắp mà không gây tích mỡ thừa. Tôi có nên cập nhật bảng điều khiển của bạn không?" 
+      }
+    }
   ]);
   const [showLiveMap, setShowLiveMap] = useState(false);
   const [streakDays, setStreakDays] = useState(7);
@@ -1096,8 +1114,8 @@ function App() {
             {tab === 'advice' && (
               <motion.div key="d-advice" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 20 }} style={{ height: 'calc(100vh - 100px)', display: 'flex', flexDirection: 'column' }}>
                 <div className="flex-between" style={{ marginBottom: '2.5rem' }}>
-                  <h1>AI Nutritional Advice</h1>
-                  <div className="macro-pill" style={{ padding: '0.5rem 1rem' }}><Zap size={16} color="var(--accent-primary)" /> Powered by Măm-mate AI</div>
+                  <h1>{lang === 'vi' ? 'Tư Vấn Dinh Dưỡng AI' : 'AI Nutritional Advice'}</h1>
+                  <div className="macro-pill" style={{ padding: '0.5rem 1rem' }}><Zap size={16} color="var(--accent-primary)" /> {lang === 'vi' ? 'Cung cấp bởi Măm-mate AI' : 'Powered by Măm-mate AI'}</div>
                 </div>
                 <div className="glass-panel" style={{ flex: 1, borderRadius: '24px', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
                   <div style={{ flex: 1, padding: '2rem', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
@@ -1113,12 +1131,12 @@ function App() {
                         lineHeight: 1.5,
                         boxShadow: '0 4px 15px rgba(0,0,0,0.1)'
                       }}>
-                        {msg.text}
+                        {typeof msg.text === 'object' ? t(msg.text, lang) : msg.text}
                       </div>
                     ))}
                   </div>
                   <div style={{ padding: '1.5rem', background: 'rgba(255,255,255,0.02)', borderTop: '1px solid var(--border-color)', display: 'flex', gap: '1rem' }}>
-                    <input type="text" placeholder="Ask about your diet, macros, or meal timing..." style={{ flex: 1, background: 'var(--bg-dark)', border: '1px solid var(--border-color)', borderRadius: '12px', padding: '1rem', color: '#fff', outline: 'none' }} />
+                    <input type="text" placeholder={lang === 'vi' ? 'Hỏi về chế độ ăn, macro, hoặc thời gian ăn uống...' : 'Ask about your diet, macros, or meal timing...'} style={{ flex: 1, background: 'var(--bg-dark)', border: '1px solid var(--border-color)', borderRadius: '12px', padding: '1rem', color: '#fff', outline: 'none' }} />
                     <button className="btn-primary" style={{ width: '60px', height: '60px', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '12px' }}><Send size={24}/></button>
                   </div>
                 </div>
@@ -1127,35 +1145,35 @@ function App() {
 
             {tab === 'tracker' && (
               <motion.div key="d-tracker" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 20 }}>
-                <h1>Live Tracking</h1>
+                <h1>{lang === 'vi' ? 'Theo Dõi Trực Tiếp' : 'Live Tracking'}</h1>
                 <div className="desktop-tracker-card" style={{ marginTop: '2rem' }}>
                   {!activeOrder ? (
                     <div style={{ textAlign: 'center', padding: '5rem 0' }}>
                       <Truck size={64} style={{ opacity: 0.2, marginBottom: '1.5rem' }} />
-                      <h3>No active orders</h3>
+                      <h3>{lang === 'vi' ? 'Không có đơn hàng nào đang hoạt động' : 'No active orders'}</h3>
                     </div>
                   ) : (
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem' }}>
                       <div>
-                        <h2 style={{ marginBottom: '2rem' }}>Status: {['Preparing', 'Cooking', 'Ready', 'Out for Delivery', 'Delivered'][orderStage]}</h2>
+                        <h2 style={{ marginBottom: '2rem' }}>{lang === 'vi' ? 'Trạng thái' : 'Status'}: {lang === 'vi' ? ['Chuẩn bị', 'Đang nấu', 'Sẵn sàng', 'Đang giao hàng', 'Đã giao'][orderStage] : ['Preparing', 'Cooking', 'Ready', 'Out for Delivery', 'Delivered'][orderStage]}</h2>
                         <div className="tracker-steps">
-                          <TrackStep active={orderStage >= 0} icon={<Clock size={18}/>} title="Order Confirmed" desc="Kitchen has received your order." />
-                          <TrackStep active={orderStage >= 1} icon={<ChefHat size={18}/>} title="In the Kitchen" desc="Our chefs are preparing your meal to the exact gram." />
-                          <TrackStep active={orderStage >= 2} icon={<CheckCircle2 size={18}/>} title="Quality Check" desc="Macros verified and meal packaged." />
-                          <TrackStep active={orderStage >= 3} icon={<Truck size={18}/>} title="Out for Delivery" desc="A driver is heading to your location." />
-                          <TrackStep active={orderStage >= 4} icon={<ShoppingBag size={18}/>} title="Delivered" desc="Enjoy your macro-certified meal!" />
+                          <TrackStep active={orderStage >= 0} icon={<Clock size={18}/>} title={lang === 'vi' ? 'Đã Xác Nhận Đơn Hàng' : 'Order Confirmed'} desc={lang === 'vi' ? 'Bếp đã nhận được đơn hàng của bạn.' : 'Kitchen has received your order.'} />
+                          <TrackStep active={orderStage >= 1} icon={<ChefHat size={18}/>} title={lang === 'vi' ? 'Đang Trong Bếp' : 'In the Kitchen'} desc={lang === 'vi' ? 'Các đầu bếp đang chuẩn bị bữa ăn của bạn chính xác từng gram.' : 'Our chefs are preparing your meal to the exact gram.'} />
+                          <TrackStep active={orderStage >= 2} icon={<CheckCircle2 size={18}/>} title={lang === 'vi' ? 'Kiểm Tra Chất Lượng' : 'Quality Check'} desc={lang === 'vi' ? 'Các chỉ số macro đã được xác minh và đóng gói.' : 'Macros verified and meal packaged.'} />
+                          <TrackStep active={orderStage >= 3} icon={<Truck size={18}/>} title={lang === 'vi' ? 'Đang Giao Hàng' : 'Out for Delivery'} desc={lang === 'vi' ? 'Tài xế đang di chuyển tới địa điểm của bạn.' : 'A driver is heading to your location.'} />
+                          <TrackStep active={orderStage >= 4} icon={<ShoppingBag size={18}/>} title={lang === 'vi' ? 'Đã Giao Hàng' : 'Delivered'} desc={lang === 'vi' ? 'Chúc bạn ngon miệng với bữa ăn chuẩn dinh dưỡng!' : 'Enjoy your macro-certified meal!'} />
                         </div>
                         {orderStage === 3 && (
                           <button className="btn-primary" style={{ marginTop: '2rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.75rem' }} onClick={() => setShowLiveMap(true)}>
-                            <MapPin size={20} /> View Live Tracking Map
+                            <MapPin size={20} /> {lang === 'vi' ? 'Xem Bản Đồ Theo Dõi Trực Tiếp' : 'View Live Tracking Map'}
                           </button>
                         )}
                         {orderStage >= 4 && (
                           <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} style={{ marginTop: '3rem', padding: '2rem', background: 'rgba(16, 185, 129, 0.05)', borderRadius: '24px', border: '1px solid rgba(16, 185, 129, 0.2)', textAlign: 'center' }}>
                             <CheckCircle2 size={40} color="var(--accent-primary)" style={{ margin: '0 auto 1rem' }} />
-                            <h2 style={{ color: 'var(--accent-primary)', marginBottom: '0.5rem' }}>Delivered & Logged!</h2>
-                            <p style={{ color: 'var(--text-muted)', marginBottom: '2rem' }}>{activeOrder.totalCals} kcal and exact macros have been synced to your Dashboard.</p>
-                            <button onClick={() => { setActiveOrder(null); setTab('home'); }} className="btn-primary" style={{ maxWidth: '300px', margin: '0 auto' }}>View Dashboard</button>
+                            <h2 style={{ color: 'var(--accent-primary)', marginBottom: '0.5rem' }}>{lang === 'vi' ? 'Đã Giao & Ghi Nhận!' : 'Delivered & Logged!'}</h2>
+                            <p style={{ color: 'var(--text-muted)', marginBottom: '2rem' }}>{lang === 'vi' ? `${activeOrder.totalCals} kcal và các chỉ số macro chính xác đã được đồng bộ với Bảng điều khiển.` : `${activeOrder.totalCals} kcal and exact macros have been synced to your Dashboard.`}</p>
+                            <button onClick={() => { setActiveOrder(null); setTab('home'); }} className="btn-primary" style={{ maxWidth: '300px', margin: '0 auto' }}>{lang === 'vi' ? 'Xem Bảng Điều Khiển' : 'View Dashboard'}</button>
                           </motion.div>
                         )}
                       </div>
@@ -2092,20 +2110,20 @@ function App() {
 
           {tab === 'tracker' && (
             <motion.div key="tracker" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0 }}>
-              <h1>Live Tracking</h1>
-              <p>Directly synced with Măm-mate Cloud Kitchen</p>
+              <h1>{lang === 'vi' ? 'Theo Dõi Trực Tiếp' : 'Live Tracking'}</h1>
+              <p>{lang === 'vi' ? 'Đồng bộ trực tiếp với Bếp Trung Tâm Măm-mate' : 'Directly synced with Măm-mate Cloud Kitchen'}</p>
 
               {!activeOrder ? (
                 <div style={{ textAlign: 'center', padding: '4rem 1rem', color: 'var(--text-muted)' }}>
                   <Truck size={48} style={{ margin: '0 auto 1rem', opacity: 0.5 }} />
-                  <p>No active deliveries.</p>
+                  <p>{lang === 'vi' ? 'Không có đơn giao hàng nào đang hoạt động.' : 'No active deliveries.'}</p>
                 </div>
               ) : (
                 <div className="tracker-container">
                   <div style={{ marginBottom: '2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <div>
-                      <h3 style={{ fontSize: '1.1rem', marginBottom: '0.25rem' }}>Weekly Prep Order</h3>
-                      <p style={{ color: 'var(--accent-primary)', fontWeight: 600, fontSize: '0.85rem' }}>Guaranteed {activeOrder.totalCals} kcal</p>
+                      <h3 style={{ fontSize: '1.1rem', marginBottom: '0.25rem' }}>{lang === 'vi' ? 'Đơn Hàng Dinh Dưỡng Tuần' : 'Weekly Prep Order'}</h3>
+                      <p style={{ color: 'var(--accent-primary)', fontWeight: 600, fontSize: '0.85rem' }}>{lang === 'vi' ? `Đảm bảo ${activeOrder.totalCals} kcal` : `Guaranteed ${activeOrder.totalCals} kcal`}</p>
                     </div>
                     <div style={{ fontSize: '2rem' }}>📦</div>
                   </div>
@@ -2114,41 +2132,41 @@ function App() {
                     <TrackStep 
                       active={orderStage >= 0} 
                       icon={<LayoutList size={16} />} 
-                      title="Order Received" 
-                      desc="Sent to Măm-mate OS Kitchen Board." 
+                      title={lang === 'vi' ? 'Đã Nhận Đơn Hàng' : 'Order Received'} 
+                      desc={lang === 'vi' ? 'Đã gửi tới Bảng Quản Trị Bếp Măm-mate OS.' : 'Sent to Măm-mate OS Kitchen Board.'} 
                     />
                     <TrackStep 
                       active={orderStage >= 1} 
                       icon={<Scale size={16} />} 
-                      title="Prep & Weigh Station" 
-                      desc="Ingredients precisely measured to the gram." 
+                      title={lang === 'vi' ? 'Trạm Chuẩn Bị & Cân Đo' : 'Prep & Weigh Station'} 
+                      desc={lang === 'vi' ? 'Nguyên liệu được đo lường chính xác từng gram.' : 'Ingredients precisely measured to the gram.'} 
                     />
                     <TrackStep 
                       active={orderStage >= 2} 
                       icon={<Flame size={16} />} 
-                      title="Cooking" 
-                      desc="Chefs are preparing your meals." 
+                      title={lang === 'vi' ? 'Đang Nấu' : 'Cooking'} 
+                      desc={lang === 'vi' ? 'Các đầu bếp đang chuẩn bị bữa ăn của bạn.' : 'Chefs are preparing your meals.'} 
                     />
                     <TrackStep 
                       active={orderStage >= 3} 
                       icon={<Truck size={16} />} 
-                      title="Out for Delivery" 
-                      desc={orderStage >= 3 ? "Native dispatcher is on the way." : "Awaiting dispatch."} 
+                      title={lang === 'vi' ? 'Đang Giao Hàng' : 'Out for Delivery'} 
+                      desc={orderStage >= 3 ? (lang === 'vi' ? "Tài xế giao hàng đang trên đường." : "Native dispatcher is on the way.") : (lang === 'vi' ? "Đang chờ điều phối xe." : "Awaiting dispatch.")} 
                     />
                   </div>
                   
                   {orderStage === 3 && (
                     <button className="btn-primary" style={{ marginTop: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }} onClick={() => setShowLiveMap(true)}>
-                      <MapPin size={18} /> View Live Map
+                      <MapPin size={18} /> {lang === 'vi' ? 'Xem Bản Đồ Trực Tiếp' : 'View Live Map'}
                     </button>
                   )}
 
                   {orderStage >= 4 && (
                     <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} style={{ marginTop: '2rem', padding: '1rem', background: 'rgba(16, 185, 129, 0.1)', borderRadius: '12px', border: '1px solid rgba(16, 185, 129, 0.3)', textAlign: 'center' }}>
                       <CheckCircle2 size={24} color="var(--accent-primary)" style={{ margin: '0 auto 0.5rem' }} />
-                      <h4 style={{ color: 'var(--accent-primary)' }}>Delivered & Logged!</h4>
-                      <p style={{ fontSize: '0.85rem', marginTop: '0.25rem' }}>{activeOrder.totalCals} kcal and exact macros have been synced to your Dashboard.</p>
-                      <button onClick={() => { setActiveOrder(null); setTab('home'); }} className="btn-primary" style={{ marginTop: '1rem', padding: '0.75rem' }}>View Dashboard</button>
+                      <h4 style={{ color: 'var(--accent-primary)' }}>{lang === 'vi' ? 'Đã Giao & Ghi Nhận!' : 'Delivered & Logged!'}</h4>
+                      <p style={{ fontSize: '0.85rem', marginTop: '0.25rem' }}>{lang === 'vi' ? `${activeOrder.totalCals} kcal và các chỉ số macro chính xác đã được đồng bộ với Bảng điều khiển.` : `${activeOrder.totalCals} kcal and exact macros have been synced to your Dashboard.`}</p>
+                      <button onClick={() => { setActiveOrder(null); setTab('home'); }} className="btn-primary" style={{ marginTop: '1rem', padding: '0.75rem' }}>{lang === 'vi' ? 'Xem Bảng Điều Khiển' : 'View Dashboard'}</button>
                     </motion.div>
                   )}
                 </div>
@@ -2224,7 +2242,7 @@ function App() {
 
           {tab === 'advice' && (
             <motion.div key="advice" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} style={{ height: 'calc(100vh - 180px)', display: 'flex', flexDirection: 'column' }}>
-              <h1 style={{ marginBottom: '1.5rem' }}>AI Advice</h1>
+              <h1 style={{ marginBottom: '1.5rem' }}>{lang === 'vi' ? 'Tư Vấn AI' : 'AI Advice'}</h1>
               <div className="glass-panel" style={{ flex: 1, borderRadius: '24px', display: 'flex', flexDirection: 'column', overflow: 'hidden', background: 'rgba(255,255,255,0.02)' }}>
                 <div style={{ flex: 1, padding: '1.5rem', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
                   {aiMessages.map((msg, i) => (
@@ -2238,12 +2256,12 @@ function App() {
                       fontSize: '0.9rem',
                       lineHeight: 1.4
                     }}>
-                      {msg.text}
+                      {typeof msg.text === 'object' ? t(msg.text, lang) : msg.text}
                     </div>
                   ))}
                 </div>
                 <div style={{ padding: '1rem', background: 'rgba(0,0,0,0.2)', display: 'flex', gap: '0.75rem' }}>
-                  <input type="text" placeholder="Message AI..." style={{ flex: 1, background: 'rgba(255,255,255,0.05)', border: '1px solid var(--border-color)', borderRadius: '12px', padding: '0.75rem 1rem', color: '#fff', fontSize: '0.9rem', outline: 'none' }} />
+                  <input type="text" placeholder={lang === 'vi' ? 'Gửi tin nhắn cho AI...' : 'Message AI...'} style={{ flex: 1, background: 'rgba(255,255,255,0.05)', border: '1px solid var(--border-color)', borderRadius: '12px', padding: '0.75rem 1rem', color: '#fff', fontSize: '0.9rem', outline: 'none' }} />
                   <button className="btn-primary" style={{ width: '45px', height: '45px', padding: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}><Send size={20}/></button>
                 </div>
               </div>
