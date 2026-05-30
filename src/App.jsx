@@ -1343,7 +1343,7 @@ function App() {
                       </button>
                       <button 
                         className="btn-primary" 
-                        style={{ background: 'transparent', border: '1px solid var(--border-color)', color: 'white', marginTop: '0.75rem' }} 
+                        style={{ background: 'transparent', border: '1px solid var(--border-color)', color: theme === 'light' ? '#000' : 'white', marginTop: '0.75rem' }} 
                         onClick={() => setIsCheckingOut(false)}
                       >
                         {lang === 'vi' ? 'Hủy' : 'Cancel'}
@@ -2404,7 +2404,7 @@ function App() {
                     </button>
                     <button 
                       className="btn-primary" 
-                      style={{ background: 'transparent', border: '1px solid var(--border-color)', color: 'white', marginTop: '0.75rem' }} 
+                      style={{ background: 'transparent', border: '1px solid var(--border-color)', color: theme === 'light' ? '#000' : 'white', marginTop: '0.75rem' }} 
                       onClick={() => setIsCheckingOut(false)}
                     >
                       {lang === 'vi' ? 'Hủy' : 'Cancel'}
