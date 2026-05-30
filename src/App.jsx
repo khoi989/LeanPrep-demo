@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ShieldCheck, Utensils, Activity, Search, Clock, CheckCircle2, Truck, ChefHat, ArrowLeft, Flame, Scale, LayoutList, Target, ShoppingBag, Plus, Minus, Edit2, X, CreditCard, Wallet, Lock, LayoutDashboard, Package, TrendingUp, Bell, FileText, Zap, ArrowRight, Settings, MessageSquare, Send, MapPin, Sun, Moon } from 'lucide-react';
+import { ShieldCheck, Utensils, Activity, Search, Clock, CheckCircle2, Truck, ChefHat, ArrowLeft, Flame, Scale, LayoutList, Target, ShoppingBag, Plus, Minus, Edit2, X, CreditCard, Wallet, Lock, LayoutDashboard, Package, TrendingUp, Bell, FileText, Zap, ArrowRight, Settings, MessageSquare, Send, MapPin, Sun, Moon, Globe } from 'lucide-react';
 import './index.css';
+
+import blackJellyImg from './assets/black_jelly.png';
+import phoRollsImg from './assets/pho_rolls.png';
+import chickenBrownRiceImg from './assets/chicken_brown_rice.jpg';
 
 const formatVND = (value) => {
   return new Intl.NumberFormat('vi-VN', {
@@ -13,26 +17,458 @@ const formatVND = (value) => {
 };
 
 const renderImage = (img, name, style = {}) => {
-  if (typeof img === 'string' && img.startsWith('http')) {
-    return <img src={img} alt={name} style={{ width: '100%', height: '100%', objectFit: 'cover', ...style }} />;
+  if (typeof img === 'string') {
+    if (img.startsWith('http') || img.startsWith('/') || img.includes('.') || img.startsWith('data:')) {
+      return <img src={img} alt={name} style={{ width: '100%', height: '100%', objectFit: 'cover', ...style }} />;
+    }
   }
   return img;
 };
 
+const t = (field, lang) => {
+  if (field && typeof field === 'object') {
+    return field[lang] || field['en'] || '';
+  }
+  return field;
+};
+
+const translations = {
+  en: {
+    dashboard: "Your Dashboard",
+    searchMeals: "Search meals...",
+    search: "Search",
+    dailySummary: "Daily Summary",
+    calories: "Calories",
+    protein: "Protein",
+    carbs: "Carbs",
+    fats: "Fats",
+    addToCart: "Add to Cart",
+    cart: "Your Cart",
+    checkout: "Checkout",
+    emptyCart: "Your cart is empty.",
+    exitHub: "Exit Hub",
+    liveKitchenBoard: "Live Kitchen Board",
+    inventoryForecast: "Inventory Forecast",
+    performanceAnalytics: "Performance Analytics",
+    realTimeSync: "Real-time sync with Măm-mate Cloud",
+    searchOrders: "Search orders...",
+    incoming: "Incoming",
+    cooking: "Cooking",
+    ready: "Ready",
+    delivered: "Delivered",
+    exitDashboard: "Exit Dashboard",
+    eatGoal: "Eaten of TDEE Goal",
+    remCalories: "rem. calories",
+    orderTracking: "Order Tracking",
+    preparingYourOrder: "Preparing your order...",
+    itemsInCart: "items",
+    total: "Total",
+    selectPayment: "Select Payment Method",
+    creditCard: "Credit Card",
+    digitalWallet: "Digital Wallet",
+    submittingOrder: "Submitting order to kitchen...",
+    paymentSuccessful: "Payment Successful!",
+    viewTracker: "View Live Tracker",
+    processingPayment: "Processing payment securely...",
+    ingredients: "Exact Ingredients",
+    back: "Back",
+    orderSuccess: "Order has been successfully sent to the kitchen!",
+    statusIncoming: "Incoming",
+    statusCooking: "Cooking",
+    statusReady: "Ready to Deliver",
+    statusDelivered: "Delivered & Completed",
+    menuHeader: "Explore Kitchen",
+    menuSub: "Curated nutrition for clean eating",
+    streak: "Day Streak",
+    goalsTitle: "What's your primary goal?",
+    goalsSub: "We'll customize your meal plan and macro targets based on this.",
+    dietsTitle: "Any dietary preferences?",
+    dietsSub: "Our cloud kitchen can adapt to your lifestyle.",
+    continueBtn: "Continue",
+    calculatingPlans: "Calculating personalized nutrition plans...",
+    profile: "User Profile",
+    details: "Details",
+    // Options
+    loseWeight: "Lose Weight",
+    maintainFitness: "Maintain Fitness",
+    buildMuscle: "Build Muscle",
+    standard: "Standard",
+    keto: "Keto / Low Carb",
+    vegan: "Vegan / Plant-Based",
+    // UI Selector
+    demoTitle: "Măm-mate",
+    demoSub: "Select your interface to begin the demo",
+    mobileApp: "Mobile App",
+    mobileSub: "Personalized experience",
+    desktopWeb: "Desktop Web",
+    desktopSub: "Full nutrition hub",
+    sellerDash: "Seller Dashboard",
+    sellerDashSub: "Kitchen Management",
+  },
+  vi: {
+    dashboard: "Bảng Điều Khiển",
+    searchMeals: "Tìm món ăn...",
+    search: "Tìm kiếm",
+    dailySummary: "Tóm Tắt Hàng Ngày",
+    calories: "Lượng Calo",
+    protein: "Đạm (Protein)",
+    carbs: "Tinh Bột (Carbs)",
+    fats: "Chất Béo (Fats)",
+    addToCart: "Thêm vào giỏ hàng",
+    cart: "Giỏ Hàng Của Bạn",
+    checkout: "Thanh Toán",
+    emptyCart: "Giỏ hàng của bạn đang trống.",
+    exitHub: "Thoát Hub",
+    liveKitchenBoard: "Bảng Bếp Trực Tiếp",
+    inventoryForecast: "Dự Báo Hàng Tồn Kho",
+    performanceAnalytics: "Phân Tích Hiệu Suất",
+    realTimeSync: "Đồng bộ thời gian thực với Măm-mate Cloud",
+    searchOrders: "Tìm đơn hàng...",
+    incoming: "Đơn Mới",
+    cooking: "Đang Chế Biến",
+    ready: "Đã Sẵn Sàng",
+    delivered: "Đã Giao",
+    exitDashboard: "Thoát Bảng Điều Khiển",
+    eatGoal: "Đã ăn trong tổng Calo mục tiêu",
+    remCalories: "calo còn lại",
+    orderTracking: "Theo Dõi Đơn Hàng",
+    preparingYourOrder: "Đang chuẩn bị đơn hàng của bạn...",
+    itemsInCart: "món",
+    total: "Tổng cộng",
+    selectPayment: "Chọn Phương Thức Thanh Toán",
+    creditCard: "Thẻ Tín Dụng",
+    digitalWallet: "Ví Điện Tử",
+    submittingOrder: "Đang gửi đơn hàng vào bếp...",
+    paymentSuccessful: "Thanh Toán Thành Công!",
+    viewTracker: "Xem Trực Tiếp Đơn Hàng",
+    processingPayment: "Đang xử lý thanh toán bảo mật...",
+    ingredients: "Thành Phần Chi Tiết",
+    back: "Quay lại",
+    orderSuccess: "Đơn hàng đã được gửi đến nhà bếp thành công!",
+    statusIncoming: "Chờ xác nhận",
+    statusCooking: "Đang nấu",
+    statusReady: "Sẵn sàng giao hàng",
+    statusDelivered: "Đã hoàn thành",
+    menuHeader: "Khám Phá Thực Đơn",
+    menuSub: "Dinh dưỡng tuyển chọn cho chế độ ăn sạch",
+    streak: "Ngày liên tục",
+    goalsTitle: "Mục tiêu chính của bạn?",
+    goalsSub: "Chúng tôi sẽ điều chỉnh kế hoạch bữa ăn và mục tiêu macro dựa trên điều này.",
+    dietsTitle: "Chế độ ăn ưa thích?",
+    dietsSub: "Bếp ăn trên mây của chúng tôi có thể thích ứng với lối sống của bạn.",
+    continueBtn: "Tiếp tục",
+    calculatingPlans: "Đang tính toán kế hoạch dinh dưỡng cá nhân...",
+    profile: "Hồ Sơ Người Dùng",
+    details: "Chi Tiết",
+    // Options
+    loseWeight: "Giảm Cân",
+    maintainFitness: "Giữ Dáng",
+    buildMuscle: "Tăng Cơ",
+    standard: "Tiêu Chuẩn",
+    keto: "Keto / Ít Tinh Bột",
+    vegan: "Thuần Chay / Thực Vật",
+    // UI Selector
+    demoTitle: "Măm-mate",
+    demoSub: "Chọn giao diện để bắt đầu chạy thử nghiệm",
+    mobileApp: "Ứng Dụng Di Động",
+    mobileSub: "Trải nghiệm cá nhân hóa",
+    desktopWeb: "Trang Web Máy Tính",
+    desktopSub: "Trung tâm dinh dưỡng",
+    sellerDash: "Trang Quản Trị Nhà Bán",
+    sellerDashSub: "Quản lý hoạt động bếp",
+  }
+};
+
+
 const MENU_ITEMS = [
-  { id: 'M1', name: 'Lemon Herb Chicken', desc: 'Juicy, oven-roasted chicken breast marinated in fresh lemon and herbs, served over a bed of fluffy quinoa and steamed broccoli.', cals: 450, macros: { p: 45, c: 35, f: 12 }, price: 325000, img: 'https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&w=600&q=80', ingredients: [{ name: 'Premium Chicken Breast', amt: '170g' }, { name: 'Organic Quinoa', amt: '90g' }, { name: 'Fresh Broccoli', amt: '150g' }, { name: 'Olive Oil & Herbs', amt: '15ml' }] },
-  { id: 'M2', name: 'Spicy Salmon Bowl', desc: 'Wild-caught salmon glazed in a spicy-sweet soy reduction, paired with jasmine rice and roasted edamame.', cals: 520, macros: { p: 40, c: 45, f: 18 }, price: 375000, img: 'https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format&fit=crop&w=600&q=80', ingredients: [{ name: 'Wild-Caught Salmon', amt: '140g' }, { name: 'Jasmine Rice', amt: '120g' }, { name: 'Edamame', amt: '75g' }, { name: 'Spicy Soy Glaze', amt: '30ml' }] },
-  { id: 'M3', name: 'Keto Steak & Eggs', desc: 'Grass-fed flank steak seared to perfection alongside two pasture-raised eggs and avocado.', cals: 600, macros: { p: 55, c: 5, f: 38 }, price: 400000, img: 'https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=600&q=80', ingredients: [{ name: 'Grass-fed Flank Steak', amt: '170g' }, { name: 'Pasture-Raised Eggs', amt: '2 large' }, { name: 'Hass Avocado', amt: '100g' }, { name: 'Grass-fed Butter', amt: '15g' }] },
-  { id: 'M4', name: 'Vegan Buddha Bowl', desc: 'A vibrant mix of roasted chickpeas, sweet potatoes, and kale drizzled with a creamy tahini dressing.', cals: 400, macros: { p: 15, c: 55, f: 14 }, price: 300000, img: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=600&q=80', ingredients: [{ name: 'Roasted Chickpeas', amt: '80g' }, { name: 'Sweet Potatoes', amt: '130g' }, { name: 'Fresh Kale', amt: '100g' }, { name: 'Tahini Dressing', amt: '30g' }] },
-  { id: 'M5', name: 'Turkey Meatballs & Zoodles', desc: 'Lean ground turkey meatballs simmered in a rich marinara sauce, served over fresh zucchini noodles.', cals: 380, macros: { p: 42, c: 15, f: 16 }, price: 350000, img: 'https://images.unsplash.com/photo-1529042410759-befb1204b468?auto=format&fit=crop&w=600&q=80', ingredients: [{ name: 'Lean Turkey Meatballs', amt: '140g' }, { name: 'Zucchini Noodles', amt: '150g' }, { name: 'Marinara Sauce', amt: '120ml' }, { name: 'Parmesan Cheese', amt: '10g' }] },
-  { id: 'M6', name: 'Mediterranean Shrimp Salad', desc: 'Grilled shrimp over mixed greens with feta, Kalamata olives, cucumbers, and a light vinaigrette.', cals: 350, macros: { p: 38, c: 12, f: 18 }, price: 387000, img: 'https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=600&q=80', ingredients: [{ name: 'Grilled Shrimp', amt: '170g' }, { name: 'Mixed Greens', amt: '60g' }, { name: 'Kalamata Olives', amt: '30g' }, { name: 'Feta Cheese', amt: '30g' }] },
-  { id: 'M7', name: 'Protein Power Pancakes', desc: 'Fluffy whey protein pancakes topped with fresh berries, sliced banana, and sugar-free syrup.', cals: 500, macros: { p: 45, c: 50, f: 10 }, price: 275000, img: 'https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?auto=format&fit=crop&w=600&q=80', ingredients: [{ name: 'Protein Pancake Mix', amt: '60g' }, { name: 'Fresh Berries', amt: '75g' }, { name: 'Sliced Banana', amt: '60g' }, { name: 'Sugar-Free Syrup', amt: '30ml' }] },
-  { id: 'M8', name: 'BBQ Jackfruit Wrap', desc: 'Smoky BBQ pulled jackfruit wrapped in a spinach tortilla with crunchy cabbage slaw.', cals: 420, macros: { p: 8, c: 65, f: 12 }, price: 287000, img: 'https://images.unsplash.com/photo-1626700051175-6818013e1d4f?auto=format&fit=crop&w=600&q=80', ingredients: [{ name: 'Pulled Jackfruit', amt: '150g' }, { name: 'Spinach Tortilla', amt: '1 wrap' }, { name: 'Cabbage Slaw', amt: '50g' }, { name: 'BBQ Sauce', amt: '30g' }] },
-  { id: 'M9', name: 'Teriyaki Tofu Stir-Fry', desc: 'Crispy tofu cubes tossed with broccoli, bell peppers, and snap peas in a savory teriyaki glaze.', cals: 450, macros: { p: 25, c: 45, f: 20 }, price: 312000, img: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&q=80', ingredients: [{ name: 'Extra Firm Tofu', amt: '170g' }, { name: 'Mixed Veggies', amt: '200g' }, { name: 'Teriyaki Sauce', amt: '30ml' }, { name: 'Sesame Seeds', amt: '5g' }] },
-  { id: 'M10', name: 'Grilled Mahi Mahi', desc: 'Wild-caught Mahi Mahi grilled with lemon and dill, served alongside roasted asparagus spears.', cals: 320, macros: { p: 48, c: 8, f: 10 }, price: 425000, img: 'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=600&q=80', ingredients: [{ name: 'Mahi Mahi Filet', amt: '170g' }, { name: 'Asparagus', amt: '130g' }, { name: 'Lemon Wedge', amt: '1 slice' }, { name: 'Olive Oil', amt: '8ml' }] },
-  { id: 'M11', name: 'Black Bean Chili', desc: 'Hearty and spicy black bean and sweet potato chili, topped with a dollop of Greek yogurt.', cals: 380, macros: { p: 18, c: 60, f: 8 }, price: 262000, img: 'https://images.unsplash.com/photo-1541832676-9b763b0239ab?auto=format&fit=crop&w=600&q=80', ingredients: [{ name: 'Black Beans', amt: '170g' }, { name: 'Diced Sweet Potato', amt: '65g' }, { name: 'Chili Tomato Base', amt: '240ml' }, { name: 'Plain Greek Yogurt', amt: '30g' }] },
-  { id: 'M12', name: 'Chicken Pesto Penne', desc: 'Whole wheat penne pasta tossed in a creamy basil pesto sauce with grilled chicken breast strips.', cals: 550, macros: { p: 45, c: 55, f: 18 }, price: 337000, img: 'https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?auto=format&fit=crop&w=600&q=80', ingredients: [{ name: 'Grilled Chicken', amt: '140g' }, { name: 'Whole Wheat Penne', amt: '100g' }, { name: 'Basil Pesto', amt: '30g' }, { name: 'Cherry Tomatoes', amt: '40g' }] },
-  { id: 'M13', name: 'Berry Protein Parfait', desc: 'Layers of non-fat Greek yogurt, mixed berries, and a crunchy almond granola.', cals: 250, macros: { p: 22, c: 30, f: 5 }, price: 175000, img: 'https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=600&q=80', ingredients: [{ name: 'Non-fat Greek Yogurt', amt: '240g' }, { name: 'Mixed Berries', amt: '75g' }, { name: 'Almond Granola', amt: '30g' }, { name: 'Honey', amt: '7g' }] },
+  { 
+    id: 'M1', 
+    name: { en: 'Lemon Herb Chicken', vi: 'Gà Sốt Chanh Thảo Mộc' }, 
+    desc: { 
+      en: 'Juicy, oven-roasted chicken breast marinated in fresh lemon and herbs, served over a bed of fluffy quinoa and steamed broccoli.', 
+      vi: 'Ức gà nướng lò mọng nước ướp chanh tươi và thảo mộc, dùng kèm hạt diêm mạch dẻo thơm và bông cải xanh hấp.' 
+    }, 
+    cals: 450, 
+    macros: { p: 45, c: 35, f: 12 }, 
+    price: 325000, 
+    img: 'https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&w=600&q=80', 
+    ingredients: [
+      { name: { en: 'Premium Chicken Breast', vi: 'Ức gà cao cấp' }, amt: '170g' }, 
+      { name: { en: 'Organic Quinoa', vi: 'Hạt diêm mạch hữu cơ' }, amt: '90g' }, 
+      { name: { en: 'Fresh Broccoli', vi: 'Bông cải xanh tươi' }, amt: '150g' }, 
+      { name: { en: 'Olive Oil & Herbs', vi: 'Dầu ô liu & Thảo mộc' }, amt: '15ml' }
+    ] 
+  },
+  { 
+    id: 'M2', 
+    name: { en: 'Spicy Salmon Bowl', vi: 'Cơm Cá Hồi Sốt Cay' }, 
+    desc: { 
+      en: 'Wild-caught salmon glazed in a spicy-sweet soy reduction, paired with jasmine rice and roasted edamame.', 
+      vi: 'Cá hồi tự nhiên áp chảo sốt tương cay ngọt, dùng kèm cơm nhài dẻo thơm và đậu nành Nhật edamame.' 
+    }, 
+    cals: 520, 
+    macros: { p: 40, c: 45, f: 18 }, 
+    price: 375000, 
+    img: 'https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format&fit=crop&w=600&q=80', 
+    ingredients: [
+      { name: { en: 'Wild-Caught Salmon', vi: 'Cá hồi tự nhiên' }, amt: '140g' }, 
+      { name: { en: 'Jasmine Rice', vi: 'Cơm gạo nhài' }, amt: '120g' }, 
+      { name: { en: 'Edamame', vi: 'Đậu nành Nhật' }, amt: '75g' }, 
+      { name: { en: 'Spicy Soy Glaze', vi: 'Sốt tương cay ngọt' }, amt: '30ml' }
+    ] 
+  },
+  { 
+    id: 'M3', 
+    name: { en: 'Keto Steak & Eggs', vi: 'Bít Tết & Trứng Keto' }, 
+    desc: { 
+      en: 'Grass-fed flank steak seared to perfection alongside two pasture-raised eggs and avocado.', 
+      vi: 'Thịt thăn bò ăn cỏ áp chảo hoàn hảo dùng kèm hai quả trứng gà ta và bơ sáp tươi ngon.' 
+    }, 
+    cals: 600, 
+    macros: { p: 55, c: 5, f: 38 }, 
+    price: 400000, 
+    img: 'https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=600&q=80', 
+    ingredients: [
+      { name: { en: 'Grass-fed Flank Steak', vi: 'Thịt thăn bò ăn cỏ' }, amt: '170g' }, 
+      { name: { en: 'Pasture-Raised Eggs', vi: 'Trứng gà ta' }, amt: '2 quả lớn' }, 
+      { name: { en: 'Hass Avocado', vi: 'Bơ sáp chín' }, amt: '100g' }, 
+      { name: { en: 'Grass-fed Butter', vi: 'Bơ nhạt ăn cỏ' }, amt: '15g' }
+    ] 
+  },
+  { 
+    id: 'M4', 
+    name: { en: 'Vegan Buddha Bowl', vi: 'Cơm Chay Buddha' }, 
+    desc: { 
+      en: 'A vibrant mix of roasted chickpeas, sweet potatoes, and kale drizzled with a creamy tahini dressing.', 
+      vi: 'Sự kết hợp đầy màu sắc giữa đậu gà rang, khoai lang nướng và cải xoăn, rưới nước sốt vừng tahini béo ngậy.' 
+    }, 
+    cals: 400, 
+    macros: { p: 15, c: 55, f: 14 }, 
+    price: 300000, 
+    img: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=600&q=80', 
+    ingredients: [
+      { name: { en: 'Roasted Chickpeas', vi: 'Đậu gà rang lò' }, amt: '80g' }, 
+      { name: { en: 'Sweet Potatoes', vi: 'Khoai lang nướng' }, amt: '130g' }, 
+      { name: { en: 'Fresh Kale', vi: 'Cải xoăn tươi' }, amt: '100g' }, 
+      { name: { en: 'Tahini Dressing', vi: 'Sốt vừng tahini' }, amt: '30g' }
+    ] 
+  },
+  { 
+    id: 'M5', 
+    name: { en: 'Turkey Meatballs & Zoodles', vi: 'Thịt Viên Gà Tây & Mỳ Bí Ngòi' }, 
+    desc: { 
+      en: 'Lean ground turkey meatballs simmered in a rich marinara sauce, served over fresh zucchini noodles.', 
+      vi: 'Thịt gà tây viên ít béo rim trong sốt cà chua marinara đậm đà, dùng kèm mỳ sợi bí ngòi tươi mát.' 
+    }, 
+    cals: 380, 
+    macros: { p: 42, c: 15, f: 16 }, 
+    price: 350000, 
+    img: 'https://images.unsplash.com/photo-1529042410759-befb1204b468?auto=format&fit=crop&w=600&q=80', 
+    ingredients: [
+      { name: { en: 'Lean Turkey Meatballs', vi: 'Thịt gà tây viên ít béo' }, amt: '140g' }, 
+      { name: { en: 'Zucchini Noodles', vi: 'Mỳ sợi bí ngòi' }, amt: '150g' }, 
+      { name: { en: 'Marinara Sauce', vi: 'Sốt cà chua marinara' }, amt: '120ml' }, 
+      { name: { en: 'Parmesan Cheese', vi: 'Phô mai Parmesan' }, amt: '10g' }
+    ] 
+  },
+  { 
+    id: 'M6', 
+    name: { en: 'Mediterranean Shrimp Salad', vi: 'Salad Tôm Địa Trung Hải' }, 
+    desc: { 
+      en: 'Grilled shrimp over mixed greens with feta, Kalamata olives, cucumbers, and a light vinaigrette.', 
+      vi: 'Tôm nướng giòn trên nền rau xanh hỗn hợp với phô mai feta, ô liu Kalamata, dưa chuột và sốt vinaigrette dịu nhẹ.' 
+    }, 
+    cals: 350, 
+    macros: { p: 38, c: 12, f: 18 }, 
+    price: 387000, 
+    img: 'https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=600&q=80', 
+    ingredients: [
+      { name: { en: 'Grilled Shrimp', vi: 'Tôm nướng' }, amt: '170g' }, 
+      { name: { en: 'Mixed Greens', vi: 'Rau xanh hỗn hợp' }, amt: '60g' }, 
+      { name: { en: 'Kalamata Olives', vi: 'Ô liu Kalamata' }, amt: '30g' }, 
+      { name: { en: 'Feta Cheese', vi: 'Phô mai Feta' }, amt: '30g' }
+    ] 
+  },
+  { 
+    id: 'M7', 
+    name: { en: 'Protein Power Pancakes', vi: 'Bánh Kếp Protein Đậm Đà' }, 
+    desc: { 
+      en: 'Fluffy whey protein pancakes topped with fresh berries, sliced banana, and sugar-free syrup.', 
+      vi: 'Bánh kếp bột whey protein mềm xốp, phủ lên trên là quả mọng tươi, chuối cắt lát và xi-rô không đường.' 
+    }, 
+    cals: 500, 
+    macros: { p: 45, c: 50, f: 10 }, 
+    price: 275000, 
+    img: 'https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?auto=format&fit=crop&w=600&q=80', 
+    ingredients: [
+      { name: { en: 'Protein Pancake Mix', vi: 'Bột bánh kếp protein' }, amt: '60g' }, 
+      { name: { en: 'Fresh Berries', vi: 'Quả mọng tươi' }, amt: '75g' }, 
+      { name: { en: 'Sliced Banana', vi: 'Chuối cắt lát' }, amt: '60g' }, 
+      { name: { en: 'Sugar-Free Syrup', vi: 'Xi-rô không đường' }, amt: '30ml' }
+    ] 
+  },
+  { 
+    id: 'M8', 
+    name: { en: 'BBQ Jackfruit Wrap', vi: 'Bánh Cuộn Mít Sốt BBQ' }, 
+    desc: { 
+      en: 'Smoky BBQ pulled jackfruit wrapped in a spinach tortilla with crunchy cabbage slaw.', 
+      vi: 'Mít non xé sợi sốt BBQ xông khói cuộn trong vỏ bánh tortilla cải bó xôi kèm salad bắp cải giòn.' 
+    }, 
+    cals: 420, 
+    macros: { p: 8, c: 65, f: 12 }, 
+    price: 287000, 
+    img: 'https://images.unsplash.com/photo-1626700051175-6818013e1d4f?auto=format&fit=crop&w=600&q=80', 
+    ingredients: [
+      { name: { en: 'Pulled Jackfruit', vi: 'Mít non xé sợi' }, amt: '150g' }, 
+      { name: { en: 'Spinach Tortilla', vi: 'Vỏ bánh tortilla cải bó xôi' }, amt: '1 cái' }, 
+      { name: { en: 'Cabbage Slaw', vi: 'Salad bắp cải giòn' }, amt: '50g' }, 
+      { name: { en: 'BBQ Sauce', vi: 'Sốt BBQ xông khói' }, amt: '30g' }
+    ] 
+  },
+  { 
+    id: 'M9', 
+    name: { en: 'Teriyaki Tofu Stir-Fry', vi: 'Đậu Phụ Xào Sốt Teriyaki' }, 
+    desc: { 
+      en: 'Crispy tofu cubes tossed with broccoli, bell peppers, and snap peas in a savory teriyaki glaze.', 
+      vi: 'Đậu phụ chiên giòn xào cùng bông cải xanh, ớt chuông và đậu hà lan trong lớp sốt Teriyaki đậm đà.' 
+    }, 
+    cals: 450, 
+    macros: { p: 25, c: 45, f: 20 }, 
+    price: 312000, 
+    img: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&q=80', 
+    ingredients: [
+      { name: { en: 'Extra Firm Tofu', vi: 'Đậu phụ siêu cứng' }, amt: '170g' }, 
+      { name: { en: 'Mixed Veggies', vi: 'Rau củ hỗn hợp' }, amt: '200g' }, 
+      { name: { en: 'Teriyaki Sauce', vi: 'Sốt Teriyaki' }, amt: '30ml' }, 
+      { name: { en: 'Sesame Seeds', vi: 'Mè rang' }, amt: '5g' }
+    ] 
+  },
+  { 
+    id: 'M10', 
+    name: { en: 'Grilled Mahi Mahi', vi: 'Cá Mahi Mahi Nướng' }, 
+    desc: { 
+      en: 'Wild-caught Mahi Mahi grilled with lemon and dill, served alongside roasted asparagus spears.', 
+      vi: 'Cá Mahi Mahi tự nhiên nướng thơm cùng chanh và thì là, dùng kèm măng tây áp chảo.' 
+    }, 
+    cals: 320, 
+    macros: { p: 48, c: 8, f: 10 }, 
+    price: 425000, 
+    img: 'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=600&q=80', 
+    ingredients: [
+      { name: { en: 'Mahi Mahi Filet', vi: 'Filet cá Mahi Mahi' }, amt: '170g' }, 
+      { name: { en: 'Asparagus', vi: 'Măng tây tươi' }, amt: '130g' }, 
+      { name: { en: 'Lemon Wedge', vi: 'Chanh tươi cắt lát' }, amt: '1 miếng' }, 
+      { name: { en: 'Olive Oil', vi: 'Dầu ô liu' }, amt: '8ml' }
+    ] 
+  },
+  { 
+    id: 'M11', 
+    name: { en: 'Black Bean Chili', vi: 'Súp Đậu Đen Hầm Đậm Vị' }, 
+    desc: { 
+      en: 'Hearty and spicy black bean and sweet potato chili, topped with a dollop of Greek yogurt.', 
+      vi: 'Súp đậu đen hầm khoai lang đậm vị cay nồng ấm bụng, phủ lên trên một muỗng sữa chua Hy Lạp béo ngậy.' 
+    }, 
+    cals: 380, 
+    macros: { p: 18, c: 60, f: 8 }, 
+    price: 262000, 
+    img: 'https://images.unsplash.com/photo-1541832676-9b763b0239ab?auto=format&fit=crop&w=600&q=80', 
+    ingredients: [
+      { name: { en: 'Black Beans', vi: 'Đậu đen hữu cơ' }, amt: '170g' }, 
+      { name: { en: 'Diced Sweet Potato', vi: 'Khoai lang cắt lựu' }, amt: '65g' }, 
+      { name: { en: 'Chili Tomato Base', vi: 'Sốt cà chua cay' }, amt: '240ml' }, 
+      { name: { en: 'Plain Greek Yogurt', vi: 'Sữa chua Hy Lạp không đường' }, amt: '30g' }
+    ] 
+  },
+  { 
+    id: 'M12', 
+    name: { en: 'Chicken Pesto Penne', vi: 'Mỳ Penne Gà Sốt Pesto' }, 
+    desc: { 
+      en: 'Whole wheat penne pasta tossed in a creamy basil pesto sauce with grilled chicken breast strips.', 
+      vi: 'Mỳ penne lúa mạch nguyên cám quyện sốt bơ kem pesto lá húng tây, ăn cùng thịt ức gà nướng thái lát.' 
+    }, 
+    cals: 550, 
+    macros: { p: 45, c: 55, f: 18 }, 
+    price: 337000, 
+    img: 'https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?auto=format&fit=crop&w=600&q=80', 
+    ingredients: [
+      { name: { en: 'Grilled Chicken', vi: 'Ức gà nướng thái lát' }, amt: '140g' }, 
+      { name: { en: 'Whole Wheat Penne', vi: 'Mỳ penne nguyên cám' }, amt: '100g' }, 
+      { name: { en: 'Basil Pesto', vi: 'Sốt pesto lá húng tây' }, amt: '30g' }, 
+      { name: { en: 'Cherry Tomatoes', vi: 'Cà chua bi tươi' }, amt: '40g' }
+    ] 
+  },
+  { 
+    id: 'M13', 
+    name: { en: 'Berry Protein Parfait', vi: 'Parfait Protein Quả Mọng' }, 
+    desc: { 
+      en: 'Layers of non-fat Greek yogurt, mixed berries, and a crunchy almond granola.', 
+      vi: 'Các lớp sữa chua Hy Lạp không béo đan xen quả mọng tươi mát và ngũ cốc granola hạnh nhân giòn rụm.' 
+    }, 
+    cals: 250, 
+    macros: { p: 22, c: 30, f: 5 }, 
+    price: 175000, 
+    img: 'https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=600&q=80', 
+    ingredients: [
+      { name: { en: 'Non-fat Greek Yogurt', vi: 'Sữa chua Hy Lạp tách béo' }, amt: '240g' }, 
+      { name: { en: 'Mixed Berries', vi: 'Quả mọng tươi hỗn hợp' }, amt: '75g' }, 
+      { name: { en: 'Almond Granola', vi: 'Ngũ cốc granola hạnh nhân' }, amt: '30g' }, 
+      { name: { en: 'Honey', vi: 'Mật ong nguyên chất' }, amt: '7g' }
+    ] 
+  },
+  { 
+    id: 'M14', 
+    name: { en: 'Chicken Pho Rolls', vi: 'Phở Cuốn Bò' }, 
+    desc: { 
+      en: 'Fresh steamed rice sheets wrapped around grilled seasoned protein, fresh garden herbs, and crisp lettuce, served with a sweet and sour dipping sauce.', 
+      vi: 'Bánh phở hấp dai mềm cuộn tròn cùng thịt bò nướng đậm vị, xà lách giòn ngọt và rau thơm thanh mát, dùng kèm nước mắm chua ngọt.' 
+    }, 
+    cals: 340, 
+    macros: { p: 22, c: 45, f: 8 }, 
+    price: 295000, 
+    img: phoRollsImg, 
+    ingredients: [
+      { name: { en: 'Fresh Steamed Rice Sheets', vi: 'Bánh phở tươi' }, amt: '150g' }, 
+      { name: { en: 'Grilled Seasoned Protein', vi: 'Thịt bò đậm vị' }, amt: '120g' }, 
+      { name: { en: 'Crisp Lettuce & Herbs', vi: 'Xà lách & Rau thơm' }, amt: '50g' }, 
+      { name: { en: 'Sweet & Sour Dipping Sauce', vi: 'Nước chấm chua ngọt' }, amt: '40ml' }
+    ] 
+  },
+  { 
+    id: 'M15', 
+    name: { en: 'Chicken Brown Rice', vi: 'Cơm Lứt Gà Nướng' }, 
+    desc: { 
+      en: 'Flame-grilled tender chicken breast served over organic brown rice, sweet corn, black beans, diced tomatoes, and avocado.', 
+      vi: 'Ức gà nướng thơm lừng dùng kèm cơm gạo lứt hữu cơ dẻo bùi, ngô ngọt thanh, đậu đen bùi béo, cà chua bi tươi mát và bơ sáp thơm ngậy.' 
+    }, 
+    cals: 480, 
+    macros: { p: 42, c: 50, f: 12 }, 
+    price: 315000, 
+    img: chickenBrownRiceImg, 
+    ingredients: [
+      { name: { en: 'Flame-Grilled Chicken', vi: 'Ức gà nướng' }, amt: '160g' }, 
+      { name: { en: 'Organic Brown Rice', vi: 'Cơm gạo lứt hữu cơ' }, amt: '130g' }, 
+      { name: { en: 'Corn, Black Beans & Tomatoes', vi: 'Đậu đen, Ngô & Cà chua' }, amt: '80g' }, 
+      { name: { en: 'Fresh Avocado', vi: 'Bơ sáp tươi' }, amt: '60g' }
+    ] 
+  },
+  { 
+    id: 'M16', 
+    name: { en: 'Cao Bang Black Jelly', vi: 'Thạch Đen Cao Bằng' }, 
+    desc: { 
+      en: 'Refreshing authentic black grass jelly from Cao Bang, served in a light coconut milk broth with sweet sago pearls.', 
+      vi: 'Thạch đen Cao Bằng thanh mát tự nhiên, giòn dai sần sật, hòa quyện cùng nước cốt dừa béo nhẹ và trân châu sago ngọt dịu.' 
+    }, 
+    cals: 150, 
+    macros: { p: 2, c: 32, f: 3 }, 
+    price: 120000, 
+    img: blackJellyImg, 
+    ingredients: [
+      { name: { en: 'Authentic Cao Bang Grass Jelly', vi: 'Thạch đen Cao Bằng' }, amt: '180g' }, 
+      { name: { en: 'Sweetened Light Coconut Milk', vi: 'Nước cốt dừa béo nhẹ' }, amt: '80ml' }, 
+      { name: { en: 'Soft Sago Pearls', vi: 'Trân châu sago ngọt dịu' }, amt: '30g' }, 
+      { name: { en: 'Rock Sugar Syrup', vi: 'Nước đường phèn' }, amt: '15ml' }
+    ] 
+  }
 ];
 
 const WEEK_DATA = [ { day: 'M', val: 1850 }, { day: 'T', val: 2100 }, { day: 'W', val: 1900 }, { day: 'T', val: 2050 }, { day: 'F', val: 2400 }, { day: 'S', val: 1200 }, { day: 'S', val: 0 } ];
@@ -59,8 +495,29 @@ const ThemeToggle = ({ theme, setTheme }) => {
   );
 };
 
+const LanguageToggle = ({ lang, setLang }) => {
+  return (
+    <motion.button
+      whileHover={{ scale: 1.1 }}
+      whileTap={{ scale: 0.9 }}
+      onClick={() => setLang(lang === 'en' ? 'vi' : 'en')}
+      className="theme-toggle-btn"
+      style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', padding: '0 0.75rem', width: 'auto', borderRadius: '12px' }}
+      title={`Switch to ${lang === 'en' ? 'Vietnamese' : 'English'}`}
+    >
+      <Globe size={18} />
+      <span style={{ fontSize: '0.8rem', fontWeight: 700 }}>{lang === 'en' ? 'EN' : 'VI'}</span>
+    </motion.button>
+  );
+};
+
 function App() {
   const [theme, setTheme] = useState(() => localStorage.getItem('măm-mate_theme') || 'dark');
+  const [lang, setLang] = useState(() => localStorage.getItem('măm-mate_lang') || 'en');
+
+  useEffect(() => {
+    localStorage.setItem('măm-mate_lang', lang);
+  }, [lang]);
 
   useEffect(() => {
     localStorage.setItem('măm-mate_theme', theme);
@@ -368,25 +825,25 @@ function App() {
           </div>
           
           <div className={`desktop-nav-item ${tab === 'home' ? 'active' : ''}`} onClick={() => setTab('home')}>
-            <Activity size={20} /> Dashboard
+            <Activity size={20} /> {lang === 'vi' ? 'Bảng Điều Khiển' : 'Dashboard'}
           </div>
           <div className={`desktop-nav-item ${tab === 'menu' ? 'active' : ''}`} onClick={() => setTab('menu')}>
-            <Utensils size={20} /> Kitchen Menu
+            <Utensils size={20} /> {lang === 'vi' ? 'Thực Đơn Bếp' : 'Kitchen Menu'}
           </div>
           <div className={`desktop-nav-item ${tab === 'advice' ? 'active' : ''}`} onClick={() => setTab('advice')}>
-            <MessageSquare size={20} /> AI Advice
+            <MessageSquare size={20} /> {lang === 'vi' ? 'Lời Khuyên AI' : 'AI Advice'}
           </div>
           <div className={`desktop-nav-item ${tab === 'profile' ? 'active' : ''}`} onClick={() => setTab('profile')}>
-            <Settings size={20} /> My Profile
+            <Settings size={20} /> {lang === 'vi' ? 'Hồ Sơ Của Tôi' : 'My Profile'}
           </div>
           <div className={`desktop-nav-item ${tab === 'tracker' ? 'active' : ''}`} onClick={() => setTab('tracker')}>
-            <Truck size={20} /> Tracker
+            <Truck size={20} /> {lang === 'vi' ? 'Theo Dõi Đơn' : 'Tracker'}
           </div>
 
           <div style={{ flex: 1 }} />
           
           <button className="desktop-nav-item" style={{ background: 'none', border: 'none', textAlign: 'left', cursor: 'pointer', color: '#ff4444' }} onClick={() => setUiMode('selector')}>
-            <ArrowLeft size={20} /> Exit to Hub
+            <ArrowLeft size={20} /> {lang === 'vi' ? 'Thoát Về Hub' : 'Exit to Hub'}
           </button>
         </div>
 
@@ -395,9 +852,10 @@ function App() {
             {tab === 'home' && (
               <motion.div key="d-home" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}>
                 <div className="flex-between" style={{ marginBottom: '2.5rem' }}>
-                  <h1>Your Dashboard</h1>
+                  <h1>{translations[lang].dashboard}</h1>
                   <div style={{ position: 'relative', width: '350px', display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
                     <ThemeToggle theme={theme} setTheme={setTheme} />
+                    <LanguageToggle lang={lang} setLang={setLang} />
                     <div style={{ position: 'relative', flex: 1 }}>
                       <Search size={18} style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
                       <input 
@@ -491,14 +949,14 @@ function App() {
                   </div>
                 </div>
 
-                <h2>Ready to Cook</h2>
+                <h2>{lang === 'vi' ? 'Sẵn sàng chế biến' : 'Ready to Cook'}</h2>
                 <div className="desktop-menu-grid">
-                  {MENU_ITEMS.filter(item => item.name.toLowerCase().includes(searchQuery.toLowerCase())).map(item => (
+                  {MENU_ITEMS.filter(item => t(item.name, lang).toLowerCase().includes(searchQuery.toLowerCase())).map(item => (
                     <div key={item.id} className="meal-card" onClick={() => setSelectedMeal(item)}>
-                      <div className="meal-img" style={{ height: '200px' }}>{renderImage(item.img, item.name)}</div>
+                      <div className="meal-img" style={{ height: '200px' }}>{renderImage(item.img, t(item.name, lang))}</div>
                       <div className="meal-content">
                         <div className="flex-between" style={{ marginBottom: '0.5rem' }}>
-                          <h3 style={{ margin: 0 }}>{item.name}</h3>
+                          <h3 style={{ margin: 0 }}>{t(item.name, lang)}</h3>
                           <span style={{ fontWeight: 700, color: 'var(--accent-primary)' }}>{formatVND(item.price)}</span>
                         </div>
                         <div style={{ display: 'flex', gap: '0.5rem' }}>
@@ -515,31 +973,31 @@ function App() {
             {tab === 'menu' && (
               <motion.div key="d-menu" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 20 }}>
                 <div className="flex-between" style={{ marginBottom: '2.5rem' }}>
-                  <h1>Explore Kitchen</h1>
+                  <h1>{translations[lang].menuHeader}</h1>
                   <div style={{ position: 'relative', width: '350px', display: 'flex', gap: '0.75rem' }}>
                     <div style={{ position: 'relative', flex: 1 }}>
                       <Search size={18} style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
                       <input 
                         type="text" 
-                        placeholder="Search meals..." 
+                        placeholder={translations[lang].searchMeals} 
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                         style={{ width: '100%', padding: '0.75rem 1rem 0.75rem 2.5rem', background: 'var(--bg-card)', border: '1px solid var(--border-color)', borderRadius: '12px', color: '#fff', outline: 'none' }} 
                       />
                     </div>
-                    <button className="btn-primary" style={{ width: 'auto', padding: '0 1.25rem', borderRadius: '12px' }}>Search</button>
+                    <button className="btn-primary" style={{ width: 'auto', padding: '0 1.25rem', borderRadius: '12px' }}>{translations[lang].search}</button>
                   </div>
                 </div>
                 <div className="desktop-menu-grid" style={{ marginTop: '2rem' }}>
-                  {MENU_ITEMS.filter(item => item.name.toLowerCase().includes(searchQuery.toLowerCase())).map(item => (
+                  {MENU_ITEMS.filter(item => t(item.name, lang).toLowerCase().includes(searchQuery.toLowerCase())).map(item => (
                     <div key={item.id} className="meal-card" onClick={() => setSelectedMeal(item)}>
-                      <div className="meal-img" style={{ height: '220px' }}>{renderImage(item.img, item.name)}</div>
+                      <div className="meal-img" style={{ height: '220px' }}>{renderImage(item.img, t(item.name, lang))}</div>
                       <div className="meal-content">
                         <div className="flex-between" style={{ marginBottom: '0.5rem' }}>
-                          <h3>{item.name}</h3>
+                          <h3>{t(item.name, lang)}</h3>
                           <span style={{ fontWeight: 700, color: 'var(--accent-primary)' }}>{formatVND(item.price)}</span>
                         </div>
-                        <p style={{ marginBottom: '1rem' }}>{item.desc}</p>
+                        <p style={{ marginBottom: '1rem' }}>{t(item.desc, lang)}</p>
                         <div style={{ display: 'flex', gap: '0.5rem' }}>
                           <span className="macro-pill"><Flame size={12} color="var(--accent-warning)" /> {item.cals}</span>
                           <span className="macro-pill">{item.macros.p}g P / {item.macros.c}g C</span>
@@ -702,10 +1160,10 @@ function App() {
                         )}
                       </div>
                       <div className="glass-panel" style={{ borderRadius: '24px', padding: '2rem' }}>
-                        <h3 style={{ marginBottom: '1.5rem' }}>Order Details</h3>
+                        <h3 style={{ marginBottom: '1.5rem' }}>{lang === 'vi' ? 'Chi Tiết Đơn Hàng' : 'Order Details'}</h3>
                         {activeOrder.items.map(item => (
                           <div key={item.id} className="flex-between" style={{ marginBottom: '1rem', paddingBottom: '1rem', borderBottom: '1px solid var(--border-color)' }}>
-                            <span>{item.qty}x {item.name}</span>
+                            <span>{item.qty}x {t(item.name, lang)}</span>
                             <span>{formatVND(item.price * item.qty)}</span>
                           </div>
                         ))}
@@ -719,19 +1177,19 @@ function App() {
         </div>
 
         <div className="desktop-cart-panel">
-          <h2 style={{ marginBottom: '2rem' }}>Cart</h2>
+          <h2 style={{ marginBottom: '2rem' }}>{translations[lang].cart}</h2>
           <div style={{ flex: 1, overflowY: 'auto' }}>
             {cart.length === 0 ? (
               <div style={{ textAlign: 'center', marginTop: '5rem', color: 'var(--text-muted)' }}>
                 <ShoppingBag size={48} style={{ opacity: 0.2, marginBottom: '1rem' }} />
-                <p>Select meals to build your week.</p>
+                <p>{lang === 'vi' ? 'Hãy chọn các món ăn để lên kế hoạch tuần.' : 'Select meals to build your week.'}</p>
               </div>
             ) : (
               cart.map(item => (
                 <div key={item.id} className="cart-item">
-                  <div className="cart-img">{renderImage(item.img, item.name)}</div>
+                  <div className="cart-img">{renderImage(item.img, t(item.name, lang))}</div>
                   <div style={{ flex: 1 }}>
-                    <h4 style={{ fontSize: '0.9rem' }}>{item.name}</h4>
+                    <h4 style={{ fontSize: '0.9rem' }}>{t(item.name, lang)}</h4>
                     <p style={{ fontSize: '0.8rem', color: 'var(--accent-primary)' }}>{formatVND(item.price)}</p>
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
@@ -769,12 +1227,12 @@ function App() {
                 onClick={e => e.stopPropagation()}
               >
                 <div style={{ width: '400px', background: '#2a2a2a', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '10rem', overflow: 'hidden' }}>
-                  {renderImage(selectedMeal.img, selectedMeal.name)}
+                  {renderImage(selectedMeal.img, t(selectedMeal.name, lang))}
                 </div>
                 <div style={{ flex: 1, padding: '3rem', position: 'relative' }}>
                   <button style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', background: 'none', border: 'none', color: '#fff', cursor: 'pointer' }} onClick={() => setSelectedMeal(null)}><X size={24}/></button>
-                  <h1>{selectedMeal.name}</h1>
-                  <p style={{ fontSize: '1.1rem', margin: '1.5rem 0 2rem' }}>{selectedMeal.desc}</p>
+                  <h1>{t(selectedMeal.name, lang)}</h1>
+                  <p style={{ fontSize: '1.1rem', margin: '1.5rem 0 2rem' }}>{t(selectedMeal.desc, lang)}</p>
                   
                   <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1rem', marginBottom: '2.5rem' }}>
                     <div style={{ background: 'var(--bg-dark)', padding: '1.5rem 1rem', borderRadius: '16px', textAlign: 'center' }}>
@@ -783,29 +1241,29 @@ function App() {
                     </div>
                     <div style={{ background: 'var(--bg-dark)', padding: '1.5rem 1rem', borderRadius: '16px', textAlign: 'center' }}>
                       <div style={{ fontSize: '1.5rem', fontWeight: 700, color: 'var(--accent-secondary)' }}>{selectedMeal.macros.p}g</div>
-                      <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>PROTEIN</div>
+                      <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>{translations[lang].protein.toUpperCase()}</div>
                     </div>
                     <div style={{ background: 'var(--bg-dark)', padding: '1.5rem 1rem', borderRadius: '16px', textAlign: 'center' }}>
                       <div style={{ fontSize: '1.5rem', fontWeight: 700, color: '#f59e0b' }}>{selectedMeal.macros.c}g</div>
-                      <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>CARBS</div>
+                      <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>{translations[lang].carbs.toUpperCase()}</div>
                     </div>
                     <div style={{ background: 'var(--bg-dark)', padding: '1.5rem 1rem', borderRadius: '16px', textAlign: 'center' }}>
                       <div style={{ fontSize: '1.5rem', fontWeight: 700, color: '#ef4444' }}>{selectedMeal.macros.f}g</div>
-                      <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>FATS</div>
+                      <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>{translations[lang].fats.toUpperCase()}</div>
                     </div>
                   </div>
 
-                  <h3>Macro-Certified Ingredients</h3>
+                  <h3>{translations[lang].ingredients}</h3>
                   <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginTop: '1rem' }}>
                     {selectedMeal.ingredients.map((ing, i) => (
                       <div key={i} className="flex-between" style={{ background: 'rgba(255,255,255,0.03)', padding: '0.75rem 1rem', borderRadius: '12px' }}>
-                        <span>{ing.name}</span>
+                        <span>{t(ing.name, lang)}</span>
                         <span style={{ fontWeight: 600, color: 'var(--accent-primary)' }}>{ing.amt}</span>
                       </div>
                     ))}
                   </div>
 
-                  <button className="btn-primary" style={{ marginTop: '3rem' }} onClick={() => addToCart(selectedMeal)}>Add to Cart - {formatVND(selectedMeal.price)}</button>
+                  <button className="btn-primary" style={{ marginTop: '3rem' }} onClick={() => addToCart(selectedMeal)}>{translations[lang].addToCart} - {formatVND(selectedMeal.price)}</button>
                 </div>
               </motion.div>
             </motion.div>
@@ -1016,6 +1474,7 @@ function App() {
             </div>
             <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
               <ThemeToggle theme={theme} setTheme={setTheme} />
+              <LanguageToggle lang={lang} setLang={setLang} />
               <div className="glass-panel" style={{ padding: '0.75rem 1.25rem', display: 'flex', alignItems: 'center', gap: '0.75rem', borderRadius: '12px', border: '1px solid var(--border-color)' }}>
                 <Search size={18} color="var(--text-muted)" />
                 <input type="text" placeholder="Search orders..." style={{ background: 'none', border: 'none', color: 'var(--text-main)', outline: 'none' }} />
@@ -1392,6 +1851,7 @@ function App() {
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                   <ThemeToggle theme={theme} setTheme={setTheme} />
+                  <LanguageToggle lang={lang} setLang={setLang} />
                   <button onClick={() => setUiMode('selector')} style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid var(--border-color)', color: 'var(--text-muted)', padding: '0.5rem 0.75rem', borderRadius: '10px', fontSize: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
                     <ArrowLeft size={14} /> Exit Hub
                   </button>
@@ -1469,14 +1929,14 @@ function App() {
               </div>
 
               <div className="flex-between" style={{ marginTop: '2rem', marginBottom: '1rem' }}>
-                <h2>Suggested For You</h2>
-                <span onClick={() => setTab('menu')} style={{ color: 'var(--accent-primary)', fontSize: '0.85rem', fontWeight: 600, cursor: 'pointer' }}>See All</span>
+                <h2>{lang === 'vi' ? 'Gợi ý cho bạn' : 'Suggested For You'}</h2>
+                <span onClick={() => setTab('menu')} style={{ color: 'var(--accent-primary)', fontSize: '0.85rem', fontWeight: 600, cursor: 'pointer' }}>{lang === 'vi' ? 'Xem tất cả' : 'See All'}</span>
               </div>
               
               <div className="meal-card" onClick={() => setSelectedMeal(MENU_ITEMS[0])}>
-                <div className="meal-img" style={{ height: '120px' }}>{renderImage(MENU_ITEMS[0].img, MENU_ITEMS[0].name)}</div>
+                <div className="meal-img" style={{ height: '120px' }}>{renderImage(MENU_ITEMS[0].img, t(MENU_ITEMS[0].name, lang))}</div>
                 <div className="meal-content">
-                  <h3>{MENU_ITEMS[0].name}</h3>
+                  <h3>{t(MENU_ITEMS[0].name, lang)}</h3>
                   <div style={{ display: 'flex', gap: '0.5rem', marginTop: '0.75rem' }}>
                     <span className="macro-pill"><Flame size={12} color="var(--accent-warning)" /> {MENU_ITEMS[0].cals} kcal</span>
                     <span className="macro-pill" style={{ color: 'var(--accent-secondary)' }}><Scale size={12} /> {MENU_ITEMS[0].macros.p}g P</span>
@@ -1489,12 +1949,12 @@ function App() {
           {tab === 'menu' && (
             <motion.div key="menu" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}>
               <div className="flex-between" style={{ alignItems: 'center', marginBottom: '1.5rem', gap: '1rem' }}>
-                <h1 style={{ margin: 0, whiteSpace: 'nowrap' }}>Menu</h1>
+                <h1 style={{ margin: 0, whiteSpace: 'nowrap' }}>{lang === 'vi' ? 'Thực đơn' : 'Menu'}</h1>
                 <div style={{ position: 'relative', flex: 1 }}>
                   <Search size={16} style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
                   <input 
                     type="text" 
-                    placeholder="Search dishes..." 
+                    placeholder={lang === 'vi' ? 'Tìm kiếm món...' : 'Search dishes...'} 
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     style={{ 
@@ -1513,20 +1973,20 @@ function App() {
               <div className="guarantee-banner">
                 <ShieldCheck size={28} color="var(--accent-primary)" style={{ flexShrink: 0 }} />
                 <div>
-                  <h3 style={{ fontSize: '0.95rem', marginBottom: '0.25rem' }}>Macro Certified Meals</h3>
-                  <p style={{ fontSize: '0.8rem', color: '#ccc' }}>All meals are cooked in our owned cloud kitchen. We guarantee precise macros to the exact gram.</p>
+                  <h3 style={{ fontSize: '0.95rem', marginBottom: '0.25rem' }}>{lang === 'vi' ? 'Bữa ăn chuẩn Macro' : 'Macro Certified Meals'}</h3>
+                  <p style={{ fontSize: '0.8rem', color: '#ccc' }}>{lang === 'vi' ? 'Tất cả bữa ăn đều được chế biến tại bếp đám mây của chúng tôi. Chúng tôi đảm bảo chỉ số macro chính xác đến từng gram.' : 'All meals are cooked in our owned cloud kitchen. We guarantee precise macros to the exact gram.'}</p>
                 </div>
               </div>
 
-              {MENU_ITEMS.filter(item => item.name.toLowerCase().includes(searchQuery.toLowerCase())).map((item) => (
+              {MENU_ITEMS.filter(item => t(item.name, lang).toLowerCase().includes(searchQuery.toLowerCase())).map((item) => (
                 <div key={item.id} className="meal-card" onClick={() => setSelectedMeal(item)}>
-                  <div className="meal-img">{renderImage(item.img, item.name)}</div>
+                  <div className="meal-img">{renderImage(item.img, t(item.name, lang))}</div>
                   <div className="meal-content">
                     <div className="flex-between" style={{ alignItems: 'flex-start' }}>
-                      <h3 style={{ fontSize: '1.1rem', marginBottom: '0.5rem' }}>{item.name}</h3>
+                      <h3 style={{ fontSize: '1.1rem', marginBottom: '0.5rem' }}>{t(item.name, lang)}</h3>
                       <span style={{ fontWeight: 600 }}>{formatVND(item.price)}</span>
                     </div>
-                    <p style={{ marginBottom: '1rem', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>{item.desc}</p>
+                    <p style={{ marginBottom: '1rem', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>{t(item.desc, lang)}</p>
                     <div style={{ display: 'flex', gap: '0.5rem' }}>
                       <span className="macro-pill"><Flame size={12} color="var(--accent-warning)" /> {item.cals}</span>
                       <span className="macro-pill">{item.macros.p}g P / {item.macros.c}g C / {item.macros.f}g F</span>
@@ -1539,12 +1999,12 @@ function App() {
 
           {tab === 'cart' && (
             <motion.div key="cart" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 20 }}>
-              <h1>Cart</h1>
+              <h1>{lang === 'vi' ? 'Giỏ hàng' : 'Cart'}</h1>
               {cart.length === 0 ? (
                 <div style={{ textAlign: 'center', padding: '4rem 1rem', color: 'var(--text-muted)' }}>
                   <ShoppingBag size={48} style={{ margin: '0 auto 1rem', opacity: 0.5 }} />
-                  <p>Your cart is empty.</p>
-                  <button className="btn-primary" onClick={() => setTab('menu')} style={{ marginTop: '2rem' }}>Browse Menu</button>
+                  <p>{lang === 'vi' ? 'Giỏ hàng của bạn đang trống.' : 'Your cart is empty.'}</p>
+                  <button className="btn-primary" onClick={() => setTab('menu')} style={{ marginTop: '2rem' }}>{lang === 'vi' ? 'Xem thực đơn' : 'Browse Menu'}</button>
                 </div>
               ) : (
                 <>
@@ -1780,14 +2240,14 @@ function App() {
             className="detail-view"
           >
             <button className="back-btn" style={{ zIndex: 10 }} onClick={() => setSelectedMeal(null)}><ArrowLeft size={20} /></button>
-            <div className="detail-header-img">{renderImage(selectedMeal.img, selectedMeal.name)}</div>
+            <div className="detail-header-img">{renderImage(selectedMeal.img, t(selectedMeal.name, lang))}</div>
             
             <div style={{ padding: '1.5rem' }}>
               <div className="flex-between">
-                <h1>{selectedMeal.name}</h1>
+                <h1>{t(selectedMeal.name, lang)}</h1>
                 <h2 style={{ color: 'var(--accent-primary)', margin: 0 }}>{formatVND(selectedMeal.price)}</h2>
               </div>
-              <p style={{ fontSize: '1rem', marginTop: '1rem', color: '#ccc' }}>{selectedMeal.desc}</p>
+              <p style={{ fontSize: '1rem', marginTop: '1rem', color: '#ccc' }}>{t(selectedMeal.desc, lang)}</p>
               
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', gap: '0.5rem', marginTop: '2rem', textAlign: 'center' }}>
                 <div style={{ background: 'var(--bg-card)', padding: '1rem 0.5rem', borderRadius: '12px', border: '1px solid var(--border-color)' }}>
@@ -1796,25 +2256,25 @@ function App() {
                 </div>
                 <div style={{ background: 'var(--bg-card)', padding: '1rem 0.5rem', borderRadius: '12px', border: '1px solid var(--border-color)' }}>
                   <div style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--accent-secondary)' }}>{selectedMeal.macros.p}g</div>
-                  <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>PROTEIN</div>
+                  <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>{translations[lang].protein.toUpperCase()}</div>
                 </div>
                 <div style={{ background: 'var(--bg-card)', padding: '1rem 0.5rem', borderRadius: '12px', border: '1px solid var(--border-color)' }}>
                   <div style={{ fontSize: '1.25rem', fontWeight: 700, color: '#f59e0b' }}>{selectedMeal.macros.c}g</div>
-                  <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>CARBS</div>
+                  <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>{translations[lang].carbs.toUpperCase()}</div>
                 </div>
                 <div style={{ background: 'var(--bg-card)', padding: '1rem 0.5rem', borderRadius: '12px', border: '1px solid var(--border-color)' }}>
                   <div style={{ fontSize: '1.25rem', fontWeight: 700, color: '#ef4444' }}>{selectedMeal.macros.f}g</div>
-                  <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>FATS</div>
+                  <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>{translations[lang].fats.toUpperCase()}</div>
                 </div>
               </div>
 
               <h3 style={{ marginTop: '2.5rem', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                <ShieldCheck size={18} color="var(--accent-primary)" /> Exact Ingredients
+                <ShieldCheck size={18} color="var(--accent-primary)" /> {translations[lang].ingredients}
               </h3>
               <ul className="ingredient-list">
                 {selectedMeal.ingredients.map((ing, i) => (
                   <li key={i} className="ingredient-item">
-                    <span className="name">{ing.name}</span>
+                    <span className="name">{t(ing.name, lang)}</span>
                     <span className="amt">{ing.amt}</span>
                   </li>
                 ))}
@@ -1823,7 +2283,7 @@ function App() {
             
             <div className="btn-sticky">
               <button className="btn-primary" onClick={() => addToCart(selectedMeal)}>
-                Add to Cart - {formatVND(selectedMeal.price)}
+                {translations[lang].addToCart} - {formatVND(selectedMeal.price)}
               </button>
             </div>
           </motion.div>
@@ -1914,28 +2374,28 @@ function App() {
       <div className="bottom-nav">
         <div className={`nav-item ${tab === 'home' ? 'active' : ''}`} onClick={() => setTab('home')}>
           <Activity size={24} />
-          <span>Dash</span>
+          <span>{lang === 'vi' ? 'Chính' : 'Dash'}</span>
         </div>
         <div className={`nav-item ${tab === 'menu' ? 'active' : ''}`} onClick={() => setTab('menu')}>
           <Utensils size={24} />
-          <span>Menu</span>
+          <span>{lang === 'vi' ? 'Thực đơn' : 'Menu'}</span>
         </div>
         <div className={`nav-item ${tab === 'profile' ? 'active' : ''}`} onClick={() => setTab('profile')}>
           <Settings size={24} />
-          <span>Profile</span>
+          <span>{lang === 'vi' ? 'Hồ sơ' : 'Profile'}</span>
         </div>
         <div className={`nav-item ${tab === 'cart' ? 'active' : ''}`} style={{ position: 'relative' }} onClick={() => setTab('cart')}>
           <ShoppingBag size={24} />
-          <span>Cart</span>
+          <span>{lang === 'vi' ? 'Giỏ hàng' : 'Cart'}</span>
           {cart.length > 0 && <div className="badge">{cart.reduce((s,i) => s + i.qty, 0)}</div>}
         </div>
         <div className={`nav-item ${tab === 'advice' ? 'active' : ''}`} onClick={() => setTab('advice')}>
           <MessageSquare size={24} />
-          <span>AI Advice</span>
+          <span>{lang === 'vi' ? 'Tư vấn AI' : 'AI Advice'}</span>
         </div>
         <div className={`nav-item ${tab === 'tracker' ? 'active' : ''}`} onClick={() => setTab('tracker')}>
           <Truck size={24} />
-          <span>Tracker</span>
+          <span>{lang === 'vi' ? 'Theo dõi' : 'Tracker'}</span>
         </div>
       </div>
 
