@@ -474,11 +474,11 @@ const MENU_ITEMS = [
 const WEEK_DATA = [ { day: 'M', val: 1850 }, { day: 'T', val: 2100 }, { day: 'W', val: 1900 }, { day: 'T', val: 2050 }, { day: 'F', val: 2400 }, { day: 'S', val: 1200 }, { day: 'S', val: 0 } ];
 
 const MOCK_SELLER_ORDERS = [
-  { id: 'ORD-1042', item: 'Lemon Herb Chicken', macros: '450 kcal', status: 'incoming', time: '10:30 AM', qty: 3, progress: 0 },
-  { id: 'ORD-1043', item: 'Spicy Salmon Bowl', macros: '520 kcal', status: 'incoming', time: '10:32 AM', qty: 1, progress: 0 },
-  { id: 'ORD-1044', item: 'Vegan Buddha Bowl', macros: '380 kcal', status: 'cooking', time: '10:15 AM', qty: 2, progress: 35 },
-  { id: 'ORD-1045', item: 'Keto Steak & Eggs', macros: '600 kcal', status: 'ready', time: '10:05 AM', qty: 1, progress: 70 },
-  { id: 'ORD-1046', item: 'Lemon Herb Chicken', macros: '450 kcal', status: 'delivered', time: '09:50 AM', qty: 5, progress: 100 },
+  { id: 'ORD-1042', item: { en: 'Lemon Herb Chicken', vi: 'Gà Sốt Chanh Thảo Mộc' }, macros: '450 kcal', status: 'incoming', time: '10:30 AM', qty: 3, progress: 0 },
+  { id: 'ORD-1043', item: { en: 'Spicy Salmon Bowl', vi: 'Cơm Cá Hồi Sốt Cay' }, macros: '520 kcal', status: 'incoming', time: '10:32 AM', qty: 1, progress: 0 },
+  { id: 'ORD-1044', item: { en: 'Vegan Buddha Bowl', vi: 'Cơm Chay Buddha' }, macros: '380 kcal', status: 'cooking', time: '10:15 AM', qty: 2, progress: 35 },
+  { id: 'ORD-1045', item: { en: 'Keto Steak & Eggs', vi: 'Bít Tết & Trứng Keto' }, macros: '600 kcal', status: 'ready', time: '10:05 AM', qty: 1, progress: 70 },
+  { id: 'ORD-1046', item: { en: 'Lemon Herb Chicken', vi: 'Gà Sốt Chanh Thảo Mộc' }, macros: '450 kcal', status: 'delivered', time: '09:50 AM', qty: 5, progress: 100 },
 ];
 
 const ThemeToggle = ({ theme, setTheme }) => {
@@ -879,15 +879,15 @@ function App() {
                       </svg>
                       <div className="progress-content">
                         <span className="num" style={{ fontSize: '1.75rem' }}>{Math.max(0, userProfile.cals - userProfile.eaten)}</span>
-                        <span className="label">Remaining</span>
+                        <span className="label">{lang === 'vi' ? 'Còn lại' : 'Remaining'}</span>
                       </div>
                     </div>
                     <div className="macros-summary" style={{ margin: 0, flex: 1 }}>
-                      <h3 style={{ marginBottom: '1.5rem' }}>Macro Breakdown</h3>
+                      <h3 style={{ marginBottom: '1.5rem' }}>{lang === 'vi' ? 'Phân Tích Macro' : 'Macro Breakdown'}</h3>
                       
                       <div style={{ marginBottom: '1.25rem' }}>
                         <div className="flex-between" style={{ marginBottom: '0.5rem', fontSize: '0.9rem' }}>
-                          <span>Protein ({userProfile.p} / {Math.round((userProfile.cals * 0.3) / 4)}g)</span>
+                          <span>{translations[lang].protein} ({userProfile.p} / {Math.round((userProfile.cals * 0.3) / 4)}g)</span>
                           <span style={{ fontWeight: 600, color: 'var(--accent-secondary)' }}>{Math.round((userProfile.p / ((userProfile.cals * 0.3) / 4)) * 100)}%</span>
                         </div>
                         <div className="macro-bar-bg" style={{ height: '8px' }}>
@@ -897,7 +897,7 @@ function App() {
 
                       <div style={{ marginBottom: '1.25rem' }}>
                         <div className="flex-between" style={{ marginBottom: '0.5rem', fontSize: '0.9rem' }}>
-                          <span>Carbs ({userProfile.c} / {Math.round((userProfile.cals * 0.4) / 4)}g)</span>
+                          <span>{translations[lang].carbs} ({userProfile.c} / {Math.round((userProfile.cals * 0.4) / 4)}g)</span>
                           <span style={{ fontWeight: 600, color: '#f59e0b' }}>{Math.round((userProfile.c / ((userProfile.cals * 0.4) / 4)) * 100)}%</span>
                         </div>
                         <div className="macro-bar-bg" style={{ height: '8px' }}>
@@ -907,7 +907,7 @@ function App() {
 
                       <div>
                         <div className="flex-between" style={{ marginBottom: '0.5rem', fontSize: '0.9rem' }}>
-                          <span>Fats ({userProfile.f} / {Math.round((userProfile.cals * 0.3) / 9)}g)</span>
+                          <span>{translations[lang].fats} ({userProfile.f} / {Math.round((userProfile.cals * 0.3) / 9)}g)</span>
                           <span style={{ fontWeight: 600, color: '#ef4444' }}>{Math.round((userProfile.f / ((userProfile.cals * 0.3) / 9)) * 100)}%</span>
                         </div>
                         <div className="macro-bar-bg" style={{ height: '8px' }}>
@@ -918,7 +918,7 @@ function App() {
                   </div>
 
                   <div className="dash-card" style={{ padding: '2rem' }}>
-                    <h3 style={{ marginBottom: '1.5rem' }}>Weekly Consistency</h3>
+                    <h3 style={{ marginBottom: '1.5rem' }}>{lang === 'vi' ? 'Kiên Trì Hàng Tuần' : 'Weekly Consistency'}</h3>
                     <div className="weekly-chart" style={{ height: '120px' }}>
                       {WEEK_DATA.map((d, i) => {
                         const isToday = i === 5;
@@ -940,8 +940,8 @@ function App() {
                           <Flame size={18} color="#000" />
                         </div>
                         <div>
-                          <div style={{ fontWeight: 700, fontSize: '0.9rem' }}>{streakDays} Day Streak!</div>
-                          <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>You've hit your target 7 days in a row</div>
+                          <div style={{ fontWeight: 700, fontSize: '0.9rem' }}>{lang === 'vi' ? `${streakDays} Ngày Liên Tiếp!` : `${streakDays} Day Streak!`}</div>
+                          <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>{lang === 'vi' ? `Bạn đã đạt mục tiêu ${streakDays} ngày liên tiếp` : `You've hit your target ${streakDays} days in a row`}</div>
                         </div>
                       </div>
                       <TrendingUp size={20} color="var(--accent-primary)" />
@@ -1286,8 +1286,8 @@ function App() {
                     <motion.div animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 1.5, ease: 'linear' }} style={{ marginBottom: '2rem' }}>
                       <Activity size={64} color="var(--accent-primary)" />
                     </motion.div>
-                    <h2>Verifying with Bank...</h2>
-                    <p style={{ color: 'var(--text-muted)', marginTop: '0.5rem' }}>Processing your macro-certified order.</p>
+                    <h2>{lang === 'vi' ? 'Đang xác thực với Ngân Hàng...' : 'Verifying with Bank...'}</h2>
+                    <p style={{ color: 'var(--text-muted)', marginTop: '0.5rem' }}>{lang === 'vi' ? 'Đang xử lý đơn hàng chuẩn dinh dưỡng của bạn.' : 'Processing your macro-certified order.'}</p>
                   </div>
                 ) : paymentSuccess ? (
                   <div style={{ padding: '4rem 2rem', textAlign: 'center' }}>
@@ -1296,15 +1296,15 @@ function App() {
                         <CheckCircle2 size={48} color="#000" />
                       </div>
                     </motion.div>
-                    <h2>Payment Successful!</h2>
-                    <p style={{ color: 'var(--text-muted)', marginTop: '0.5rem' }}>Your kitchen prep has been prioritized.</p>
+                    <h2>{lang === 'vi' ? 'Thanh Toán Thành Công!' : 'Payment Successful!'}</h2>
+                    <p style={{ color: 'var(--text-muted)', marginTop: '0.5rem' }}>{lang === 'vi' ? 'Đơn hàng của bạn đã được ưu tiên chuẩn bị.' : 'Your kitchen prep has been prioritized.'}</p>
                   </div>
                 ) : (
                   <>
                     <div style={{ padding: '2rem', borderBottom: '1px solid var(--border-color)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                         <Lock size={18} color="var(--accent-primary)" />
-                        <h2 style={{ fontSize: '1.25rem', margin: 0 }}>Secure Checkout</h2>
+                        <h2 style={{ fontSize: '1.25rem', margin: 0 }}>{lang === 'vi' ? 'Thanh Toán An Toàn' : 'Secure Checkout'}</h2>
                       </div>
                       <button onClick={() => setIsCheckingOut(false)} style={{ background: 'none', border: 'none', color: '#fff', cursor: 'pointer' }}><X size={20}/></button>
                     </div>
@@ -1312,20 +1312,20 @@ function App() {
                     <div style={{ padding: '2rem' }}>
                       <div className="glass-panel" style={{ padding: '1.5rem', borderRadius: '16px', marginBottom: '2rem' }}>
                         <div className="flex-between" style={{ marginBottom: '0.5rem' }}>
-                          <span style={{ color: 'var(--text-muted)' }}>Order Total</span>
+                          <span style={{ color: 'var(--text-muted)' }}>{lang === 'vi' ? 'Tổng tiền đơn hàng' : 'Order Total'}</span>
                           <span style={{ fontWeight: 700, fontSize: '1.25rem' }}>{formatVND(cartTotal)}</span>
                         </div>
                         <div style={{ fontSize: '0.85rem', color: 'var(--accent-primary)' }}>
-                          Includes {cart.reduce((s,i) => s+i.qty, 0)} macro-balanced meals
+                          {lang === 'vi' ? `Bao gồm ${cart.reduce((s,i) => s+i.qty, 0)} bữa ăn chuẩn dinh dưỡng` : `Includes ${cart.reduce((s,i) => s+i.qty, 0)} macro-balanced meals`}
                         </div>
                       </div>
 
-                      <h3 style={{ fontSize: '1rem', marginBottom: '1rem' }}>Select Payment Method</h3>
+                      <h3 style={{ fontSize: '1rem', marginBottom: '1rem' }}>{lang === 'vi' ? 'Chọn Phương Thức Thanh Toán' : 'Select Payment Method'}</h3>
                       <div style={{ display: 'grid', gap: '1rem', marginBottom: '2.5rem' }}>
                         <div className={`onboard-option ${paymentMethod === 'card' ? 'selected' : ''}`} style={{ margin: 0, padding: '1rem' }} onClick={() => setPaymentMethod('card')}>
                           <CreditCard size={20} color={paymentMethod === 'card' ? "var(--accent-primary)" : "#fff"} />
                           <div style={{ flex: 1, marginLeft: '1rem' }}>
-                            <div style={{ fontWeight: 600 }}>Credit Card</div>
+                            <div style={{ fontWeight: 600 }}>{lang === 'vi' ? 'Thẻ Tín Dụng' : 'Credit Card'}</div>
                             <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>•••• •••• •••• 4242</div>
                           </div>
                         </div>
@@ -1333,16 +1333,23 @@ function App() {
                           <Wallet size={20} color={paymentMethod === 'apple' ? "var(--accent-primary)" : "#fff"} />
                           <div style={{ flex: 1, marginLeft: '1rem' }}>
                             <div style={{ fontWeight: 600 }}>Apple Pay</div>
-                            <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Pay with Touch ID / Face ID</div>
+                            <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>{lang === 'vi' ? 'Thanh toán bằng Touch ID / Face ID' : 'Pay with Touch ID / Face ID'}</div>
                           </div>
                         </div>
                       </div>
 
                       <button className="btn-primary" onClick={processPayment}>
-                        Pay Now
+                        {lang === 'vi' ? 'Thanh Toán Ngay' : 'Pay Now'}
+                      </button>
+                      <button 
+                        className="btn-primary" 
+                        style={{ background: 'transparent', border: '1px solid var(--border-color)', color: 'white', marginTop: '0.75rem' }} 
+                        onClick={() => setIsCheckingOut(false)}
+                      >
+                        {lang === 'vi' ? 'Hủy' : 'Cancel'}
                       </button>
                       <p style={{ textAlign: 'center', fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '1rem' }}>
-                        Your payment information is encrypted and secure.
+                        {lang === 'vi' ? 'Thông tin thanh toán của bạn được mã hóa và bảo mật.' : 'Your payment information is encrypted and secure.'}
                       </p>
                     </div>
                   </>
@@ -1447,20 +1454,20 @@ function App() {
             <span style={{ fontWeight: 700, fontSize: '1.25rem' }}>Măm-mate Dash</span>
           </div>
           <div className={`desktop-nav-item ${sellerTab === 'kanban' ? 'active' : ''}`} onClick={() => setSellerTab('kanban')}>
-            <LayoutDashboard size={20} /> Kitchen Board
+            <LayoutDashboard size={20} /> {lang === 'vi' ? 'Bếp Trực Tiếp' : 'Kitchen Board'}
           </div>
           <div className={`desktop-nav-item ${sellerTab === 'inventory' ? 'active' : ''}`} onClick={() => setSellerTab('inventory')}>
-            <Package size={20} /> Inventory
+            <Package size={20} /> {lang === 'vi' ? 'Hàng Tồn Kho' : 'Inventory'}
           </div>
           <div className={`desktop-nav-item ${sellerTab === 'performance' ? 'active' : ''}`} onClick={() => setSellerTab('performance')}>
-            <TrendingUp size={20} /> Analytics
+            <TrendingUp size={20} /> {lang === 'vi' ? 'Phân Tích' : 'Analytics'}
           </div>
           <div className={`desktop-nav-item ${sellerTab === 'settings' ? 'active' : ''}`} onClick={() => setSellerTab('settings')}>
-            <Settings size={20} /> Settings
+            <Settings size={20} /> {lang === 'vi' ? 'Thiết Lập' : 'Settings'}
           </div>
           
           <button className="desktop-nav-item" style={{ marginTop: 'auto', background: 'none', border: 'none', textAlign: 'left', cursor: 'pointer', color: '#ff4444' }} onClick={() => setUiMode('selector')}>
-            <ArrowLeft size={20} /> Exit Dashboard
+            <ArrowLeft size={20} /> {lang === 'vi' ? 'Thoát Bảng Quản Trị' : 'Exit Dashboard'}
           </button>
         </div>
 
@@ -1468,16 +1475,20 @@ function App() {
           <div className="flex-between" style={{ marginBottom: '2.5rem' }}>
             <div>
               <h1 style={{ fontSize: '2rem', margin: 0 }}>
-                {sellerTab === 'kanban' ? 'Live Kitchen Board' : sellerTab === 'inventory' ? 'Inventory Forecast' : 'Performance Analytics'}
+                {sellerTab === 'kanban' 
+                  ? (lang === 'vi' ? 'Bếp Trực Tiếp' : 'Live Kitchen Board') 
+                  : sellerTab === 'inventory' 
+                    ? (lang === 'vi' ? 'Dự Báo Hàng Tồn Kho' : 'Inventory Forecast') 
+                    : (lang === 'vi' ? 'Phân Tích Hiệu Suất' : 'Performance Analytics')}
               </h1>
-              <p style={{ marginTop: '0.5rem', color: 'var(--text-muted)' }}>Real-time sync with Măm-mate Cloud</p>
+              <p style={{ marginTop: '0.5rem', color: 'var(--text-muted)' }}>{lang === 'vi' ? 'Đồng bộ thời gian thực với Măm-mate Cloud' : 'Real-time sync with Măm-mate Cloud'}</p>
             </div>
             <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
               <ThemeToggle theme={theme} setTheme={setTheme} />
               <LanguageToggle lang={lang} setLang={setLang} />
               <div className="glass-panel" style={{ padding: '0.75rem 1.25rem', display: 'flex', alignItems: 'center', gap: '0.75rem', borderRadius: '12px', border: '1px solid var(--border-color)' }}>
                 <Search size={18} color="var(--text-muted)" />
-                <input type="text" placeholder="Search orders..." style={{ background: 'none', border: 'none', color: 'var(--text-main)', outline: 'none' }} />
+                <input type="text" placeholder={lang === 'vi' ? 'Tìm đơn hàng...' : 'Search orders...'} style={{ background: 'none', border: 'none', color: 'var(--text-main)', outline: 'none' }} />
               </div>
               <div className="glass-panel" style={{ padding: '0.75rem', borderRadius: '12px', border: '1px solid var(--border-color)', display: 'flex' }}><Bell size={20}/></div>
             </div>
@@ -1493,7 +1504,13 @@ function App() {
                       {status === 'cooking' && <Zap size={14} color="var(--accent-warning)" />}
                       {status === 'ready' && <CheckCircle2 size={14} color="var(--accent-primary)" />}
                       {status === 'delivered' && <Truck size={14} color="var(--accent-secondary)" />}
-                      {status === 'ready' ? 'Ready for Delivery' : status === 'delivered' ? 'Delivery' : status}
+                      {status === 'ready' 
+                        ? (lang === 'vi' ? 'Sẵn Sàng Giao Hàng' : 'Ready for Delivery') 
+                        : status === 'delivered' 
+                          ? (lang === 'vi' ? 'Đã Giao' : 'Delivery') 
+                          : status === 'incoming'
+                            ? (lang === 'vi' ? 'Đơn Mới' : 'Incoming')
+                            : (lang === 'vi' ? 'Đang Nấu' : 'Cooking')}
                     </div>
                     <span style={{ background: 'rgba(255,255,255,0.05)', padding: '2px 8px', borderRadius: '6px' }}>
                       {sellerOrders.filter(o => o.status === status).length}
@@ -1509,7 +1526,7 @@ function App() {
                             <Clock size={12} /> {order.time}
                           </span>
                         </div>
-                        <div style={{ fontWeight: 700, fontSize: '1.25rem', marginBottom: '1rem', color: 'var(--text-main)' }}>{order.qty}x {order.item}</div>
+                        <div style={{ fontWeight: 700, fontSize: '1.25rem', marginBottom: '1rem', color: 'var(--text-main)' }}>{order.qty}x {t(order.item, lang)}</div>
                         
                         <div style={{ display: 'flex', gap: '0.6rem', marginBottom: '1.25rem' }}>
                           <span style={{ background: theme === 'light' ? 'rgba(0,0,0,0.05)' : 'rgba(255,255,255,0.05)', padding: '4px 12px', borderRadius: '8px', fontSize: '0.7rem', fontWeight: 600, color: 'var(--text-muted)', textTransform: 'uppercase' }}>{order.macros}</span>
@@ -1527,28 +1544,28 @@ function App() {
                         <div style={{ display: 'flex', gap: '0.75rem' }}>
                           {status === 'incoming' && (
                             <button className="btn-primary" style={{ padding: '0.6rem', fontSize: '0.85rem', fontWeight: 700, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }} onClick={() => moveOrder(order.id, 'cooking')}>
-                              Start Prep <ArrowRight size={14} />
+                              {lang === 'vi' ? 'Chuẩn Bị Nấu' : 'Start Prep'} <ArrowRight size={14} />
                             </button>
                           )}
                           {status === 'cooking' && (
                             <>
-                              <button style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid var(--border-color)', color: 'var(--text-muted)', padding: '0.6rem 1rem', borderRadius: '12px', fontSize: '0.8rem' }} onClick={() => moveOrder(order.id, 'incoming')}>Undo</button>
+                              <button style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid var(--border-color)', color: 'var(--text-muted)', padding: '0.6rem 1rem', borderRadius: '12px', fontSize: '0.8rem', cursor: 'pointer' }} onClick={() => moveOrder(order.id, 'incoming')}>{lang === 'vi' ? 'Quay lại' : 'Undo'}</button>
                               <button className="btn-primary" style={{ flex: 1, padding: '0.6rem', fontSize: '0.85rem', fontWeight: 700, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }} onClick={() => moveOrder(order.id, 'ready')}>
-                                Mark Ready <ArrowRight size={14} />
+                                {lang === 'vi' ? 'Xong' : 'Mark Ready'} <ArrowRight size={14} />
                               </button>
                             </>
                           )}
                           {status === 'ready' && (
                             <>
-                              <button style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid var(--border-color)', color: 'var(--text-muted)', padding: '0.6rem 1rem', borderRadius: '12px', fontSize: '0.8rem' }} onClick={() => moveOrder(order.id, 'cooking')}>Undo</button>
+                              <button style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid var(--border-color)', color: 'var(--text-muted)', padding: '0.6rem 1rem', borderRadius: '12px', fontSize: '0.8rem', cursor: 'pointer' }} onClick={() => moveOrder(order.id, 'cooking')}>{lang === 'vi' ? 'Quay lại' : 'Undo'}</button>
                               <button className="btn-primary" style={{ flex: 1, padding: '0.6rem', fontSize: '0.85rem', fontWeight: 700, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }} onClick={() => moveOrder(order.id, 'delivered')}>
-                                Dispatch <ArrowRight size={14} />
+                                {lang === 'vi' ? 'Giao Hàng' : 'Dispatch'} <ArrowRight size={14} />
                               </button>
                             </>
                           )}
                           {status === 'delivered' && (
                             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--accent-primary)', fontSize: '0.85rem', fontWeight: 600 }}>
-                              <CheckCircle2 size={16} /> Delivered Successfully
+                              <CheckCircle2 size={16} /> {lang === 'vi' ? 'Đã Giao Thành Công' : 'Delivered Successfully'}
                             </div>
                           )}
                         </div>
@@ -1569,37 +1586,39 @@ function App() {
                       <Package size={24} color="var(--accent-primary)" />
                     </div>
                     <div>
-                      <h3 style={{ margin: 0, fontSize: '1.1rem' }}>AI Inventory Procurement</h3>
-                      <p style={{ margin: '0.25rem 0 0', fontSize: '0.85rem', color: 'var(--text-muted)' }}>Based on user meal plan selections for the upcoming week, we recommend ordering by Thursday 5PM.</p>
+                      <h3 style={{ margin: 0, fontSize: '1.1rem' }}>{lang === 'vi' ? 'Thu Mua Kho Hàng AI' : 'AI Inventory Procurement'}</h3>
+                      <p style={{ margin: '0.25rem 0 0', fontSize: '0.85rem', color: 'var(--text-muted)' }}>
+                        {lang === 'vi' ? 'Dựa trên kế hoạch bữa ăn của người dùng trong tuần tới, đề xuất đặt hàng trước 17h00 thứ Năm.' : 'Based on user meal plan selections for the upcoming week, we recommend ordering by Thursday 5PM.'}
+                      </p>
                     </div>
                   </div>
-                  <button className="btn-primary" style={{ width: 'auto', padding: '0.75rem 1.5rem' }} onClick={() => setShowPOModal(true)}>Generate Purchase Order</button>
+                  <button className="btn-primary" style={{ width: 'auto', padding: '0.75rem 1.5rem' }} onClick={() => setShowPOModal(true)}>{lang === 'vi' ? 'Tạo Đơn Mua Hàng' : 'Generate Purchase Order'}</button>
                 </div>
 
                 <div className="glass-panel" style={{ padding: '2rem', borderRadius: '24px', border: '1px solid var(--border-color)' }}>
                   <table style={{ width: '100%', borderCollapse: 'collapse' }}>
                     <thead>
                       <tr style={{ textAlign: 'left', borderBottom: '1px solid var(--border-color)', color: 'var(--text-muted)', fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                        <th style={{ padding: '1rem' }}>Ingredient</th>
-                        <th>Stock on Hand</th>
-                        <th>7-Day Forecast</th>
-                        <th>Deficit (To Order)</th>
-                        <th>Status</th>
+                        <th style={{ padding: '1rem' }}>{lang === 'vi' ? 'Nguyên Liệu' : 'Ingredient'}</th>
+                        <th>{lang === 'vi' ? 'Tồn Kho Thực Tế' : 'Stock on Hand'}</th>
+                        <th>{lang === 'vi' ? 'Dự Báo 7 Ngày' : '7-Day Forecast'}</th>
+                        <th>{lang === 'vi' ? 'Thiếu Hụt (Cần Đặt)' : 'Deficit (To Order)'}</th>
+                        <th>{lang === 'vi' ? 'Trạng Thái' : 'Status'}</th>
                       </tr>
                     </thead>
                     <tbody>
                       {[
-                        { name: 'Premium Chicken Breast', stock: '12 kg', forecast: '68 kg', deficit: '56 kg', status: 'critical' },
-                        { name: 'Wild-Caught Salmon', stock: '5 kg', forecast: '25 kg', deficit: '20 kg', status: 'low' },
-                        { name: 'Grass-fed Flank Steak', stock: '8 kg', forecast: '35 kg', deficit: '27 kg', status: 'low' },
-                        { name: 'Organic Quinoa', stock: '4 kg', forecast: '18 kg', deficit: '14 kg', status: 'low' },
-                        { name: 'Fresh Broccoli', stock: '15 kg', forecast: '33 kg', deficit: '18 kg', status: 'optimal' },
-                        { name: 'Extra Firm Tofu', stock: '3 kg', forecast: '15 kg', deficit: '12 kg', status: 'critical' },
-                        { name: 'Sweet Potatoes', stock: '22 kg', forecast: '40 kg', deficit: '18 kg', status: 'optimal' },
-                        { name: 'Zucchini Noodles', stock: '5 kg', forecast: '20 kg', deficit: '15 kg', status: 'low' }
+                        { name: { en: 'Premium Chicken Breast', vi: 'Ức Gà Cao Cấp' }, stock: '12 kg', forecast: '68 kg', deficit: '56 kg', status: 'critical' },
+                        { name: { en: 'Wild-Caught Salmon', vi: 'Cá Hồi Tự Nhiên' }, stock: '5 kg', forecast: '25 kg', deficit: '20 kg', status: 'low' },
+                        { name: { en: 'Grass-fed Flank Steak', vi: 'Bít Tết Bò Ăn Cỏ' }, stock: '8 kg', forecast: '35 kg', deficit: '27 kg', status: 'low' },
+                        { name: { en: 'Organic Quinoa', vi: 'Diêm Mạch Hữu Cơ' }, stock: '4 kg', forecast: '18 kg', deficit: '14 kg', status: 'low' },
+                        { name: { en: 'Fresh Broccoli', vi: 'Bông Cải Xanh Tươi' }, stock: '15 kg', forecast: '33 kg', deficit: '18 kg', status: 'optimal' },
+                        { name: { en: 'Extra Firm Tofu', vi: 'Đậu Hũ Siêu Cứng' }, stock: '3 kg', forecast: '15 kg', deficit: '12 kg', status: 'critical' },
+                        { name: { en: 'Sweet Potatoes', vi: 'Khoai Lang Ngọt' }, stock: '22 kg', forecast: '40 kg', deficit: '18 kg', status: 'optimal' },
+                        { name: { en: 'Zucchini Noodles', vi: 'Mì Bí Ngòi' }, stock: '5 kg', forecast: '20 kg', deficit: '15 kg', status: 'low' }
                       ].map((ing, i) => (
                         <tr key={i} style={{ borderBottom: '1px solid var(--border-color)', fontSize: '0.9rem' }}>
-                          <td style={{ padding: '1.25rem', fontWeight: 600 }}>{ing.name}</td>
+                          <td style={{ padding: '1.25rem', fontWeight: 600 }}>{t(ing.name, lang)}</td>
                           <td>{ing.stock}</td>
                           <td>{ing.forecast}</td>
                           <td style={{ color: 'var(--accent-warning)', fontWeight: 700 }}>{ing.deficit}</td>
@@ -1609,7 +1628,7 @@ function App() {
                               background: ing.status === 'critical' ? 'rgba(239, 68, 68, 0.1)' : ing.status === 'low' ? 'rgba(245, 158, 11, 0.1)' : 'rgba(16, 185, 129, 0.1)',
                               color: ing.status === 'critical' ? '#ef4444' : ing.status === 'low' ? '#f59e0b' : 'var(--accent-primary)'
                             }}>
-                              {ing.status}
+                              {ing.status === 'critical' ? (lang === 'vi' ? 'Nghiêm Trọng' : 'critical') : ing.status === 'low' ? (lang === 'vi' ? 'Thấp' : 'low') : (lang === 'vi' ? 'Tối Ưu' : 'optimal')}
                             </span>
                           </td>
                         </tr>
@@ -1621,14 +1640,14 @@ function App() {
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                 <div className="glass-panel" style={{ padding: '1.5rem', borderRadius: '24px', border: '1px solid var(--border-color)' }}>
-                  <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--text-muted)' }}>Total Value on Hand</p>
+                  <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--text-muted)' }}>{lang === 'vi' ? 'Tổng Giá Trị Hiện Có' : 'Total Value on Hand'}</p>
                   <h2 style={{ margin: '0.5rem 0', fontSize: '1.75rem' }}>{formatVND(81012500)}</h2>
-                  <p style={{ margin: 0, fontSize: '0.8rem', color: 'var(--accent-primary)', fontWeight: 600 }}>Optimal Range</p>
+                  <p style={{ margin: 0, fontSize: '0.8rem', color: 'var(--accent-primary)', fontWeight: 600 }}>{lang === 'vi' ? 'Phạm Vi Tối Ưu' : 'Optimal Range'}</p>
                 </div>
                 <div className="glass-panel" style={{ padding: '1.5rem', borderRadius: '24px', border: '1px solid var(--border-color)' }}>
-                  <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--text-muted)' }}>Wastage Rate (Weekly)</p>
+                  <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--text-muted)' }}>{lang === 'vi' ? 'Tỷ Lệ Hao Hụt (Hàng Tuần)' : 'Wastage Rate (Weekly)'}</p>
                   <h2 style={{ margin: '0.5rem 0', fontSize: '1.75rem' }}>1.2%</h2>
-                  <p style={{ margin: 0, fontSize: '0.8rem', color: 'var(--accent-secondary)', fontWeight: 600 }}>Industry avg: 4-10%</p>
+                  <p style={{ margin: 0, fontSize: '0.8rem', color: 'var(--accent-secondary)', fontWeight: 600 }}>{lang === 'vi' ? 'Trung bình ngành: 4-10%' : 'Industry avg: 4-10%'}</p>
                 </div>
               </div>
             </div>
@@ -1638,39 +1657,39 @@ function App() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem' }}>
                 <div className="glass-panel" style={{ padding: '2rem', borderRadius: '24px', border: '1px solid var(--border-color)' }}>
-                  <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--text-muted)' }}>Gross Revenue (MTD)</p>
+                  <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--text-muted)' }}>{lang === 'vi' ? 'Doanh Thu Gộp (Tháng)' : 'Gross Revenue (MTD)'}</p>
                   <h2 style={{ margin: '0.5rem 0', fontSize: '2.5rem' }}>{formatVND(1071250000)}</h2>
-                  <p style={{ margin: 0, fontSize: '0.9rem', color: 'var(--accent-primary)', fontWeight: 600 }}>+15.2% vs last month</p>
+                  <p style={{ margin: 0, fontSize: '0.9rem', color: 'var(--accent-primary)', fontWeight: 600 }}>{lang === 'vi' ? '+15.2% so với tháng trước' : '+15.2% vs last month'}</p>
                 </div>
                 <div className="glass-panel" style={{ padding: '2rem', borderRadius: '24px', border: '1px solid var(--border-color)' }}>
-                  <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--text-muted)' }}>Avg. Prep & Cook Time</p>
-                  <h2 style={{ margin: '0.5rem 0', fontSize: '2.5rem' }}>14.2 min</h2>
-                  <p style={{ margin: 0, fontSize: '0.9rem', color: '#10b981', fontWeight: 600 }}>-1.5 min from target</p>
+                  <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--text-muted)' }}>{lang === 'vi' ? 'Thời Gian Chuẩn Bị & Nấu TB' : 'Avg. Prep & Cook Time'}</p>
+                  <h2 style={{ margin: '0.5rem 0', fontSize: '2.5rem' }}>14.2 {lang === 'vi' ? 'phút' : 'min'}</h2>
+                  <p style={{ margin: 0, fontSize: '0.9rem', color: '#10b981', fontWeight: 600 }}>{lang === 'vi' ? '-1.5 phút so với mục tiêu' : '-1.5 min from target'}</p>
                 </div>
                 <div className="glass-panel" style={{ padding: '2rem', borderRadius: '24px', border: '1px solid var(--border-color)' }}>
-                  <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--text-muted)' }}>Macro Accuracy Rate</p>
+                  <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--text-muted)' }}>{lang === 'vi' ? 'Tỷ Lệ Chính Xác Macro' : 'Macro Accuracy Rate'}</p>
                   <h2 style={{ margin: '0.5rem 0', fontSize: '2.5rem' }}>99.8%</h2>
-                  <p style={{ margin: 0, fontSize: '0.9rem', color: 'var(--text-muted)' }}>Based on digital scale logs</p>
+                  <p style={{ margin: 0, fontSize: '0.9rem', color: 'var(--text-muted)' }}>{lang === 'vi' ? 'Dựa trên nhật ký cân kỹ thuật số' : 'Based on digital scale logs'}</p>
                 </div>
               </div>
 
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 320px', gap: '2rem' }}>
                 <div className="glass-panel" style={{ padding: '2rem', borderRadius: '24px', border: '1px solid var(--border-color)' }}>
-                  <h3 style={{ marginBottom: '2rem' }}>Top Selling Meals (This Week)</h3>
+                  <h3 style={{ marginBottom: '2rem' }}>{lang === 'vi' ? 'Món Ăn Bán Chạy Nhất (Tuần Này)' : 'Top Selling Meals (This Week)'}</h3>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                     {[
-                      { rank: 1, name: 'Lemon Herb Chicken', orders: 342, rev: '111.050.000 ₫' },
-                      { rank: 2, name: 'Spicy Salmon Bowl', orders: 289, rev: '108.300.000 ₫' },
-                      { rank: 3, name: 'Keto Steak & Eggs', orders: 215, rev: '85.925.000 ₫' },
-                      { rank: 4, name: 'Vegan Buddha Bowl', orders: 198, rev: '59.350.000 ₫' }
+                      { rank: 1, name: { en: 'Lemon Herb Chicken', vi: 'Gà Sốt Chanh Thảo Mộc' }, orders: 342, rev: '111.050.000 ₫' },
+                      { rank: 2, name: { en: 'Spicy Salmon Bowl', vi: 'Cơm Cá Hồi Sốt Cay' }, orders: 289, rev: '108.300.000 ₫' },
+                      { rank: 3, name: { en: 'Keto Steak & Eggs', vi: 'Bít Tết & Trứng Keto' }, orders: 215, rev: '85.925.000 ₫' },
+                      { rank: 4, name: { en: 'Vegan Buddha Bowl', vi: 'Cơm Chay Buddha' }, orders: 198, rev: '59.350.000 ₫' }
                     ].map(m => (
                       <div key={m.rank} className="flex-between" style={{ paddingBottom: '1rem', borderBottom: '1px solid var(--border-color)' }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                           <span style={{ color: 'var(--text-muted)', fontWeight: 600 }}>#{m.rank}</span>
-                          <span style={{ fontWeight: 700 }}>{m.name}</span>
+                          <span style={{ fontWeight: 700 }}>{t(m.name, lang)}</span>
                         </div>
                         <div style={{ display: 'flex', gap: '2rem' }}>
-                          <span style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>{m.orders} orders</span>
+                          <span style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>{m.orders} {lang === 'vi' ? 'đơn hàng' : 'orders'}</span>
                           <span style={{ color: 'var(--accent-primary)', fontWeight: 700 }}>{m.rev}</span>
                         </div>
                       </div>
@@ -1679,7 +1698,7 @@ function App() {
                 </div>
 
                 <div className="glass-panel" style={{ padding: '2rem', borderRadius: '24px', border: '1px solid var(--border-color)', textAlign: 'center' }}>
-                  <h3 style={{ marginBottom: '2rem' }}>Customer Retention</h3>
+                  <h3 style={{ marginBottom: '2rem' }}>{lang === 'vi' ? 'Tỷ Lệ Giữ Chân Khách Hàng' : 'Customer Retention'}</h3>
                   <div style={{ position: 'relative', width: '160px', height: '160px', margin: '0 auto 2rem' }}>
                     <svg viewBox="0 0 120 120" style={{ transform: 'rotate(-90deg)' }}>
                       <circle cx="60" cy="60" r="50" fill="none" stroke="rgba(255,255,255,0.05)" strokeWidth="12" />
@@ -1687,18 +1706,21 @@ function App() {
                     </svg>
                     <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
                       <div style={{ fontSize: '1.75rem', fontWeight: 800 }}>78%</div>
-                      <div style={{ fontSize: '0.65rem', color: 'var(--text-muted)', fontWeight: 700 }}>SUBSCRIBED</div>
+                      <div style={{ fontSize: '0.65rem', color: 'var(--text-muted)', fontWeight: 700 }}>{lang === 'vi' ? 'ĐÃ ĐĂNG KÝ' : 'SUBSCRIBED'}</div>
                     </div>
                   </div>
-                  <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--text-muted)' }}>Target: 80% • <span style={{ color: 'var(--accent-primary)' }}>+2% this week</span></p>
+                  <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--text-muted)' }}>
+                    {lang === 'vi' ? 'Mục tiêu: 80% • ' : 'Target: 80% • '}
+                    <span style={{ color: 'var(--accent-primary)' }}>{lang === 'vi' ? '+2% tuần này' : '+2% this week'}</span>
+                  </p>
                 </div>
               </div>
 
               <div className="glass-panel" style={{ padding: '2rem', borderRadius: '24px', border: '1px solid var(--border-color)', position: 'relative' }}>
                 <div className="flex-between" style={{ alignItems: 'flex-start', marginBottom: '2.5rem' }}>
-                  <h3 style={{ margin: 0 }}>Daily Order Volume (Last 7 Days)</h3>
+                  <h3 style={{ margin: 0 }}>{lang === 'vi' ? 'Lượng Đơn Hàng Hàng Ngày (7 Ngày Qua)' : 'Daily Order Volume (Last 7 Days)'}</h3>
                   <span style={{ color: 'var(--text-main)', fontSize: '0.75rem', fontWeight: 500, fontFamily: 'Arial, sans-serif', opacity: 0.8 }}>
-                    Weekly Avg: 387
+                    {lang === 'vi' ? 'Trung bình tuần: 387' : 'Weekly Avg: 387'}
                   </span>
                 </div>
                 <div style={{ position: 'relative', height: '200px', padding: '0 2rem', marginTop: '1rem' }}>
@@ -1721,6 +1743,15 @@ function App() {
                     ].map((d, idx) => {
                       const avg = 387; 
                       const isBelow = d.val < avg;
+                      const dayLabels = {
+                        Mon: { en: 'Mon', vi: 'T2' },
+                        Tue: { en: 'Tue', vi: 'T3' },
+                        Wed: { en: 'Wed', vi: 'T4' },
+                        Thu: { en: 'Thu', vi: 'T5' },
+                        Fri: { en: 'Fri', vi: 'T6' },
+                        Sat: { en: 'Sat', vi: 'T7' },
+                        Sun: { en: 'Sun', vi: 'CN' }
+                      };
                       return (
                         <div key={idx} style={{ textAlign: 'center', width: '40px', display: 'flex', flexDirection: 'column', alignItems: 'center', flex: 1 }}>
                           <div style={{ fontSize: '0.75rem', fontWeight: 700, marginBottom: '0.5rem', color: isBelow ? 'var(--text-muted)' : 'var(--accent-primary)' }}>{d.val}</div>
@@ -1731,7 +1762,9 @@ function App() {
                             borderRadius: '6px 6px 0 0',
                             transition: 'all 0.3s ease'
                           }}></div>
-                          <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.75rem', fontWeight: 600 }}>{d.day}</div>
+                          <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.75rem', fontWeight: 600 }}>
+                            {dayLabels[d.day] ? dayLabels[d.day][lang] : d.day}
+                          </div>
                         </div>
                       );
                     })}
@@ -1742,31 +1775,40 @@ function App() {
           )}
           {sellerTab === 'settings' && (
             <div className="glass-panel" style={{ padding: '3rem', borderRadius: '32px', border: '1px solid var(--border-color)', maxWidth: '900px' }}>
-              <h2 style={{ marginBottom: '2rem', fontSize: '1.5rem' }}>Kitchen Profile</h2>
+              <h2 style={{ marginBottom: '2rem', fontSize: '1.5rem' }}>{lang === 'vi' ? 'Hồ Sơ Nhà Bếp' : 'Kitchen Profile'}</h2>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem', marginBottom: '3rem' }}>
                 <div className="onboard-option" style={{ margin: 0, padding: '1rem 1.5rem', display: 'block', height: 'auto', border: 'none', background: theme === 'light' ? 'rgba(0,0,0,0.03)' : 'rgba(255,255,255,0.03)' }}>
-                  <p style={{ margin: '0 0 0.75rem', fontSize: '0.85rem', color: 'var(--text-muted)', fontWeight: 600 }}>Location Name</p>
+                  <p style={{ margin: '0 0 0.75rem', fontSize: '0.85rem', color: 'var(--text-muted)', fontWeight: 600 }}>{lang === 'vi' ? 'Tên Địa Điểm' : 'Location Name'}</p>
                   <input type="text" value={sellerSettings.location} onChange={e => setSellerSettings({...sellerSettings, location: e.target.value})} style={{ background: 'none', border: 'none', color: 'var(--text-main)', fontSize: '1rem', width: '100%', outline: 'none' }} />
                 </div>
                 <div className="onboard-option" style={{ margin: 0, padding: '1rem 1.5rem', display: 'block', height: 'auto', border: 'none', background: theme === 'light' ? 'rgba(0,0,0,0.03)' : 'rgba(255,255,255,0.03)' }}>
-                  <p style={{ margin: '0 0 0.75rem', fontSize: '0.85rem', color: 'var(--text-muted)', fontWeight: 600 }}>Max Capacity (Meals/Day)</p>
+                  <p style={{ margin: '0 0 0.75rem', fontSize: '0.85rem', color: 'var(--text-muted)', fontWeight: 600 }}>{lang === 'vi' ? 'Sức Chứa Tối Đa (Bữa/Ngày)' : 'Max Capacity (Meals/Day)'}</p>
                   <input type="number" value={sellerSettings.capacity} onChange={e => setSellerSettings({...sellerSettings, capacity: e.target.value})} style={{ background: 'none', border: 'none', color: 'var(--text-main)', fontSize: '1rem', width: '100%', outline: 'none' }} />
                 </div>
                 <div className="onboard-option" style={{ margin: 0, padding: '1rem 1.5rem', display: 'block', height: 'auto', border: 'none', background: theme === 'light' ? 'rgba(0,0,0,0.03)' : 'rgba(255,255,255,0.03)' }}>
-                  <p style={{ margin: '0 0 0.75rem', fontSize: '0.85rem', color: 'var(--text-muted)', fontWeight: 600 }}>Operating Hours</p>
+                  <p style={{ margin: '0 0 0.75rem', fontSize: '0.85rem', color: 'var(--text-muted)', fontWeight: 600 }}>{lang === 'vi' ? 'Giờ Hoạt Động' : 'Operating Hours'}</p>
                   <input type="text" value={sellerSettings.hours} onChange={e => setSellerSettings({...sellerSettings, hours: e.target.value})} style={{ background: 'none', border: 'none', color: 'var(--text-main)', fontSize: '1rem', width: '100%', outline: 'none' }} />
                 </div>
                 <div className="onboard-option" style={{ margin: 0, padding: '1rem 1.5rem', display: 'block', height: 'auto', border: 'none', background: theme === 'light' ? 'rgba(0,0,0,0.03)' : 'rgba(255,255,255,0.03)' }}>
-                  <p style={{ margin: '0 0 0.75rem', fontSize: '0.85rem', color: 'var(--text-muted)', fontWeight: 600 }}>Auto-Dispatch Delivery Partners</p>
+                  <p style={{ margin: '0 0 0.75rem', fontSize: '0.85rem', color: 'var(--text-muted)', fontWeight: 600 }}>{lang === 'vi' ? 'Đối Tác Giao Hàng Tự Động' : 'Auto-Dispatch Delivery Partners'}</p>
                   <input type="text" value={sellerSettings.partners} onChange={e => setSellerSettings({...sellerSettings, partners: e.target.value})} style={{ background: 'none', border: 'none', color: 'var(--text-main)', fontSize: '1rem', width: '100%', outline: 'none' }} />
                 </div>
               </div>
               <div style={{ display: 'flex', gap: '1rem' }}>
                 <button className="btn-primary" style={{ flex: 1 }} onClick={() => { setIsSavingSettings(true); setTimeout(() => setIsSavingSettings(false), 1500); }}>
-                  {isSavingSettings ? 'Saving...' : 'Save Changes'}
+                  {isSavingSettings ? (lang === 'vi' ? 'Đang Lưu...' : 'Saving...') : (lang === 'vi' ? 'Lưu Thay Đổi' : 'Save Changes')}
                 </button>
-                <button className="onboard-option" style={{ margin: 0, width: 'auto', padding: '0 1.5rem', background: 'rgba(255,255,255,0.05)', border: '1px solid var(--border-color)', fontWeight: 700 }} onClick={() => setSellerSettings({ location: 'Măm-mate Central Kitchen - NY', capacity: '1500', hours: '04:00 AM - 10:00 PM', partners: 'Uber Direct & DoorDash Drive' })}>
-                  Reset
+                <button 
+                  className="onboard-option" 
+                  style={{ margin: 0, width: 'auto', padding: '0 1.5rem', background: 'rgba(255,255,255,0.05)', border: '1px solid var(--border-color)', fontWeight: 700 }} 
+                  onClick={() => setSellerSettings({ 
+                    location: lang === 'vi' ? 'Bếp Trung Tâm Măm-mate - Hà Nội' : 'Măm-mate Central Kitchen - NY', 
+                    capacity: '1500', 
+                    hours: '04:00 AM - 10:00 PM', 
+                    partners: 'Uber Direct & DoorDash Drive' 
+                  })}
+                >
+                  {lang === 'vi' ? 'Thiết Lập Lại' : 'Reset'}
                 </button>
               </div>
             </div>
@@ -1781,36 +1823,36 @@ function App() {
                 
                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '2.5rem' }}>
                   <FileText size={32} color="var(--accent-primary)" />
-                  <h1 style={{ fontSize: '1.75rem', margin: 0 }}>Generate Purchase Order</h1>
+                  <h1 style={{ fontSize: '1.75rem', margin: 0 }}>{lang === 'vi' ? 'Tạo Đơn Mua Hàng' : 'Generate Purchase Order'}</h1>
                 </div>
 
                 <p style={{ color: 'var(--text-muted)', marginBottom: '2.5rem', fontSize: '1.1rem', lineHeight: 1.6 }}>
-                  The AI has compiled the exact ingredient amounts needed to fulfill the forecasted meals for next week while maintaining zero waste.
+                  {lang === 'vi' ? 'AI đã tổng hợp lượng nguyên liệu chính xác cần thiết để đáp ứng các bữa ăn dự báo cho tuần tới trong khi vẫn duy trì không có rác thải.' : 'The AI has compiled the exact ingredient amounts needed to fulfill the forecasted meals for next week while maintaining zero waste.'}
                 </p>
 
                 <div style={{ maxHeight: '400px', overflowY: 'auto', marginBottom: '2.5rem' }}>
                   <table style={{ width: '100%', borderCollapse: 'collapse' }}>
                     <thead>
                       <tr style={{ textAlign: 'left', borderBottom: '1px solid var(--border-color)', color: 'var(--text-muted)', fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                        <th style={{ padding: '1rem 0' }}>Ingredient</th>
-                        <th>Quantity Needed</th>
-                        <th>Preferred Supplier</th>
-                        <th style={{ textAlign: 'right' }}>Est. Cost</th>
+                        <th style={{ padding: '1rem 0' }}>{lang === 'vi' ? 'Nguyên Liệu' : 'Ingredient'}</th>
+                        <th>{lang === 'vi' ? 'Lượng Cần Mua' : 'Quantity Needed'}</th>
+                        <th>{lang === 'vi' ? 'Nhà Cung Cấp' : 'Preferred Supplier'}</th>
+                        <th style={{ textAlign: 'right' }}>{lang === 'vi' ? 'Chi Phí Ước Tính' : 'Est. Cost'}</th>
                       </tr>
                     </thead>
                     <tbody>
                       {[
-                        { name: 'Premium Chicken Breast', qty: '56 kg', supplier: 'Farm Fresh Meats Inc.', cost: '9.238.000 ₫' },
-                        { name: 'Wild-Caught Salmon', qty: '20 kg', supplier: 'Oceanic Seafoods', cost: '10.676.000 ₫' },
-                        { name: 'Grass-fed Flank Steak', qty: '27 kg', supplier: 'Ranch Direct', cost: '14.510.000 ₫' },
-                        { name: 'Organic Quinoa', qty: '14 kg', supplier: 'Valley Grains', cost: '2.137.500 ₫' },
-                        { name: 'Fresh Broccoli', qty: '18 kg', supplier: 'Local Green Farms', cost: '1.550.000 ₫' },
-                        { name: 'Extra Firm Tofu', qty: '12 kg', supplier: 'Soy Masters', cost: '880.000 ₫' },
-                        { name: 'Sweet Potatoes', qty: '18 kg', supplier: 'Root Farms', cost: '612.500 ₫' },
-                        { name: 'Zucchini Noodles', qty: '15 kg', supplier: 'Fresh Veggies Co.', cost: '1.125.000 ₫' }
+                        { name: { en: 'Premium Chicken Breast', vi: 'Ức Gà Cao Cấp' }, qty: '56 kg', supplier: 'Farm Fresh Meats Inc.', cost: '9.238.000 ₫' },
+                        { name: { en: 'Wild-Caught Salmon', vi: 'Cá Hồi Tự Nhiên' }, qty: '20 kg', supplier: 'Oceanic Seafoods', cost: '10.676.000 ₫' },
+                        { name: { en: 'Grass-fed Flank Steak', vi: 'Bít Tết Bò Ăn Cỏ' }, qty: '27 kg', supplier: 'Ranch Direct', cost: '14.510.000 ₫' },
+                        { name: { en: 'Organic Quinoa', vi: 'Diêm Mạch Hữu Cơ' }, qty: '14 kg', supplier: 'Valley Grains', cost: '2.137.500 ₫' },
+                        { name: { en: 'Fresh Broccoli', vi: 'Bông Cải Xanh Tươi' }, qty: '18 kg', supplier: 'Local Green Farms', cost: '1.550.000 ₫' },
+                        { name: { en: 'Extra Firm Tofu', vi: 'Đậu Hũ Siêu Cứng' }, qty: '12 kg', supplier: 'Soy Masters', cost: '880.000 ₫' },
+                        { name: { en: 'Sweet Potatoes', vi: 'Khoai Lang Ngọt' }, qty: '18 kg', supplier: 'Root Farms', cost: '612.500 ₫' },
+                        { name: { en: 'Zucchini Noodles', vi: 'Mỳ Bí Ngòi' }, qty: '15 kg', supplier: 'Fresh Veggies Co.', cost: '1.125.000 ₫' }
                       ].map((item, i) => (
                         <tr key={i} style={{ borderBottom: '1px solid rgba(255,255,255,0.03)', fontSize: '0.95rem' }}>
-                          <td style={{ padding: '1.25rem 0', fontWeight: 500 }}>{item.name}</td>
+                          <td style={{ padding: '1.25rem 0', fontWeight: 500 }}>{t(item.name, lang)}</td>
                           <td style={{ color: 'var(--accent-warning)', fontWeight: 700 }}>{item.qty}</td>
                           <td style={{ color: 'var(--text-muted)' }}>{item.supplier}</td>
                           <td style={{ textAlign: 'right', fontWeight: 600 }}>{item.cost}</td>
@@ -1846,14 +1888,14 @@ function App() {
             <motion.div key="home" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
               <div className="flex-between" style={{ marginBottom: '1.5rem' }}>
                 <div>
-                  <p style={{ color: 'var(--accent-primary)', fontWeight: 600, fontSize: '0.85rem' }}>Good Morning, Khoi</p>
-                  <h1>Your Dashboard</h1>
+                  <p style={{ color: 'var(--accent-primary)', fontWeight: 600, fontSize: '0.85rem' }}>{lang === 'vi' ? 'Chào buổi sáng, Khoi' : 'Good Morning, Khoi'}</p>
+                  <h1>{translations[lang].dashboard}</h1>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                   <ThemeToggle theme={theme} setTheme={setTheme} />
                   <LanguageToggle lang={lang} setLang={setLang} />
                   <button onClick={() => setUiMode('selector')} style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid var(--border-color)', color: 'var(--text-muted)', padding: '0.5rem 0.75rem', borderRadius: '10px', fontSize: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                    <ArrowLeft size={14} /> Exit Hub
+                    <ArrowLeft size={14} /> {lang === 'vi' ? 'Thoát Hub' : 'Exit Hub'}
                   </button>
                 </div>
               </div>
@@ -1861,7 +1903,7 @@ function App() {
               <div className="dash-card">
                 <div className="flex-between" style={{ marginBottom: '1rem' }}>
                   <h3 style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', margin: 0 }}>
-                    <Target size={18} color="var(--accent-primary)"/> Daily Summary
+                    <Target size={18} color="var(--accent-primary)"/> {translations[lang].dailySummary}
                   </h3>
                   <button style={{ background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer' }} onClick={() => { setNewCals(userProfile.cals); setIsEditingCals(true); }}>
                     <Edit2 size={16} />
@@ -1875,28 +1917,28 @@ function App() {
                     </svg>
                     <div className="progress-content">
                       <span className="num" style={{ fontSize: '1.25rem' }}>{Math.max(0, userProfile.cals - userProfile.eaten)}</span>
-                      <span className="label">of {userProfile.cals} kcal</span>
+                      <span className="label">{lang === 'vi' ? `trên ${userProfile.cals} kcal` : `of ${userProfile.cals} kcal`}</span>
                     </div>
                   </div>
                   
                   <div className="macros-summary" style={{ flex: 1 }}>
                     <div style={{ marginBottom: '1rem' }}>
                       <div className="flex-between" style={{ marginBottom: '0.35rem', fontSize: '0.8rem' }}>
-                        <span style={{ color: 'var(--text-muted)' }}>Protein</span>
+                        <span style={{ color: 'var(--text-muted)' }}>{translations[lang].protein}</span>
                         <span style={{ fontWeight: 700 }}>{userProfile.p} / {Math.round((userProfile.cals * 0.3) / 4)}g</span>
                       </div>
                       <div className="macro-bar-bg" style={{ height: '6px' }}><div className="macro-bar-fg" style={{ width: `${Math.min(100, (userProfile.p / ((userProfile.cals * 0.3) / 4)) * 100)}%`, background: '#3b82f6' }}></div></div>
                     </div>
                     <div style={{ marginBottom: '1rem' }}>
                       <div className="flex-between" style={{ marginBottom: '0.35rem', fontSize: '0.8rem' }}>
-                        <span style={{ color: 'var(--text-muted)' }}>Carbs</span>
+                        <span style={{ color: 'var(--text-muted)' }}>{translations[lang].carbs}</span>
                         <span style={{ fontWeight: 700 }}>{userProfile.c} / {Math.round((userProfile.cals * 0.4) / 4)}g</span>
                       </div>
                       <div className="macro-bar-bg" style={{ height: '6px' }}><div className="macro-bar-fg" style={{ width: `${Math.min(100, (userProfile.c / ((userProfile.cals * 0.4) / 4)) * 100)}%`, background: '#f59e0b' }}></div></div>
                     </div>
                     <div>
                       <div className="flex-between" style={{ marginBottom: '0.35rem', fontSize: '0.8rem' }}>
-                        <span style={{ color: 'var(--text-muted)' }}>Fats</span>
+                        <span style={{ color: 'var(--text-muted)' }}>{translations[lang].fats}</span>
                         <span style={{ fontWeight: 700 }}>{userProfile.f} / {Math.round((userProfile.cals * 0.3) / 9)}g</span>
                       </div>
                       <div className="macro-bar-bg" style={{ height: '6px' }}><div className="macro-bar-fg" style={{ width: `${Math.min(100, (userProfile.f / ((userProfile.cals * 0.3) / 9)) * 100)}%`, background: '#ef4444' }}></div></div>
@@ -1922,9 +1964,9 @@ function App() {
                 <div className="flex-between" style={{ marginTop: '1rem', padding: '0.85rem', background: 'rgba(245, 158, 11, 0.1)', borderRadius: '12px', border: '1px solid rgba(245, 158, 11, 0.2)' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
                     <Flame size={18} color="var(--accent-warning)" />
-                    <span style={{ fontWeight: 700, fontSize: '0.85rem' }}>{streakDays} Day Streak!</span>
+                    <span style={{ fontWeight: 700, fontSize: '0.85rem' }}>{lang === 'vi' ? `${streakDays} Ngày Liên Tiếp!` : `${streakDays} Day Streak!`}</span>
                   </div>
-                  <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Meeting targets daily</span>
+                  <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>{lang === 'vi' ? 'Đạt mục tiêu hàng ngày' : 'Meeting targets daily'}</span>
                 </div>
               </div>
 
@@ -2011,9 +2053,9 @@ function App() {
                   <div style={{ marginTop: '1.5rem', marginBottom: '2rem' }}>
                     {cart.map(item => (
                       <div key={item.id} className="cart-item">
-                        <div className="cart-img">{renderImage(item.img, item.name)}</div>
+                        <div className="cart-img">{renderImage(item.img, t(item.name, lang))}</div>
                         <div style={{ flex: 1 }}>
-                          <h4 style={{ fontSize: '0.95rem', marginBottom: '0.25rem' }}>{item.name}</h4>
+                          <h4 style={{ fontSize: '0.95rem', marginBottom: '0.25rem' }}>{t(item.name, lang)}</h4>
                           <p style={{ fontSize: '0.85rem', color: 'var(--accent-primary)' }}>{formatVND(item.price)}</p>
                         </div>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', background: '#222', borderRadius: '8px', padding: '0.25rem' }}>
@@ -2027,21 +2069,21 @@ function App() {
                   
                   <div className="dash-card">
                     <div className="flex-between" style={{ marginBottom: '0.75rem' }}>
-                      <span style={{ color: 'var(--text-muted)' }}>Subtotal</span>
+                      <span style={{ color: 'var(--text-muted)' }}>{lang === 'vi' ? 'Tạm tính' : 'Subtotal'}</span>
                       <span>{formatVND(cartTotal)}</span>
                     </div>
                     <div className="flex-between" style={{ marginBottom: '0.75rem' }}>
-                      <span style={{ color: 'var(--text-muted)' }}>Delivery</span>
-                      <span>Free</span>
+                      <span style={{ color: 'var(--text-muted)' }}>{lang === 'vi' ? 'Giao hàng' : 'Delivery'}</span>
+                      <span>{lang === 'vi' ? 'Miễn phí' : 'Free'}</span>
                     </div>
                     <div className="flex-between" style={{ borderTop: '1px solid var(--border-color)', paddingTop: '1rem', marginTop: '0.5rem', fontWeight: 600, fontSize: '1.1rem' }}>
-                      <span>Total</span>
+                      <span>{lang === 'vi' ? 'Tổng cộng' : 'Total'}</span>
                       <span>{formatVND(cartTotal)}</span>
                     </div>
                   </div>
                   
                   <button className="btn-primary" onClick={handleCheckout} style={{ marginTop: '1rem' }}>
-                    Confirm Order
+                    {lang === 'vi' ? 'Xác Nhận Đơn Hàng' : 'Confirm Order'}
                   </button>
                 </>
               )}
@@ -2218,12 +2260,12 @@ function App() {
             style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.8)', zIndex: 100, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem' }}
           >
             <div style={{ background: 'var(--bg-card)', padding: '1.5rem', borderRadius: '16px', width: '100%', border: '1px solid var(--border-color)' }}>
-              <h3 style={{ marginBottom: '0.5rem' }}>Daily Calorie Target</h3>
-              <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '1rem' }}>Set your new calorie goal.</p>
+              <h3 style={{ marginBottom: '0.5rem' }}>{lang === 'vi' ? 'Mục Tiêu Calo Hàng Ngày' : 'Daily Calorie Target'}</h3>
+              <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '1rem' }}>{lang === 'vi' ? 'Đặt mục tiêu calo mới của bạn.' : 'Set your new calorie goal.'}</p>
               <input type="number" value={newCals} onChange={e => setNewCals(Number(e.target.value))} style={{ width: '100%', padding: '0.75rem', background: 'var(--bg-dark)', border: '1px solid var(--border-color)', color: 'white', borderRadius: '8px', fontSize: '1.1rem' }} />
               <div style={{ display: 'flex', gap: '0.75rem', marginTop: '1.5rem' }}>
-                <button className="btn-primary" style={{ background: 'transparent', border: '1px solid var(--border-color)', color: 'white', flex: 1 }} onClick={() => setIsEditingCals(false)}>Cancel</button>
-                <button className="btn-primary" style={{ flex: 1 }} onClick={() => { setUserProfile({...userProfile, cals: newCals}); setIsEditingCals(false); }}>Save</button>
+                <button className="btn-primary" style={{ background: 'transparent', border: '1px solid var(--border-color)', color: 'white', flex: 1 }} onClick={() => setIsEditingCals(false)}>{lang === 'vi' ? 'Hủy' : 'Cancel'}</button>
+                <button className="btn-primary" style={{ flex: 1 }} onClick={() => { setUserProfile({...userProfile, cals: newCals}); setIsEditingCals(false); }}>{lang === 'vi' ? 'Lưu' : 'Save'}</button>
               </div>
             </div>
           </motion.div>
@@ -2305,8 +2347,8 @@ function App() {
                   <motion.div animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 1.5, ease: 'linear' }} style={{ marginBottom: '2rem' }}>
                     <Activity size={64} color="var(--accent-primary)" />
                   </motion.div>
-                  <h2>Verifying with Bank...</h2>
-                  <p style={{ color: 'var(--text-muted)', marginTop: '0.5rem' }}>Processing your macro-certified order.</p>
+                  <h2>{lang === 'vi' ? 'Đang xác thực với Ngân Hàng...' : 'Verifying with Bank...'}</h2>
+                  <p style={{ color: 'var(--text-muted)', marginTop: '0.5rem' }}>{lang === 'vi' ? 'Đang xử lý đơn hàng chuẩn dinh dưỡng của bạn.' : 'Processing your macro-certified order.'}</p>
                 </div>
               ) : paymentSuccess ? (
                 <div style={{ padding: '4rem 2rem', textAlign: 'center' }}>
@@ -2315,15 +2357,15 @@ function App() {
                       <CheckCircle2 size={48} color="#000" />
                     </div>
                   </motion.div>
-                  <h2>Payment Successful!</h2>
-                  <p style={{ color: 'var(--text-muted)', marginTop: '0.5rem' }}>Your kitchen prep has been prioritized.</p>
+                  <h2>{lang === 'vi' ? 'Thanh Toán Thành Công!' : 'Payment Successful!'}</h2>
+                  <p style={{ color: 'var(--text-muted)', marginTop: '0.5rem' }}>{lang === 'vi' ? 'Đơn hàng của bạn đã được ưu tiên chuẩn bị.' : 'Your kitchen prep has been prioritized.'}</p>
                 </div>
               ) : (
                 <>
                   <div style={{ padding: '2rem', borderBottom: '1px solid var(--border-color)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                       <Lock size={18} color="var(--accent-primary)" />
-                      <h2 style={{ fontSize: '1.25rem', margin: 0 }}>Secure Checkout</h2>
+                      <h2 style={{ fontSize: '1.25rem', margin: 0 }}>{lang === 'vi' ? 'Thanh Toán An Toàn' : 'Secure Checkout'}</h2>
                     </div>
                     <button onClick={() => setIsCheckingOut(false)} style={{ background: 'none', border: 'none', color: '#fff', cursor: 'pointer' }}><X size={20}/></button>
                   </div>
@@ -2331,20 +2373,20 @@ function App() {
                   <div style={{ padding: '2rem' }}>
                     <div className="glass-panel" style={{ padding: '1.5rem', borderRadius: '16px', marginBottom: '2rem' }}>
                       <div className="flex-between" style={{ marginBottom: '0.5rem' }}>
-                        <span style={{ color: 'var(--text-muted)' }}>Order Total</span>
+                        <span style={{ color: 'var(--text-muted)' }}>{lang === 'vi' ? 'Tổng tiền đơn hàng' : 'Order Total'}</span>
                         <span style={{ fontWeight: 700, fontSize: '1.25rem' }}>{formatVND(cartTotal)}</span>
                       </div>
                       <div style={{ fontSize: '0.85rem', color: 'var(--accent-primary)' }}>
-                        Includes {cart.reduce((s,i) => s+i.qty, 0)} macro-balanced meals
+                        {lang === 'vi' ? `Bao gồm ${cart.reduce((s,i) => s+i.qty, 0)} bữa ăn chuẩn dinh dưỡng` : `Includes ${cart.reduce((s,i) => s+i.qty, 0)} macro-balanced meals`}
                       </div>
                     </div>
 
-                    <h3 style={{ fontSize: '1rem', marginBottom: '1rem' }}>Select Payment Method</h3>
+                    <h3 style={{ fontSize: '1rem', marginBottom: '1rem' }}>{lang === 'vi' ? 'Chọn Phương Thức Thanh Toán' : 'Select Payment Method'}</h3>
                     <div style={{ display: 'grid', gap: '1rem', marginBottom: '2.5rem' }}>
                       <div className={`onboard-option ${paymentMethod === 'card' ? 'selected' : ''}`} style={{ margin: 0, padding: '1rem' }} onClick={() => setPaymentMethod('card')}>
                         <CreditCard size={20} color={paymentMethod === 'card' ? "var(--accent-primary)" : "#fff"} />
                         <div style={{ flex: 1, marginLeft: '1rem' }}>
-                          <div style={{ fontWeight: 600 }}>Credit Card</div>
+                          <div style={{ fontWeight: 600 }}>{lang === 'vi' ? 'Thẻ Tín Dụng' : 'Credit Card'}</div>
                           <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>•••• •••• •••• 4242</div>
                         </div>
                       </div>
@@ -2352,16 +2394,23 @@ function App() {
                         <Wallet size={20} color={paymentMethod === 'apple' ? "var(--accent-primary)" : "#fff"} />
                         <div style={{ flex: 1, marginLeft: '1rem' }}>
                           <div style={{ fontWeight: 600 }}>Apple Pay</div>
-                          <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Pay with Touch ID / Face ID</div>
+                          <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>{lang === 'vi' ? 'Thanh toán bằng Touch ID / Face ID' : 'Pay with Touch ID / Face ID'}</div>
                         </div>
                       </div>
                     </div>
 
                     <button className="btn-primary" onClick={processPayment}>
-                      Pay Now
+                      {lang === 'vi' ? 'Thanh Toán Ngay' : 'Pay Now'}
+                    </button>
+                    <button 
+                      className="btn-primary" 
+                      style={{ background: 'transparent', border: '1px solid var(--border-color)', color: 'white', marginTop: '0.75rem' }} 
+                      onClick={() => setIsCheckingOut(false)}
+                    >
+                      {lang === 'vi' ? 'Hủy' : 'Cancel'}
                     </button>
                     <p style={{ textAlign: 'center', fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '1rem' }}>
-                      Your payment information is encrypted and secure.
+                      {lang === 'vi' ? 'Thông tin thanh toán của bạn được mã hóa và bảo mật.' : 'Your payment information is encrypted and secure.'}
                     </p>
                   </div>
                 </>
