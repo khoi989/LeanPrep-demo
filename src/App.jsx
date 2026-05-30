@@ -190,7 +190,7 @@ const MENU_ITEMS = [
     }, 
     cals: 450, 
     macros: { p: 45, c: 35, f: 12 }, 
-    price: 108333, 
+    price: 54167, 
     img: 'https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&w=600&q=80', 
     ingredients: [
       { name: { en: 'Premium Chicken Breast', vi: 'Ức gà cao cấp' }, amt: '170g' }, 
@@ -208,7 +208,7 @@ const MENU_ITEMS = [
     }, 
     cals: 520, 
     macros: { p: 40, c: 45, f: 18 }, 
-    price: 125000, 
+    price: 62500, 
     img: 'https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format&fit=crop&w=600&q=80', 
     ingredients: [
       { name: { en: 'Wild-Caught Salmon', vi: 'Cá hồi tự nhiên' }, amt: '140g' }, 
@@ -226,7 +226,7 @@ const MENU_ITEMS = [
     }, 
     cals: 600, 
     macros: { p: 55, c: 5, f: 38 }, 
-    price: 133333, 
+    price: 66667, 
     img: 'https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=600&q=80', 
     ingredients: [
       { name: { en: 'Grass-fed Flank Steak', vi: 'Thịt thăn bò ăn cỏ' }, amt: '170g' }, 
@@ -244,7 +244,7 @@ const MENU_ITEMS = [
     }, 
     cals: 400, 
     macros: { p: 15, c: 55, f: 14 }, 
-    price: 100000, 
+    price: 50000, 
     img: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=600&q=80', 
     ingredients: [
       { name: { en: 'Roasted Chickpeas', vi: 'Đậu gà rang lò' }, amt: '80g' }, 
@@ -262,7 +262,7 @@ const MENU_ITEMS = [
     }, 
     cals: 380, 
     macros: { p: 42, c: 15, f: 16 }, 
-    price: 116667, 
+    price: 58334, 
     img: 'https://images.unsplash.com/photo-1529042410759-befb1204b468?auto=format&fit=crop&w=600&q=80', 
     ingredients: [
       { name: { en: 'Lean Turkey Meatballs', vi: 'Thịt gà tây viên ít béo' }, amt: '140g' }, 
@@ -280,7 +280,7 @@ const MENU_ITEMS = [
     }, 
     cals: 350, 
     macros: { p: 38, c: 12, f: 18 }, 
-    price: 129000, 
+    price: 64500, 
     img: 'https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=600&q=80', 
     ingredients: [
       { name: { en: 'Grilled Shrimp', vi: 'Tôm nướng' }, amt: '170g' }, 
@@ -298,7 +298,7 @@ const MENU_ITEMS = [
     }, 
     cals: 500, 
     macros: { p: 45, c: 50, f: 10 }, 
-    price: 91667, 
+    price: 45834, 
     img: 'https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?auto=format&fit=crop&w=600&q=80', 
     ingredients: [
       { name: { en: 'Protein Pancake Mix', vi: 'Bột bánh kếp protein' }, amt: '60g' }, 
@@ -316,7 +316,7 @@ const MENU_ITEMS = [
     }, 
     cals: 420, 
     macros: { p: 8, c: 65, f: 12 }, 
-    price: 95667, 
+    price: 47834, 
     img: 'https://images.unsplash.com/photo-1626700051175-6818013e1d4f?auto=format&fit=crop&w=600&q=80', 
     ingredients: [
       { name: { en: 'Pulled Jackfruit', vi: 'Mít non xé sợi' }, amt: '150g' }, 
@@ -334,7 +334,7 @@ const MENU_ITEMS = [
     }, 
     cals: 450, 
     macros: { p: 25, c: 45, f: 20 }, 
-    price: 104000, 
+    price: 52000, 
     img: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&q=80', 
     ingredients: [
       { name: { en: 'Extra Firm Tofu', vi: 'Đậu phụ siêu cứng' }, amt: '170g' }, 
@@ -352,7 +352,7 @@ const MENU_ITEMS = [
     }, 
     cals: 320, 
     macros: { p: 48, c: 8, f: 10 }, 
-    price: 141667, 
+    price: 70834, 
     img: 'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=600&q=80', 
     ingredients: [
       { name: { en: 'Mahi Mahi Filet', vi: 'Filet cá Mahi Mahi' }, amt: '170g' }, 
@@ -370,7 +370,7 @@ const MENU_ITEMS = [
     }, 
     cals: 380, 
     macros: { p: 18, c: 60, f: 8 }, 
-    price: 87333, 
+    price: 43667, 
     img: 'https://images.unsplash.com/photo-1541832676-9b763b0239ab?auto=format&fit=crop&w=600&q=80', 
     ingredients: [
       { name: { en: 'Black Beans', vi: 'Đậu đen hữu cơ' }, amt: '170g' }, 
@@ -388,7 +388,7 @@ const MENU_ITEMS = [
     }, 
     cals: 550, 
     macros: { p: 45, c: 55, f: 18 }, 
-    price: 112333, 
+    price: 56167, 
     img: 'https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?auto=format&fit=crop&w=600&q=80', 
     ingredients: [
       { name: { en: 'Grilled Chicken', vi: 'Ức gà nướng thái lát' }, amt: '140g' }, 
@@ -406,7 +406,7 @@ const MENU_ITEMS = [
     }, 
     cals: 250, 
     macros: { p: 22, c: 30, f: 5 }, 
-    price: 58333, 
+    price: 29167, 
     img: 'https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=600&q=80', 
     ingredients: [
       { name: { en: 'Non-fat Greek Yogurt', vi: 'Sữa chua Hy Lạp tách béo' }, amt: '240g' }, 
@@ -424,7 +424,7 @@ const MENU_ITEMS = [
     }, 
     cals: 340, 
     macros: { p: 22, c: 45, f: 8 }, 
-    price: 98333, 
+    price: 49167, 
     img: phoRollsImg, 
     ingredients: [
       { name: { en: 'Fresh Steamed Rice Sheets', vi: 'Bánh phở tươi' }, amt: '150g' }, 
@@ -442,7 +442,7 @@ const MENU_ITEMS = [
     }, 
     cals: 480, 
     macros: { p: 42, c: 50, f: 12 }, 
-    price: 105000, 
+    price: 52500, 
     img: chickenBrownRiceImg, 
     ingredients: [
       { name: { en: 'Flame-Grilled Chicken', vi: 'Ức gà nướng' }, amt: '160g' }, 
@@ -460,13 +460,193 @@ const MENU_ITEMS = [
     }, 
     cals: 150, 
     macros: { p: 2, c: 32, f: 3 }, 
-    price: 40000, 
+    price: 20000, 
     img: blackJellyImg, 
     ingredients: [
       { name: { en: 'Authentic Cao Bang Grass Jelly', vi: 'Thạch đen Cao Bằng' }, amt: '180g' }, 
       { name: { en: 'Sweetened Light Coconut Milk', vi: 'Nước cốt dừa béo nhẹ' }, amt: '80ml' }, 
       { name: { en: 'Soft Sago Pearls', vi: 'Trân châu sago ngọt dịu' }, amt: '30g' }, 
       { name: { en: 'Rock Sugar Syrup', vi: 'Nước đường phèn' }, amt: '15ml' }
+    ] 
+  },
+  { 
+    id: 'M17', 
+    name: { en: 'Grilled Garlic Herb Shrimp', vi: 'Tôm Nướng Tỏi Thảo Mộc' }, 
+    desc: { 
+      en: 'Skewered jumbo shrimp brushed with fresh garlic, olive oil, and herbs, served with asparagus spears and seasoned brown rice.', 
+      vi: 'Tôm sú xiên nướng quết tỏi tươi, dầu ô liu và thảo mộc thơm, dùng kèm măng tây áp chảo và cơm gạo lứt dẻo bùi.' 
+    }, 
+    cals: 360, 
+    macros: { p: 32, c: 28, f: 10 }, 
+    price: 68000, 
+    img: 'https://images.unsplash.com/photo-1559742811-824289541574?auto=format&fit=crop&w=600&q=80', 
+    ingredients: [
+      { name: { en: 'Grilled Jumbo Shrimp', vi: 'Tôm sú nướng' }, amt: '150g' }, 
+      { name: { en: 'Fresh Asparagus', vi: 'Măng tây tươi' }, amt: '120g' }, 
+      { name: { en: 'Organic Brown Rice', vi: 'Cơm gạo lứt hữu cơ' }, amt: '100g' }, 
+      { name: { en: 'Garlic Butter & Herbs', vi: 'Bơ tỏi & Thảo mộc' }, amt: '15ml' }
+    ] 
+  },
+  { 
+    id: 'M18', 
+    name: { en: 'Avocado Tuna Salad', vi: 'Salad Bơ Cá Ngừ' }, 
+    desc: { 
+      en: 'Premium flaky tuna tossed with ripe avocado, crisp celery, cucumber, and a light lemon-olive oil dressing over mixed baby greens.', 
+      vi: 'Cá ngừ cao cấp trộn cùng bơ chín sáp, cần tây giòn, dưa chuột và sốt chanh dầu ô liu dịu nhẹ, bày trên nền rau xanh non.' 
+    }, 
+    cals: 310, 
+    macros: { p: 28, c: 12, f: 18 }, 
+    price: 58000, 
+    img: 'https://images.unsplash.com/photo-1505253716362-afaea1d3d1af?auto=format&fit=crop&w=600&q=80', 
+    ingredients: [
+      { name: { en: 'Premium Flaky Tuna', vi: 'Cá ngừ cao cấp' }, amt: '120g' }, 
+      { name: { en: 'Hass Avocado', vi: 'Bơ chín sáp' }, amt: '80g' }, 
+      { name: { en: 'Mixed Baby Greens', vi: 'Rau xanh non' }, amt: '70g' }, 
+      { name: { en: 'Lemon Olive Oil Dressing', vi: 'Sốt chanh dầu ô liu' }, amt: '20ml' }
+    ] 
+  },
+  { 
+    id: 'M19', 
+    name: { en: 'Ginger Soy Glazed Tofu', vi: 'Đậu Hũ Phủ Sốt Tương Gừng' }, 
+    desc: { 
+      en: 'Pan-seared firm tofu glazed in a low-sodium ginger soy sauce, served with roasted bok choy and steamed jasmine rice.', 
+      vi: 'Đậu hũ áp chảo vàng đều phủ sốt tương gừng thanh nhẹ, dùng kèm cải thìa nướng lò và cơm nhài dẻo thơm.' 
+    }, 
+    cals: 340, 
+    macros: { p: 18, c: 42, f: 12 }, 
+    price: 48000, 
+    img: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&q=80', 
+    ingredients: [
+      { name: { en: 'Firm Organic Tofu', vi: 'Đậu hũ hữu cơ' }, amt: '160g' }, 
+      { name: { en: 'Fresh Bok Choy', vi: 'Cải thìa tươi' }, amt: '150g' }, 
+      { name: { en: 'Steamed Jasmine Rice', vi: 'Cơm gạo nhài' }, amt: '100g' }, 
+      { name: { en: 'Ginger Soy Glaze', vi: 'Sốt tương gừng' }, amt: '25ml' }
+    ] 
+  },
+  { 
+    id: 'M20', 
+    name: { en: 'Rosemary Grilled Beef Tenderloin', vi: 'Thăn Bò Nướng Hương Thảo' }, 
+    desc: { 
+      en: 'Tender grass-fed beef tenderloin grilled with fresh rosemary and garlic, accompanied by a savory sweet potato mash and green beans.', 
+      vi: 'Thịt thăn bò ăn cỏ mềm ngọt nướng cùng lá hương thảo và tỏi tươi, dùng kèm khoai lang nghiền bùi ngậy và đậu cô ve thanh mát.' 
+    }, 
+    cals: 520, 
+    macros: { p: 48, c: 30, f: 20 }, 
+    price: 98000, 
+    img: 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80', 
+    ingredients: [
+      { name: { en: 'Grass-fed Beef Tenderloin', vi: 'Thăn bò ăn cỏ' }, amt: '160g' }, 
+      { name: { en: 'Sweet Potato Mash', vi: 'Khoai lang nghiền' }, amt: '120g' }, 
+      { name: { en: 'Fresh Green Beans', vi: 'Đậu cô ve tươi' }, amt: '80g' }, 
+      { name: { en: 'Rosemary Garlic Glaze', vi: 'Sốt bơ hương thảo tỏi' }, amt: '15ml' }
+    ] 
+  },
+  { 
+    id: 'M21', 
+    name: { en: 'Pesto Quinoa Bowl with Roasted Veggies', vi: 'Diêm Mạch Sốt Pesto & Rau Củ Nướng' }, 
+    desc: { 
+      en: 'Organic quinoa tossed in fresh basil pesto, topped with roasted cherry tomatoes, zucchini, red bell pepper, and pine nuts.', 
+      vi: 'Hạt diêm mạch hữu cơ trộn sốt pesto lá húng tây, ăn cùng cà chua bi nướng, bí ngòi, ớt chuông đỏ và hạt thông giòn ngậy.' 
+    }, 
+    cals: 390, 
+    macros: { p: 12, c: 48, f: 16 }, 
+    price: 62000, 
+    img: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=600&q=80', 
+    ingredients: [
+      { name: { en: 'Organic Quinoa', vi: 'Hạt diêm mạch hữu cơ' }, amt: '110g' }, 
+      { name: { en: 'Roasted Vegetables', vi: 'Rau củ nướng lò' }, amt: '150g' }, 
+      { name: { en: 'Fresh Basil Pesto', vi: 'Sốt pesto húng tây' }, amt: '30g' }, 
+      { name: { en: 'Pine Nuts', vi: 'Hạt thông' }, amt: '10g' }
+    ] 
+  },
+  { 
+    id: 'M22', 
+    name: { en: 'Turmeric Lemon Baked Fish', vi: 'Cá Nướng Nghệ Chanh Tây' }, 
+    desc: { 
+      en: 'Delicate white fish filet baked with fresh turmeric, sliced lemon, and dill, paired with steamed asparagus and cauliflower rice.', 
+      vi: 'Filet cá trắng ngọt nướng nghệ tươi, chanh vàng và thì là thanh mát, dùng kèm măng tây tươi và cơm súp lơ ít calo.' 
+    }, 
+    cals: 280, 
+    macros: { p: 35, c: 10, f: 8 }, 
+    price: 69000, 
+    img: 'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=600&q=80', 
+    ingredients: [
+      { name: { en: 'Premium Fish Filet', vi: 'Filet cá trắng cao cấp' }, amt: '160g' }, 
+      { name: { en: 'Fresh Asparagus', vi: 'Măng tây tươi' }, amt: '100g' }, 
+      { name: { en: 'Cauliflower Rice', vi: 'Cơm súp lơ' }, amt: '130g' }, 
+      { name: { en: 'Turmeric Lemon Glaze', vi: 'Sốt nghệ chanh tây' }, amt: '15ml' }
+    ] 
+  },
+  { 
+    id: 'M23', 
+    name: { en: 'High-Protein Chia Seed Pudding', vi: 'Pudding Hạt Chia Giàu Protein' }, 
+    desc: { 
+      en: 'Creamy chia seeds soaked in unsweetened almond milk and vanilla whey protein, layered with mixed berries and toasted coconut flakes.', 
+      vi: 'Hạt chia dẻo mịn ngâm sữa hạnh nhân không đường và whey protein vani dồi dào, xếp lớp cùng quả mọng tươi và dừa nạo nướng thơm.' 
+    }, 
+    cals: 230, 
+    macros: { p: 20, c: 18, f: 7 }, 
+    price: 38000, 
+    img: 'https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=600&q=80', 
+    ingredients: [
+      { name: { en: 'Organic Chia Seeds', vi: 'Hạt chia hữu cơ' }, amt: '35g' }, 
+      { name: { en: 'Almond Milk & Whey Blend', vi: 'Sữa hạnh nhân & Whey protein' }, amt: '180ml' }, 
+      { name: { en: 'Fresh Mixed Berries', vi: 'Quả mọng tươi' }, amt: '50g' }, 
+      { name: { en: 'Toasted Coconut Flakes', vi: 'Dừa nạo nướng' }, amt: '10g' }
+    ] 
+  },
+  { 
+    id: 'M24', 
+    name: { en: 'Sweet Potato Chickpea Salad', vi: 'Salad Khoai Lang & Đậu Gà' }, 
+    desc: { 
+      en: 'Roasted sweet potato cubes, organic chickpeas, and red onion tossed with fresh parsley and a tahini vinaigrette over baby spinach.', 
+      vi: 'Khoai lang ngọt nướng, đậu gà bùi và hành tây đỏ trộn cùng rau mùi tây tươi, rưới sốt vừng tahini trên nền cải bó xôi.' 
+    }, 
+    cals: 350, 
+    macros: { p: 12, c: 48, f: 10 }, 
+    price: 49000, 
+    img: 'https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=600&q=80', 
+    ingredients: [
+      { name: { en: 'Roasted Sweet Potatoes', vi: 'Khoai lang nướng' }, amt: '120g' }, 
+      { name: { en: 'Organic Chickpeas', vi: 'Đậu gà hữu cơ' }, amt: '100g' }, 
+      { name: { en: 'Baby Spinach', vi: 'Cải bó xôi non' }, amt: '60g' }, 
+      { name: { en: 'Tahini Vinaigrette', vi: 'Sốt vừng tahini' }, amt: '25ml' }
+    ] 
+  },
+  { 
+    id: 'M25', 
+    name: { en: 'Grilled Basil Herb Chicken', vi: 'Ức Gà Nướng Sốt Húng Tây' }, 
+    desc: { 
+      en: 'Juicy chicken breast marinated in fresh sweet basil and citrus herbs, grilled and served with green beans and a wild rice blend.', 
+      vi: 'Ức gà mọng nước ướp lá húng tây ngọt và thảo mộc cam chanh, nướng thơm và dùng kèm đậu cô ve, cơm gạo hoang dã.' 
+    }, 
+    cals: 410, 
+    macros: { p: 40, c: 32, f: 11 }, 
+    price: 55000, 
+    img: 'https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&w=600&q=80', 
+    ingredients: [
+      { name: { en: 'Premium Chicken Breast', vi: 'Ức gà cao cấp' }, amt: '160g' }, 
+      { name: { en: 'Fresh Green Beans', vi: 'Đậu cô ve tươi' }, amt: '90g' }, 
+      { name: { en: 'Wild Rice Blend', vi: 'Cơm gạo hoang dã' }, amt: '100g' }, 
+      { name: { en: 'Sweet Basil Glaze', vi: 'Sốt húng tây ngọt' }, amt: '20ml' }
+    ] 
+  },
+  { 
+    id: 'M26', 
+    name: { en: 'Grass-Fed Beef Pho Rolls', vi: 'Phở Cuốn Bò Tây Bắc' }, 
+    desc: { 
+      en: 'Fresh steamed rice noodle sheets wrapped around grilled grass-fed beef slices, fresh regional herbs, and garden lettuce, served with a spiced lime chili fish sauce.', 
+      vi: 'Bánh phở tươi cuộn thịt bò ăn cỏ nướng đậm vị Tây Bắc, rau thơm đặc sản và xà lách giòn ngọt, chấm nước mắm chanh ớt cay nồng.' 
+    }, 
+    cals: 380, 
+    macros: { p: 26, c: 45, f: 10 }, 
+    price: 52000, 
+    img: 'https://images.unsplash.com/photo-1626700051175-6818013e1d4f?auto=format&fit=crop&w=600&q=80', 
+    ingredients: [
+      { name: { en: 'Steamed Rice Sheets', vi: 'Bánh phở hấp' }, amt: '150g' }, 
+      { name: { en: 'Grass-Fed Beef', vi: 'Thịt bò ăn cỏ' }, amt: '120g' }, 
+      { name: { en: 'Fresh Regional Herbs', vi: 'Xà lách & Rau thơm' }, amt: '50g' }, 
+      { name: { en: 'Spiced Lime Chili Fish Sauce', vi: 'Nước chấm tỏi ớt' }, amt: '40ml' }
     ] 
   }
 ];
@@ -1659,7 +1839,7 @@ function App() {
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                 <div className="glass-panel" style={{ padding: '1.5rem', borderRadius: '24px', border: '1px solid var(--border-color)' }}>
                   <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--text-muted)' }}>{lang === 'vi' ? 'Tổng Giá Trị Hiện Có' : 'Total Value on Hand'}</p>
-                  <h2 style={{ margin: '0.5rem 0', fontSize: '1.75rem' }}>{formatVND(27004167)}</h2>
+                  <h2 style={{ margin: '0.5rem 0', fontSize: '1.75rem' }}>{formatVND(13502084)}</h2>
                   <p style={{ margin: 0, fontSize: '0.8rem', color: 'var(--accent-primary)', fontWeight: 600 }}>{lang === 'vi' ? 'Phạm Vi Tối Ưu' : 'Optimal Range'}</p>
                 </div>
                 <div className="glass-panel" style={{ padding: '1.5rem', borderRadius: '24px', border: '1px solid var(--border-color)' }}>
@@ -1676,7 +1856,7 @@ function App() {
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem' }}>
                 <div className="glass-panel" style={{ padding: '2rem', borderRadius: '24px', border: '1px solid var(--border-color)' }}>
                   <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--text-muted)' }}>{lang === 'vi' ? 'Doanh Thu Gộp (Tháng)' : 'Gross Revenue (MTD)'}</p>
-                  <h2 style={{ margin: '0.5rem 0', fontSize: '2.5rem' }}>{formatVND(357083333)}</h2>
+                  <h2 style={{ margin: '0.5rem 0', fontSize: '2.5rem' }}>{formatVND(178541667)}</h2>
                   <p style={{ margin: 0, fontSize: '0.9rem', color: 'var(--accent-primary)', fontWeight: 600 }}>{lang === 'vi' ? '+15.2% so với tháng trước' : '+15.2% vs last month'}</p>
                 </div>
                 <div className="glass-panel" style={{ padding: '2rem', borderRadius: '24px', border: '1px solid var(--border-color)' }}>
@@ -1696,10 +1876,10 @@ function App() {
                   <h3 style={{ marginBottom: '2rem' }}>{lang === 'vi' ? 'Món Ăn Bán Chạy Nhất (Tuần Này)' : 'Top Selling Meals (This Week)'}</h3>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                     {[
-                      { rank: 1, name: { en: 'Lemon Herb Chicken', vi: 'Gà Sốt Chanh Thảo Mộc' }, orders: 342, rev: '37.016.667 ₫' },
-                      { rank: 2, name: { en: 'Spicy Salmon Bowl', vi: 'Cơm Cá Hồi Sốt Cay' }, orders: 289, rev: '36.100.000 ₫' },
-                      { rank: 3, name: { en: 'Keto Steak & Eggs', vi: 'Bít Tết & Trứng Keto' }, orders: 215, rev: '28.641.667 ₫' },
-                      { rank: 4, name: { en: 'Vegan Buddha Bowl', vi: 'Cơm Chay Buddha' }, orders: 198, rev: '19.783.333 ₫' }
+                      { rank: 1, name: { en: 'Lemon Herb Chicken', vi: 'Gà Sốt Chanh Thảo Mộc' }, orders: 342, rev: '18.508.334 ₫' },
+                      { rank: 2, name: { en: 'Spicy Salmon Bowl', vi: 'Cơm Cá Hồi Sốt Cay' }, orders: 289, rev: '18.050.000 ₫' },
+                      { rank: 3, name: { en: 'Keto Steak & Eggs', vi: 'Bít Tết & Trứng Keto' }, orders: 215, rev: '14.320.834 ₫' },
+                      { rank: 4, name: { en: 'Vegan Buddha Bowl', vi: 'Cơm Chay Buddha' }, orders: 198, rev: '9.891.667 ₫' }
                     ].map(m => (
                       <div key={m.rank} className="flex-between" style={{ paddingBottom: '1rem', borderBottom: '1px solid var(--border-color)' }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
@@ -1860,14 +2040,14 @@ function App() {
                     </thead>
                     <tbody>
                       {[
-                        { name: { en: 'Premium Chicken Breast', vi: 'Ức Gà Cao Cấp' }, qty: '56 kg', supplier: 'Farm Fresh Meats Inc.', cost: '3.079.333 ₫' },
-                        { name: { en: 'Wild-Caught Salmon', vi: 'Cá Hồi Tự Nhiên' }, qty: '20 kg', supplier: 'Oceanic Seafoods', cost: '3.558.667 ₫' },
-                        { name: { en: 'Grass-fed Flank Steak', vi: 'Bít Tết Bò Ăn Cỏ' }, qty: '27 kg', supplier: 'Ranch Direct', cost: '4.836.667 ₫' },
-                        { name: { en: 'Organic Quinoa', vi: 'Diêm Mạch Hữu Cơ' }, qty: '14 kg', supplier: 'Valley Grains', cost: '712.500 ₫' },
-                        { name: { en: 'Fresh Broccoli', vi: 'Bông Cải Xanh Tươi' }, qty: '18 kg', supplier: 'Local Green Farms', cost: '516.667 ₫' },
-                        { name: { en: 'Extra Firm Tofu', vi: 'Đậu Hũ Siêu Cứng' }, qty: '12 kg', supplier: 'Soy Masters', cost: '293.333 ₫' },
-                        { name: { en: 'Sweet Potatoes', vi: 'Khoai Lang Ngọt' }, qty: '18 kg', supplier: 'Root Farms', cost: '204.167 ₫' },
-                        { name: { en: 'Zucchini Noodles', vi: 'Mỳ Bí Ngòi' }, qty: '15 kg', supplier: 'Fresh Veggies Co.', cost: '375.000 ₫' }
+                        { name: { en: 'Premium Chicken Breast', vi: 'Ức Gà Cao Cấp' }, qty: '56 kg', supplier: 'Farm Fresh Meats Inc.', cost: '1.539.667 ₫' },
+                        { name: { en: 'Wild-Caught Salmon', vi: 'Cá Hồi Tự Nhiên' }, qty: '20 kg', supplier: 'Oceanic Seafoods', cost: '1.779.334 ₫' },
+                        { name: { en: 'Grass-fed Flank Steak', vi: 'Bít Tết Bò Ăn Cỏ' }, qty: '27 kg', supplier: 'Ranch Direct', cost: '2.418.334 ₫' },
+                        { name: { en: 'Organic Quinoa', vi: 'Diêm Mạch Hữu Cơ' }, qty: '14 kg', supplier: 'Valley Grains', cost: '356.250 ₫' },
+                        { name: { en: 'Fresh Broccoli', vi: 'Bông Cải Xanh Tươi' }, qty: '18 kg', supplier: 'Local Green Farms', cost: '258.334 ₫' },
+                        { name: { en: 'Extra Firm Tofu', vi: 'Đậu Hũ Siêu Cứng' }, qty: '12 kg', supplier: 'Soy Masters', cost: '146.667 ₫' },
+                        { name: { en: 'Sweet Potatoes', vi: 'Khoai Lang Ngọt' }, qty: '18 kg', supplier: 'Root Farms', cost: '102.084 ₫' },
+                        { name: { en: 'Zucchini Noodles', vi: 'Mỳ Bí Ngòi' }, qty: '15 kg', supplier: 'Fresh Veggies Co.', cost: '187.500 ₫' }
                       ].map((item, i) => (
                         <tr key={i} style={{ borderBottom: '1px solid rgba(255,255,255,0.03)', fontSize: '0.95rem' }}>
                           <td style={{ padding: '1.25rem 0', fontWeight: 500 }}>{t(item.name, lang)}</td>
@@ -1882,7 +2062,7 @@ function App() {
 
                 <div className="flex-between" style={{ padding: '1.5rem 0', borderTop: '2px solid var(--border-color)', marginBottom: '3rem' }}>
                   <span style={{ fontSize: '1.1rem', fontWeight: 700 }}>Total Estimated Cost:</span>
-                  <span style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--accent-primary)' }}>{formatVND(13576334)}</span>
+                  <span style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--accent-primary)' }}>{formatVND(6788170)}</span>
                 </div>
 
                 <div style={{ display: 'flex', gap: '1.5rem' }}>
