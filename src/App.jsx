@@ -190,7 +190,7 @@ const MENU_ITEMS = [
     }, 
     cals: 450, 
     macros: { p: 45, c: 35, f: 12 }, 
-    price: 325000, 
+    price: 108333, 
     img: 'https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&w=600&q=80', 
     ingredients: [
       { name: { en: 'Premium Chicken Breast', vi: 'Ức gà cao cấp' }, amt: '170g' }, 
@@ -208,7 +208,7 @@ const MENU_ITEMS = [
     }, 
     cals: 520, 
     macros: { p: 40, c: 45, f: 18 }, 
-    price: 375000, 
+    price: 125000, 
     img: 'https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format&fit=crop&w=600&q=80', 
     ingredients: [
       { name: { en: 'Wild-Caught Salmon', vi: 'Cá hồi tự nhiên' }, amt: '140g' }, 
@@ -226,7 +226,7 @@ const MENU_ITEMS = [
     }, 
     cals: 600, 
     macros: { p: 55, c: 5, f: 38 }, 
-    price: 400000, 
+    price: 133333, 
     img: 'https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=600&q=80', 
     ingredients: [
       { name: { en: 'Grass-fed Flank Steak', vi: 'Thịt thăn bò ăn cỏ' }, amt: '170g' }, 
@@ -244,7 +244,7 @@ const MENU_ITEMS = [
     }, 
     cals: 400, 
     macros: { p: 15, c: 55, f: 14 }, 
-    price: 300000, 
+    price: 100000, 
     img: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=600&q=80', 
     ingredients: [
       { name: { en: 'Roasted Chickpeas', vi: 'Đậu gà rang lò' }, amt: '80g' }, 
@@ -262,7 +262,7 @@ const MENU_ITEMS = [
     }, 
     cals: 380, 
     macros: { p: 42, c: 15, f: 16 }, 
-    price: 350000, 
+    price: 116667, 
     img: 'https://images.unsplash.com/photo-1529042410759-befb1204b468?auto=format&fit=crop&w=600&q=80', 
     ingredients: [
       { name: { en: 'Lean Turkey Meatballs', vi: 'Thịt gà tây viên ít béo' }, amt: '140g' }, 
@@ -280,7 +280,7 @@ const MENU_ITEMS = [
     }, 
     cals: 350, 
     macros: { p: 38, c: 12, f: 18 }, 
-    price: 387000, 
+    price: 129000, 
     img: 'https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=600&q=80', 
     ingredients: [
       { name: { en: 'Grilled Shrimp', vi: 'Tôm nướng' }, amt: '170g' }, 
@@ -298,7 +298,7 @@ const MENU_ITEMS = [
     }, 
     cals: 500, 
     macros: { p: 45, c: 50, f: 10 }, 
-    price: 275000, 
+    price: 91667, 
     img: 'https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?auto=format&fit=crop&w=600&q=80', 
     ingredients: [
       { name: { en: 'Protein Pancake Mix', vi: 'Bột bánh kếp protein' }, amt: '60g' }, 
@@ -316,7 +316,7 @@ const MENU_ITEMS = [
     }, 
     cals: 420, 
     macros: { p: 8, c: 65, f: 12 }, 
-    price: 287000, 
+    price: 95667, 
     img: 'https://images.unsplash.com/photo-1626700051175-6818013e1d4f?auto=format&fit=crop&w=600&q=80', 
     ingredients: [
       { name: { en: 'Pulled Jackfruit', vi: 'Mít non xé sợi' }, amt: '150g' }, 
@@ -334,7 +334,7 @@ const MENU_ITEMS = [
     }, 
     cals: 450, 
     macros: { p: 25, c: 45, f: 20 }, 
-    price: 312000, 
+    price: 104000, 
     img: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&q=80', 
     ingredients: [
       { name: { en: 'Extra Firm Tofu', vi: 'Đậu phụ siêu cứng' }, amt: '170g' }, 
@@ -352,7 +352,7 @@ const MENU_ITEMS = [
     }, 
     cals: 320, 
     macros: { p: 48, c: 8, f: 10 }, 
-    price: 425000, 
+    price: 141667, 
     img: 'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=600&q=80', 
     ingredients: [
       { name: { en: 'Mahi Mahi Filet', vi: 'Filet cá Mahi Mahi' }, amt: '170g' }, 
@@ -370,7 +370,7 @@ const MENU_ITEMS = [
     }, 
     cals: 380, 
     macros: { p: 18, c: 60, f: 8 }, 
-    price: 262000, 
+    price: 87333, 
     img: 'https://images.unsplash.com/photo-1541832676-9b763b0239ab?auto=format&fit=crop&w=600&q=80', 
     ingredients: [
       { name: { en: 'Black Beans', vi: 'Đậu đen hữu cơ' }, amt: '170g' }, 
@@ -388,7 +388,7 @@ const MENU_ITEMS = [
     }, 
     cals: 550, 
     macros: { p: 45, c: 55, f: 18 }, 
-    price: 337000, 
+    price: 112333, 
     img: 'https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?auto=format&fit=crop&w=600&q=80', 
     ingredients: [
       { name: { en: 'Grilled Chicken', vi: 'Ức gà nướng thái lát' }, amt: '140g' }, 
@@ -406,7 +406,7 @@ const MENU_ITEMS = [
     }, 
     cals: 250, 
     macros: { p: 22, c: 30, f: 5 }, 
-    price: 175000, 
+    price: 58333, 
     img: 'https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=600&q=80', 
     ingredients: [
       { name: { en: 'Non-fat Greek Yogurt', vi: 'Sữa chua Hy Lạp tách béo' }, amt: '240g' }, 
@@ -424,7 +424,7 @@ const MENU_ITEMS = [
     }, 
     cals: 340, 
     macros: { p: 22, c: 45, f: 8 }, 
-    price: 295000, 
+    price: 98333, 
     img: phoRollsImg, 
     ingredients: [
       { name: { en: 'Fresh Steamed Rice Sheets', vi: 'Bánh phở tươi' }, amt: '150g' }, 
@@ -442,7 +442,7 @@ const MENU_ITEMS = [
     }, 
     cals: 480, 
     macros: { p: 42, c: 50, f: 12 }, 
-    price: 315000, 
+    price: 105000, 
     img: chickenBrownRiceImg, 
     ingredients: [
       { name: { en: 'Flame-Grilled Chicken', vi: 'Ức gà nướng' }, amt: '160g' }, 
@@ -460,7 +460,7 @@ const MENU_ITEMS = [
     }, 
     cals: 150, 
     macros: { p: 2, c: 32, f: 3 }, 
-    price: 120000, 
+    price: 40000, 
     img: blackJellyImg, 
     ingredients: [
       { name: { en: 'Authentic Cao Bang Grass Jelly', vi: 'Thạch đen Cao Bằng' }, amt: '180g' }, 
@@ -1641,7 +1641,7 @@ function App() {
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                 <div className="glass-panel" style={{ padding: '1.5rem', borderRadius: '24px', border: '1px solid var(--border-color)' }}>
                   <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--text-muted)' }}>{lang === 'vi' ? 'Tổng Giá Trị Hiện Có' : 'Total Value on Hand'}</p>
-                  <h2 style={{ margin: '0.5rem 0', fontSize: '1.75rem' }}>{formatVND(81012500)}</h2>
+                  <h2 style={{ margin: '0.5rem 0', fontSize: '1.75rem' }}>{formatVND(27004167)}</h2>
                   <p style={{ margin: 0, fontSize: '0.8rem', color: 'var(--accent-primary)', fontWeight: 600 }}>{lang === 'vi' ? 'Phạm Vi Tối Ưu' : 'Optimal Range'}</p>
                 </div>
                 <div className="glass-panel" style={{ padding: '1.5rem', borderRadius: '24px', border: '1px solid var(--border-color)' }}>
@@ -1658,7 +1658,7 @@ function App() {
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem' }}>
                 <div className="glass-panel" style={{ padding: '2rem', borderRadius: '24px', border: '1px solid var(--border-color)' }}>
                   <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--text-muted)' }}>{lang === 'vi' ? 'Doanh Thu Gộp (Tháng)' : 'Gross Revenue (MTD)'}</p>
-                  <h2 style={{ margin: '0.5rem 0', fontSize: '2.5rem' }}>{formatVND(1071250000)}</h2>
+                  <h2 style={{ margin: '0.5rem 0', fontSize: '2.5rem' }}>{formatVND(357083333)}</h2>
                   <p style={{ margin: 0, fontSize: '0.9rem', color: 'var(--accent-primary)', fontWeight: 600 }}>{lang === 'vi' ? '+15.2% so với tháng trước' : '+15.2% vs last month'}</p>
                 </div>
                 <div className="glass-panel" style={{ padding: '2rem', borderRadius: '24px', border: '1px solid var(--border-color)' }}>
@@ -1678,10 +1678,10 @@ function App() {
                   <h3 style={{ marginBottom: '2rem' }}>{lang === 'vi' ? 'Món Ăn Bán Chạy Nhất (Tuần Này)' : 'Top Selling Meals (This Week)'}</h3>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                     {[
-                      { rank: 1, name: { en: 'Lemon Herb Chicken', vi: 'Gà Sốt Chanh Thảo Mộc' }, orders: 342, rev: '111.050.000 ₫' },
-                      { rank: 2, name: { en: 'Spicy Salmon Bowl', vi: 'Cơm Cá Hồi Sốt Cay' }, orders: 289, rev: '108.300.000 ₫' },
-                      { rank: 3, name: { en: 'Keto Steak & Eggs', vi: 'Bít Tết & Trứng Keto' }, orders: 215, rev: '85.925.000 ₫' },
-                      { rank: 4, name: { en: 'Vegan Buddha Bowl', vi: 'Cơm Chay Buddha' }, orders: 198, rev: '59.350.000 ₫' }
+                      { rank: 1, name: { en: 'Lemon Herb Chicken', vi: 'Gà Sốt Chanh Thảo Mộc' }, orders: 342, rev: '37.016.667 ₫' },
+                      { rank: 2, name: { en: 'Spicy Salmon Bowl', vi: 'Cơm Cá Hồi Sốt Cay' }, orders: 289, rev: '36.100.000 ₫' },
+                      { rank: 3, name: { en: 'Keto Steak & Eggs', vi: 'Bít Tết & Trứng Keto' }, orders: 215, rev: '28.641.667 ₫' },
+                      { rank: 4, name: { en: 'Vegan Buddha Bowl', vi: 'Cơm Chay Buddha' }, orders: 198, rev: '19.783.333 ₫' }
                     ].map(m => (
                       <div key={m.rank} className="flex-between" style={{ paddingBottom: '1rem', borderBottom: '1px solid var(--border-color)' }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
@@ -1842,14 +1842,14 @@ function App() {
                     </thead>
                     <tbody>
                       {[
-                        { name: { en: 'Premium Chicken Breast', vi: 'Ức Gà Cao Cấp' }, qty: '56 kg', supplier: 'Farm Fresh Meats Inc.', cost: '9.238.000 ₫' },
-                        { name: { en: 'Wild-Caught Salmon', vi: 'Cá Hồi Tự Nhiên' }, qty: '20 kg', supplier: 'Oceanic Seafoods', cost: '10.676.000 ₫' },
-                        { name: { en: 'Grass-fed Flank Steak', vi: 'Bít Tết Bò Ăn Cỏ' }, qty: '27 kg', supplier: 'Ranch Direct', cost: '14.510.000 ₫' },
-                        { name: { en: 'Organic Quinoa', vi: 'Diêm Mạch Hữu Cơ' }, qty: '14 kg', supplier: 'Valley Grains', cost: '2.137.500 ₫' },
-                        { name: { en: 'Fresh Broccoli', vi: 'Bông Cải Xanh Tươi' }, qty: '18 kg', supplier: 'Local Green Farms', cost: '1.550.000 ₫' },
-                        { name: { en: 'Extra Firm Tofu', vi: 'Đậu Hũ Siêu Cứng' }, qty: '12 kg', supplier: 'Soy Masters', cost: '880.000 ₫' },
-                        { name: { en: 'Sweet Potatoes', vi: 'Khoai Lang Ngọt' }, qty: '18 kg', supplier: 'Root Farms', cost: '612.500 ₫' },
-                        { name: { en: 'Zucchini Noodles', vi: 'Mỳ Bí Ngòi' }, qty: '15 kg', supplier: 'Fresh Veggies Co.', cost: '1.125.000 ₫' }
+                        { name: { en: 'Premium Chicken Breast', vi: 'Ức Gà Cao Cấp' }, qty: '56 kg', supplier: 'Farm Fresh Meats Inc.', cost: '3.079.333 ₫' },
+                        { name: { en: 'Wild-Caught Salmon', vi: 'Cá Hồi Tự Nhiên' }, qty: '20 kg', supplier: 'Oceanic Seafoods', cost: '3.558.667 ₫' },
+                        { name: { en: 'Grass-fed Flank Steak', vi: 'Bít Tết Bò Ăn Cỏ' }, qty: '27 kg', supplier: 'Ranch Direct', cost: '4.836.667 ₫' },
+                        { name: { en: 'Organic Quinoa', vi: 'Diêm Mạch Hữu Cơ' }, qty: '14 kg', supplier: 'Valley Grains', cost: '712.500 ₫' },
+                        { name: { en: 'Fresh Broccoli', vi: 'Bông Cải Xanh Tươi' }, qty: '18 kg', supplier: 'Local Green Farms', cost: '516.667 ₫' },
+                        { name: { en: 'Extra Firm Tofu', vi: 'Đậu Hũ Siêu Cứng' }, qty: '12 kg', supplier: 'Soy Masters', cost: '293.333 ₫' },
+                        { name: { en: 'Sweet Potatoes', vi: 'Khoai Lang Ngọt' }, qty: '18 kg', supplier: 'Root Farms', cost: '204.167 ₫' },
+                        { name: { en: 'Zucchini Noodles', vi: 'Mỳ Bí Ngòi' }, qty: '15 kg', supplier: 'Fresh Veggies Co.', cost: '375.000 ₫' }
                       ].map((item, i) => (
                         <tr key={i} style={{ borderBottom: '1px solid rgba(255,255,255,0.03)', fontSize: '0.95rem' }}>
                           <td style={{ padding: '1.25rem 0', fontWeight: 500 }}>{t(item.name, lang)}</td>
@@ -1864,7 +1864,7 @@ function App() {
 
                 <div className="flex-between" style={{ padding: '1.5rem 0', borderTop: '2px solid var(--border-color)', marginBottom: '3rem' }}>
                   <span style={{ fontSize: '1.1rem', fontWeight: 700 }}>Total Estimated Cost:</span>
-                  <span style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--accent-primary)' }}>{formatVND(40729250)}</span>
+                  <span style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--accent-primary)' }}>{formatVND(13576334)}</span>
                 </div>
 
                 <div style={{ display: 'flex', gap: '1.5rem' }}>
