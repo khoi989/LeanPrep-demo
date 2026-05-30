@@ -2078,7 +2078,7 @@ function App() {
                         </div>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', background: '#222', borderRadius: '8px', padding: '0.25rem' }}>
                           <button style={{ background: 'none', border: 'none', color: '#fff', padding: '0.25rem', cursor: 'pointer' }} onClick={() => updateQty(item.id, -1)}><Minus size={16}/></button>
-                          <span style={{ fontSize: '0.9rem', width: '16px', textAlign: 'center' }}>{item.qty}</span>
+                          <span style={{ fontSize: '0.9rem', width: '16px', textAlign: 'center', color: '#fff' }}>{item.qty}</span>
                           <button style={{ background: 'none', border: 'none', color: '#fff', padding: '0.25rem', cursor: 'pointer' }} onClick={() => updateQty(item.id, 1)}><Plus size={16}/></button>
                         </div>
                       </div>
