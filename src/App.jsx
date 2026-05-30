@@ -12,20 +12,27 @@ const formatVND = (value) => {
   }).format(value);
 };
 
+const renderImage = (img, name, style = {}) => {
+  if (typeof img === 'string' && img.startsWith('http')) {
+    return <img src={img} alt={name} style={{ width: '100%', height: '100%', objectFit: 'cover', ...style }} />;
+  }
+  return img;
+};
+
 const MENU_ITEMS = [
-  { id: 'M1', name: 'Lemon Herb Chicken', desc: 'Juicy, oven-roasted chicken breast marinated in fresh lemon and herbs, served over a bed of fluffy quinoa and steamed broccoli.', cals: 450, macros: { p: 45, c: 35, f: 12 }, price: 325000, img: '🍗', ingredients: [{ name: 'Premium Chicken Breast', amt: '170g' }, { name: 'Organic Quinoa', amt: '90g' }, { name: 'Fresh Broccoli', amt: '150g' }, { name: 'Olive Oil & Herbs', amt: '15ml' }] },
-  { id: 'M2', name: 'Spicy Salmon Bowl', desc: 'Wild-caught salmon glazed in a spicy-sweet soy reduction, paired with jasmine rice and roasted edamame.', cals: 520, macros: { p: 40, c: 45, f: 18 }, price: 375000, img: '🍱', ingredients: [{ name: 'Wild-Caught Salmon', amt: '140g' }, { name: 'Jasmine Rice', amt: '120g' }, { name: 'Edamame', amt: '75g' }, { name: 'Spicy Soy Glaze', amt: '30ml' }] },
-  { id: 'M3', name: 'Keto Steak & Eggs', desc: 'Grass-fed flank steak seared to perfection alongside two pasture-raised eggs and avocado.', cals: 600, macros: { p: 55, c: 5, f: 38 }, price: 400000, img: '🥩', ingredients: [{ name: 'Grass-fed Flank Steak', amt: '170g' }, { name: 'Pasture-Raised Eggs', amt: '2 large' }, { name: 'Hass Avocado', amt: '100g' }, { name: 'Grass-fed Butter', amt: '15g' }] },
-  { id: 'M4', name: 'Vegan Buddha Bowl', desc: 'A vibrant mix of roasted chickpeas, sweet potatoes, and kale drizzled with a creamy tahini dressing.', cals: 400, macros: { p: 15, c: 55, f: 14 }, price: 300000, img: '🥗', ingredients: [{ name: 'Roasted Chickpeas', amt: '80g' }, { name: 'Sweet Potatoes', amt: '130g' }, { name: 'Fresh Kale', amt: '100g' }, { name: 'Tahini Dressing', amt: '30g' }] },
-  { id: 'M5', name: 'Turkey Meatballs & Zoodles', desc: 'Lean ground turkey meatballs simmered in a rich marinara sauce, served over fresh zucchini noodles.', cals: 380, macros: { p: 42, c: 15, f: 16 }, price: 350000, img: '🍝', ingredients: [{ name: 'Lean Turkey Meatballs', amt: '140g' }, { name: 'Zucchini Noodles', amt: '150g' }, { name: 'Marinara Sauce', amt: '120ml' }, { name: 'Parmesan Cheese', amt: '10g' }] },
-  { id: 'M6', name: 'Mediterranean Shrimp Salad', desc: 'Grilled shrimp over mixed greens with feta, Kalamata olives, cucumbers, and a light vinaigrette.', cals: 350, macros: { p: 38, c: 12, f: 18 }, price: 387000, img: '🍤', ingredients: [{ name: 'Grilled Shrimp', amt: '170g' }, { name: 'Mixed Greens', amt: '60g' }, { name: 'Kalamata Olives', amt: '30g' }, { name: 'Feta Cheese', amt: '30g' }] },
-  { id: 'M7', name: 'Protein Power Pancakes', desc: 'Fluffy whey protein pancakes topped with fresh berries, sliced banana, and sugar-free syrup.', cals: 500, macros: { p: 45, c: 50, f: 10 }, price: 275000, img: '🥞', ingredients: [{ name: 'Protein Pancake Mix', amt: '60g' }, { name: 'Fresh Berries', amt: '75g' }, { name: 'Sliced Banana', amt: '60g' }, { name: 'Sugar-Free Syrup', amt: '30ml' }] },
-  { id: 'M8', name: 'BBQ Jackfruit Wrap', desc: 'Smoky BBQ pulled jackfruit wrapped in a spinach tortilla with crunchy cabbage slaw.', cals: 420, macros: { p: 8, c: 65, f: 12 }, price: 287000, img: '🌯', ingredients: [{ name: 'Pulled Jackfruit', amt: '150g' }, { name: 'Spinach Tortilla', amt: '1 wrap' }, { name: 'Cabbage Slaw', amt: '50g' }, { name: 'BBQ Sauce', amt: '30g' }] },
-  { id: 'M9', name: 'Teriyaki Tofu Stir-Fry', desc: 'Crispy tofu cubes tossed with broccoli, bell peppers, and snap peas in a savory teriyaki glaze.', cals: 450, macros: { p: 25, c: 45, f: 20 }, price: 312000, img: '🥘', ingredients: [{ name: 'Extra Firm Tofu', amt: '170g' }, { name: 'Mixed Veggies', amt: '200g' }, { name: 'Teriyaki Sauce', amt: '30ml' }, { name: 'Sesame Seeds', amt: '5g' }] },
-  { id: 'M10', name: 'Grilled Mahi Mahi', desc: 'Wild-caught Mahi Mahi grilled with lemon and dill, served alongside roasted asparagus spears.', cals: 320, macros: { p: 48, c: 8, f: 10 }, price: 425000, img: '🐟', ingredients: [{ name: 'Mahi Mahi Filet', amt: '170g' }, { name: 'Asparagus', amt: '130g' }, { name: 'Lemon Wedge', amt: '1 slice' }, { name: 'Olive Oil', amt: '8ml' }] },
-  { id: 'M11', name: 'Black Bean Chili', desc: 'Hearty and spicy black bean and sweet potato chili, topped with a dollop of Greek yogurt.', cals: 380, macros: { p: 18, c: 60, f: 8 }, price: 262000, img: '🍲', ingredients: [{ name: 'Black Beans', amt: '170g' }, { name: 'Diced Sweet Potato', amt: '65g' }, { name: 'Chili Tomato Base', amt: '240ml' }, { name: 'Plain Greek Yogurt', amt: '30g' }] },
-  { id: 'M12', name: 'Chicken Pesto Penne', desc: 'Whole wheat penne pasta tossed in a creamy basil pesto sauce with grilled chicken breast strips.', cals: 550, macros: { p: 45, c: 55, f: 18 }, price: 337000, img: '🍝', ingredients: [{ name: 'Grilled Chicken', amt: '140g' }, { name: 'Whole Wheat Penne', amt: '100g' }, { name: 'Basil Pesto', amt: '30g' }, { name: 'Cherry Tomatoes', amt: '40g' }] },
-  { id: 'M13', name: 'Berry Protein Parfait', desc: 'Layers of non-fat Greek yogurt, mixed berries, and a crunchy almond granola.', cals: 250, macros: { p: 22, c: 30, f: 5 }, price: 175000, img: '🍧', ingredients: [{ name: 'Non-fat Greek Yogurt', amt: '240g' }, { name: 'Mixed Berries', amt: '75g' }, { name: 'Almond Granola', amt: '30g' }, { name: 'Honey', amt: '7g' }] },
+  { id: 'M1', name: 'Lemon Herb Chicken', desc: 'Juicy, oven-roasted chicken breast marinated in fresh lemon and herbs, served over a bed of fluffy quinoa and steamed broccoli.', cals: 450, macros: { p: 45, c: 35, f: 12 }, price: 325000, img: 'https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&w=600&q=80', ingredients: [{ name: 'Premium Chicken Breast', amt: '170g' }, { name: 'Organic Quinoa', amt: '90g' }, { name: 'Fresh Broccoli', amt: '150g' }, { name: 'Olive Oil & Herbs', amt: '15ml' }] },
+  { id: 'M2', name: 'Spicy Salmon Bowl', desc: 'Wild-caught salmon glazed in a spicy-sweet soy reduction, paired with jasmine rice and roasted edamame.', cals: 520, macros: { p: 40, c: 45, f: 18 }, price: 375000, img: 'https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format&fit=crop&w=600&q=80', ingredients: [{ name: 'Wild-Caught Salmon', amt: '140g' }, { name: 'Jasmine Rice', amt: '120g' }, { name: 'Edamame', amt: '75g' }, { name: 'Spicy Soy Glaze', amt: '30ml' }] },
+  { id: 'M3', name: 'Keto Steak & Eggs', desc: 'Grass-fed flank steak seared to perfection alongside two pasture-raised eggs and avocado.', cals: 600, macros: { p: 55, c: 5, f: 38 }, price: 400000, img: 'https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=600&q=80', ingredients: [{ name: 'Grass-fed Flank Steak', amt: '170g' }, { name: 'Pasture-Raised Eggs', amt: '2 large' }, { name: 'Hass Avocado', amt: '100g' }, { name: 'Grass-fed Butter', amt: '15g' }] },
+  { id: 'M4', name: 'Vegan Buddha Bowl', desc: 'A vibrant mix of roasted chickpeas, sweet potatoes, and kale drizzled with a creamy tahini dressing.', cals: 400, macros: { p: 15, c: 55, f: 14 }, price: 300000, img: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=600&q=80', ingredients: [{ name: 'Roasted Chickpeas', amt: '80g' }, { name: 'Sweet Potatoes', amt: '130g' }, { name: 'Fresh Kale', amt: '100g' }, { name: 'Tahini Dressing', amt: '30g' }] },
+  { id: 'M5', name: 'Turkey Meatballs & Zoodles', desc: 'Lean ground turkey meatballs simmered in a rich marinara sauce, served over fresh zucchini noodles.', cals: 380, macros: { p: 42, c: 15, f: 16 }, price: 350000, img: 'https://images.unsplash.com/photo-1529042410759-befb1204b468?auto=format&fit=crop&w=600&q=80', ingredients: [{ name: 'Lean Turkey Meatballs', amt: '140g' }, { name: 'Zucchini Noodles', amt: '150g' }, { name: 'Marinara Sauce', amt: '120ml' }, { name: 'Parmesan Cheese', amt: '10g' }] },
+  { id: 'M6', name: 'Mediterranean Shrimp Salad', desc: 'Grilled shrimp over mixed greens with feta, Kalamata olives, cucumbers, and a light vinaigrette.', cals: 350, macros: { p: 38, c: 12, f: 18 }, price: 387000, img: 'https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=600&q=80', ingredients: [{ name: 'Grilled Shrimp', amt: '170g' }, { name: 'Mixed Greens', amt: '60g' }, { name: 'Kalamata Olives', amt: '30g' }, { name: 'Feta Cheese', amt: '30g' }] },
+  { id: 'M7', name: 'Protein Power Pancakes', desc: 'Fluffy whey protein pancakes topped with fresh berries, sliced banana, and sugar-free syrup.', cals: 500, macros: { p: 45, c: 50, f: 10 }, price: 275000, img: 'https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?auto=format&fit=crop&w=600&q=80', ingredients: [{ name: 'Protein Pancake Mix', amt: '60g' }, { name: 'Fresh Berries', amt: '75g' }, { name: 'Sliced Banana', amt: '60g' }, { name: 'Sugar-Free Syrup', amt: '30ml' }] },
+  { id: 'M8', name: 'BBQ Jackfruit Wrap', desc: 'Smoky BBQ pulled jackfruit wrapped in a spinach tortilla with crunchy cabbage slaw.', cals: 420, macros: { p: 8, c: 65, f: 12 }, price: 287000, img: 'https://images.unsplash.com/photo-1626700051175-6518c4793f4f?auto=format&fit=crop&w=600&q=80', ingredients: [{ name: 'Pulled Jackfruit', amt: '150g' }, { name: 'Spinach Tortilla', amt: '1 wrap' }, { name: 'Cabbage Slaw', amt: '50g' }, { name: 'BBQ Sauce', amt: '30g' }] },
+  { id: 'M9', name: 'Teriyaki Tofu Stir-Fry', desc: 'Crispy tofu cubes tossed with broccoli, bell peppers, and snap peas in a savory teriyaki glaze.', cals: 450, macros: { p: 25, c: 45, f: 20 }, price: 312000, img: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&q=80', ingredients: [{ name: 'Extra Firm Tofu', amt: '170g' }, { name: 'Mixed Veggies', amt: '200g' }, { name: 'Teriyaki Sauce', amt: '30ml' }, { name: 'Sesame Seeds', amt: '5g' }] },
+  { id: 'M10', name: 'Grilled Mahi Mahi', desc: 'Wild-caught Mahi Mahi grilled with lemon and dill, served alongside roasted asparagus spears.', cals: 320, macros: { p: 48, c: 8, f: 10 }, price: 425000, img: 'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=600&q=80', ingredients: [{ name: 'Mahi Mahi Filet', amt: '170g' }, { name: 'Asparagus', amt: '130g' }, { name: 'Lemon Wedge', amt: '1 slice' }, { name: 'Olive Oil', amt: '8ml' }] },
+  { id: 'M11', name: 'Black Bean Chili', desc: 'Hearty and spicy black bean and sweet potato chili, topped with a dollop of Greek yogurt.', cals: 380, macros: { p: 18, c: 60, f: 8 }, price: 262000, img: 'https://images.unsplash.com/photo-1541832676-9b763b0239ab?auto=format&fit=crop&w=600&q=80', ingredients: [{ name: 'Black Beans', amt: '170g' }, { name: 'Diced Sweet Potato', amt: '65g' }, { name: 'Chili Tomato Base', amt: '240ml' }, { name: 'Plain Greek Yogurt', amt: '30g' }] },
+  { id: 'M12', name: 'Chicken Pesto Penne', desc: 'Whole wheat penne pasta tossed in a creamy basil pesto sauce with grilled chicken breast strips.', cals: 550, macros: { p: 45, c: 55, f: 18 }, price: 337000, img: 'https://images.unsplash.com/photo-1621996346565-e3bb64e0be5e?auto=format&fit=crop&w=600&q=80', ingredients: [{ name: 'Grilled Chicken', amt: '140g' }, { name: 'Whole Wheat Penne', amt: '100g' }, { name: 'Basil Pesto', amt: '30g' }, { name: 'Cherry Tomatoes', amt: '40g' }] },
+  { id: 'M13', name: 'Berry Protein Parfait', desc: 'Layers of non-fat Greek yogurt, mixed berries, and a crunchy almond granola.', cals: 250, macros: { p: 22, c: 30, f: 5 }, price: 175000, img: 'https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=600&q=80', ingredients: [{ name: 'Non-fat Greek Yogurt', amt: '240g' }, { name: 'Mixed Berries', amt: '75g' }, { name: 'Almond Granola', amt: '30g' }, { name: 'Honey', amt: '7g' }] },
 ];
 
 const WEEK_DATA = [ { day: 'M', val: 1850 }, { day: 'T', val: 2100 }, { day: 'W', val: 1900 }, { day: 'T', val: 2050 }, { day: 'F', val: 2400 }, { day: 'S', val: 1200 }, { day: 'S', val: 0 } ];
@@ -488,7 +495,7 @@ function App() {
                 <div className="desktop-menu-grid">
                   {MENU_ITEMS.filter(item => item.name.toLowerCase().includes(searchQuery.toLowerCase())).map(item => (
                     <div key={item.id} className="meal-card" onClick={() => setSelectedMeal(item)}>
-                      <div className="meal-img" style={{ height: '200px' }}>{item.img}</div>
+                      <div className="meal-img" style={{ height: '200px' }}>{renderImage(item.img, item.name)}</div>
                       <div className="meal-content">
                         <div className="flex-between" style={{ marginBottom: '0.5rem' }}>
                           <h3 style={{ margin: 0 }}>{item.name}</h3>
@@ -526,7 +533,7 @@ function App() {
                 <div className="desktop-menu-grid" style={{ marginTop: '2rem' }}>
                   {MENU_ITEMS.filter(item => item.name.toLowerCase().includes(searchQuery.toLowerCase())).map(item => (
                     <div key={item.id} className="meal-card" onClick={() => setSelectedMeal(item)}>
-                      <div className="meal-img" style={{ height: '220px' }}>{item.img}</div>
+                      <div className="meal-img" style={{ height: '220px' }}>{renderImage(item.img, item.name)}</div>
                       <div className="meal-content">
                         <div className="flex-between" style={{ marginBottom: '0.5rem' }}>
                           <h3>{item.name}</h3>
@@ -722,7 +729,7 @@ function App() {
             ) : (
               cart.map(item => (
                 <div key={item.id} className="cart-item">
-                  <div className="cart-img">{item.img}</div>
+                  <div className="cart-img">{renderImage(item.img, item.name)}</div>
                   <div style={{ flex: 1 }}>
                     <h4 style={{ fontSize: '0.9rem' }}>{item.name}</h4>
                     <p style={{ fontSize: '0.8rem', color: 'var(--accent-primary)' }}>{formatVND(item.price)}</p>
@@ -761,8 +768,8 @@ function App() {
                 style={{ background: 'var(--bg-card)', width: '900px', borderRadius: '32px', overflow: 'hidden', display: 'flex', maxHeight: '80vh' }}
                 onClick={e => e.stopPropagation()}
               >
-                <div style={{ width: '400px', background: '#2a2a2a', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '10rem' }}>
-                  {selectedMeal.img}
+                <div style={{ width: '400px', background: '#2a2a2a', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '10rem', overflow: 'hidden' }}>
+                  {renderImage(selectedMeal.img, selectedMeal.name)}
                 </div>
                 <div style={{ flex: 1, padding: '3rem', position: 'relative' }}>
                   <button style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', background: 'none', border: 'none', color: '#fff', cursor: 'pointer' }} onClick={() => setSelectedMeal(null)}><X size={24}/></button>
@@ -1467,7 +1474,7 @@ function App() {
               </div>
               
               <div className="meal-card" onClick={() => setSelectedMeal(MENU_ITEMS[0])}>
-                <div className="meal-img" style={{ height: '120px' }}>{MENU_ITEMS[0].img}</div>
+                <div className="meal-img" style={{ height: '120px' }}>{renderImage(MENU_ITEMS[0].img, MENU_ITEMS[0].name)}</div>
                 <div className="meal-content">
                   <h3>{MENU_ITEMS[0].name}</h3>
                   <div style={{ display: 'flex', gap: '0.5rem', marginTop: '0.75rem' }}>
@@ -1513,7 +1520,7 @@ function App() {
 
               {MENU_ITEMS.filter(item => item.name.toLowerCase().includes(searchQuery.toLowerCase())).map((item) => (
                 <div key={item.id} className="meal-card" onClick={() => setSelectedMeal(item)}>
-                  <div className="meal-img">{item.img}</div>
+                  <div className="meal-img">{renderImage(item.img, item.name)}</div>
                   <div className="meal-content">
                     <div className="flex-between" style={{ alignItems: 'flex-start' }}>
                       <h3 style={{ fontSize: '1.1rem', marginBottom: '0.5rem' }}>{item.name}</h3>
@@ -1544,7 +1551,7 @@ function App() {
                   <div style={{ marginTop: '1.5rem', marginBottom: '2rem' }}>
                     {cart.map(item => (
                       <div key={item.id} className="cart-item">
-                        <div className="cart-img">{item.img}</div>
+                        <div className="cart-img">{renderImage(item.img, item.name)}</div>
                         <div style={{ flex: 1 }}>
                           <h4 style={{ fontSize: '0.95rem', marginBottom: '0.25rem' }}>{item.name}</h4>
                           <p style={{ fontSize: '0.85rem', color: 'var(--accent-primary)' }}>{formatVND(item.price)}</p>
@@ -1772,8 +1779,8 @@ function App() {
             transition={{ type: 'spring', damping: 25, stiffness: 300 }}
             className="detail-view"
           >
-            <button className="back-btn" onClick={() => setSelectedMeal(null)}><ArrowLeft size={20} /></button>
-            <div className="detail-header-img">{selectedMeal.img}</div>
+            <button className="back-btn" style={{ zIndex: 10 }} onClick={() => setSelectedMeal(null)}><ArrowLeft size={20} /></button>
+            <div className="detail-header-img">{renderImage(selectedMeal.img, selectedMeal.name)}</div>
             
             <div style={{ padding: '1.5rem' }}>
               <div className="flex-between">
