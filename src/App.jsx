@@ -6,6 +6,7 @@ import './index.css';
 import blackJellyImg from './assets/black_jelly.png';
 import phoRollsImg from './assets/pho_rolls.png';
 import chickenBrownRiceImg from './assets/chicken_brown_rice.jpg';
+import phoChickenImg from './assets/pho_chicken.jpg';
 
 const formatVND = (value) => {
   return new Intl.NumberFormat('vi-VN', {
@@ -669,7 +670,7 @@ const MENU_ITEMS = [
   },
   { 
     id: 'M28', 
-    name: { en: 'Clean Protein Chicken Pho', vi: 'Phở Gà Ức Sạch' }, 
+    name: { en: 'Clean Protein Chicken Pho', vi: 'Phở Ức Gà' }, 
     desc: { 
       en: 'Tender slices of grass-fed chicken breast in a fragrant ginger-spiced broth, topped with clean rice noodles, fresh scallions, coriander, and sweet basil.', 
       vi: 'Bánh phở tươi dùng kèm ức gà sạch hấp mọng nước trong nước dùng ninh thảo mộc gừng quế ấm nồng, hành ngò quế tươi.' 
@@ -677,7 +678,7 @@ const MENU_ITEMS = [
     cals: 390, 
     macros: { p: 32, c: 48, f: 8 }, 
     price: 48000, 
-    img: 'https://images.unsplash.com/photo-1541832676-9b763b0239ab?auto=format&fit=crop&w=600&q=80', 
+    img: phoChickenImg, 
     ingredients: [
       { name: { en: 'Clean Chicken Breast', vi: 'Ức gà sạch hấp' }, amt: '140g' }, 
       { name: { en: 'Rice Noodles', vi: 'Bánh phở tươi' }, amt: '120g' }, 
