@@ -2572,45 +2572,48 @@ function App() {
             className="detail-view"
           >
             <button className="back-btn" style={{ zIndex: 10 }} onClick={() => setSelectedMeal(null)}><ArrowLeft size={20} /></button>
-            <div className="detail-header-img">{renderImage(selectedMeal.img, t(selectedMeal.name, lang))}</div>
             
-            <div style={{ padding: '1.5rem' }}>
-              <div className="flex-between">
-                <h1>{t(selectedMeal.name, lang)}</h1>
-                <h2 style={{ color: 'var(--accent-primary)', margin: 0 }}>{formatVND(selectedMeal.price)}</h2>
-              </div>
-              <p style={{ fontSize: '1rem', marginTop: '1rem', color: '#ccc' }}>{t(selectedMeal.desc, lang)}</p>
+            <div className="detail-scroll-content">
+              <div className="detail-header-img">{renderImage(selectedMeal.img, t(selectedMeal.name, lang))}</div>
               
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', gap: '0.5rem', marginTop: '2rem', textAlign: 'center' }}>
-                <div style={{ background: 'var(--bg-card)', padding: '1rem 0.5rem', borderRadius: '12px', border: '1px solid var(--border-color)' }}>
-                  <div style={{ fontSize: '1.25rem', fontWeight: 700 }}>{selectedMeal.cals}</div>
-                  <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>KCAL</div>
+              <div style={{ padding: '1.5rem' }}>
+                <div className="flex-between" style={{ alignItems: 'flex-start', gap: '1rem' }}>
+                  <h1 style={{ flex: 1, margin: 0, fontSize: '1.5rem', fontWeight: 700 }}>{t(selectedMeal.name, lang)}</h1>
+                  <h2 style={{ color: 'var(--accent-primary)', margin: 0, flexShrink: 0, fontSize: '1.35rem', fontWeight: 700 }}>{formatVND(selectedMeal.price)}</h2>
                 </div>
-                <div style={{ background: 'var(--bg-card)', padding: '1rem 0.5rem', borderRadius: '12px', border: '1px solid var(--border-color)' }}>
-                  <div style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--accent-secondary)' }}>{selectedMeal.macros.p}g</div>
-                  <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>{translations[lang].protein.toUpperCase()}</div>
+                <p style={{ fontSize: '1rem', marginTop: '1rem', color: '#ccc' }}>{t(selectedMeal.desc, lang)}</p>
+                
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', gap: '0.5rem', marginTop: '2rem', textAlign: 'center' }}>
+                  <div style={{ background: 'var(--bg-card)', padding: '1rem 0.5rem', borderRadius: '12px', border: '1px solid var(--border-color)' }}>
+                    <div style={{ fontSize: '1.25rem', fontWeight: 700 }}>{selectedMeal.cals}</div>
+                    <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>KCAL</div>
+                  </div>
+                  <div style={{ background: 'var(--bg-card)', padding: '1rem 0.5rem', borderRadius: '12px', border: '1px solid var(--border-color)' }}>
+                    <div style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--accent-secondary)' }}>{selectedMeal.macros.p}g</div>
+                    <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>{translations[lang].protein.toUpperCase()}</div>
+                  </div>
+                  <div style={{ background: 'var(--bg-card)', padding: '1rem 0.5rem', borderRadius: '12px', border: '1px solid var(--border-color)' }}>
+                    <div style={{ fontSize: '1.25rem', fontWeight: 700, color: '#f59e0b' }}>{selectedMeal.macros.c}g</div>
+                    <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>{translations[lang].carbs.toUpperCase()}</div>
+                  </div>
+                  <div style={{ background: 'var(--bg-card)', padding: '1rem 0.5rem', borderRadius: '12px', border: '1px solid var(--border-color)' }}>
+                    <div style={{ fontSize: '1.25rem', fontWeight: 700, color: '#ef4444' }}>{selectedMeal.macros.f}g</div>
+                    <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>{translations[lang].fats.toUpperCase()}</div>
+                  </div>
                 </div>
-                <div style={{ background: 'var(--bg-card)', padding: '1rem 0.5rem', borderRadius: '12px', border: '1px solid var(--border-color)' }}>
-                  <div style={{ fontSize: '1.25rem', fontWeight: 700, color: '#f59e0b' }}>{selectedMeal.macros.c}g</div>
-                  <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>{translations[lang].carbs.toUpperCase()}</div>
-                </div>
-                <div style={{ background: 'var(--bg-card)', padding: '1rem 0.5rem', borderRadius: '12px', border: '1px solid var(--border-color)' }}>
-                  <div style={{ fontSize: '1.25rem', fontWeight: 700, color: '#ef4444' }}>{selectedMeal.macros.f}g</div>
-                  <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>{translations[lang].fats.toUpperCase()}</div>
-                </div>
-              </div>
 
-              <h3 style={{ marginTop: '2.5rem', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                <ShieldCheck size={18} color="var(--accent-primary)" /> {translations[lang].ingredients}
-              </h3>
-              <ul className="ingredient-list">
-                {selectedMeal.ingredients.map((ing, i) => (
-                  <li key={i} className="ingredient-item">
-                    <span className="name">{t(ing.name, lang)}</span>
-                    <span className="amt">{ing.amt}</span>
-                  </li>
-                ))}
-              </ul>
+                <h3 style={{ marginTop: '2.5rem', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                  <ShieldCheck size={18} color="var(--accent-primary)" /> {translations[lang].ingredients}
+                </h3>
+                <ul className="ingredient-list">
+                  {selectedMeal.ingredients.map((ing, i) => (
+                    <li key={i} className="ingredient-item">
+                      <span className="name">{t(ing.name, lang)}</span>
+                      <span className="amt">{ing.amt}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
             
             <div className="btn-sticky">
