@@ -479,7 +479,7 @@ const MENU_ITEMS = [
     cals: 360, 
     macros: { p: 32, c: 28, f: 10 }, 
     price: 68000, 
-    img: 'https://images.unsplash.com/photo-1559742811-824289541574?auto=format&fit=crop&w=600&q=80', 
+    img: 'https://images.unsplash.com/photo-1565557623262-b51c2513a641?auto=format&fit=crop&w=600&q=80', 
     ingredients: [
       { name: { en: 'Grilled Jumbo Shrimp', vi: 'Tôm sú nướng' }, amt: '150g' }, 
       { name: { en: 'Fresh Asparagus', vi: 'Măng tây tươi' }, amt: '120g' }, 
@@ -669,7 +669,7 @@ const MENU_ITEMS = [
   },
   { 
     id: 'M28', 
-    name: { en: 'Clean Protein Chicken Pho', vi: 'Phở Gà Ức Sạch Sức Khỏe' }, 
+    name: { en: 'Clean Protein Chicken Pho', vi: 'Phở Gà Ức Sạch' }, 
     desc: { 
       en: 'Tender slices of grass-fed chicken breast in a fragrant ginger-spiced broth, topped with clean rice noodles, fresh scallions, coriander, and sweet basil.', 
       vi: 'Bánh phở tươi dùng kèm ức gà sạch hấp mọng nước trong nước dùng ninh thảo mộc gừng quế ấm nồng, hành ngò quế tươi.' 
@@ -677,7 +677,7 @@ const MENU_ITEMS = [
     cals: 390, 
     macros: { p: 32, c: 48, f: 8 }, 
     price: 48000, 
-    img: 'https://images.unsplash.com/photo-1582878826629-29b7ad8cd305?auto=format&fit=crop&w=600&q=80', 
+    img: 'https://images.unsplash.com/photo-1541832676-9b763b0239ab?auto=format&fit=crop&w=600&q=80', 
     ingredients: [
       { name: { en: 'Clean Chicken Breast', vi: 'Ức gà sạch hấp' }, amt: '140g' }, 
       { name: { en: 'Rice Noodles', vi: 'Bánh phở tươi' }, amt: '120g' }, 
