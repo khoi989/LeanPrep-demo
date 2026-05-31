@@ -7,6 +7,7 @@ import blackJellyImg from './assets/black_jelly.png';
 import phoRollsImg from './assets/pho_rolls.png';
 import chickenBrownRiceImg from './assets/chicken_brown_rice.jpg';
 import phoChickenImg from './assets/pho_chicken.jpg';
+import sourSoupImg from './assets/sour_soup.png';
 
 const formatVND = (value) => {
   return new Intl.NumberFormat('vi-VN', {
@@ -714,7 +715,7 @@ const MENU_ITEMS = [
     cals: 320, 
     macros: { p: 28, c: 42, f: 6 }, 
     price: 58000, 
-    img: 'https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=600&q=80', 
+    img: sourSoupImg, 
     ingredients: [
       { name: { en: 'Poached Prawns', vi: 'Tôm sú tươi luộc' }, amt: '100g' }, 
       { name: { en: 'Organic Tofu', vi: 'Đậu hũ hữu cơ' }, amt: '80g' }, 
