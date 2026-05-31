@@ -641,7 +641,7 @@ const MENU_ITEMS = [
     cals: 380, 
     macros: { p: 26, c: 45, f: 10 }, 
     price: 52000, 
-    img: 'https://images.unsplash.com/photo-1626700051175-6818013e1d4f?auto=format&fit=crop&w=600&q=80', 
+    img: 'https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=600&q=80', 
     ingredients: [
       { name: { en: 'Steamed Rice Sheets', vi: 'Bánh phở hấp' }, amt: '150g' }, 
       { name: { en: 'Grass-Fed Beef', vi: 'Thịt bò ăn cỏ' }, amt: '120g' }, 
